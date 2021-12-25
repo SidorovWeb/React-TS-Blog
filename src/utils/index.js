@@ -1,13 +1,19 @@
 import Image from '../images/img.webp'
+import Pushkin from '../images/pushkin.webp'
+
+export const formatDate = () => {
+  const date = new Date()
+  return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()
+}
 
 export const myPostList = [
   {
     author: 'Сидоров Александр',
-    authorPhoto: '/',
+    authorPhoto: Pushkin,
     title: 'Выучи VUE и React',
     slug: 'Learn-VUE-and-React',
     previewImage: Image,
-    dateOfCreation: new Date(),
+    dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     content:
@@ -16,11 +22,11 @@ export const myPostList = [
   },
   {
     author: 'Sasskaa',
-    authorPhoto: '/',
+    authorPhoto: Pushkin,
     title: 'Какой-то текст',
     slug: 'Some-text',
     previewImage: Image,
-    dateOfCreation: new Date(),
+    dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     content:
@@ -29,11 +35,11 @@ export const myPostList = [
   },
   {
     author: 'Сидоров Александр',
-    authorPhoto: '/',
+    authorPhoto: Pushkin,
     title: 'Молодец, не останавливайся!',
     slug: 'Well-done-dont-stop',
     previewImage: Image,
-    dateOfCreation: new Date(),
+    dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     content:
@@ -42,11 +48,11 @@ export const myPostList = [
   },
   {
     author: 'Сидоров Александр',
-    authorPhoto: '/',
-    title: 'Ты получишь свою работу!',
+    authorPhoto: Pushkin,
+    title: 'Ты получишь свою работу awdaw awdawd awdawd awdaw dawd wd !',
     slug: 'Youll-get-your-job',
     previewImage: Image,
-    dateOfCreation: new Date(),
+    dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     content:

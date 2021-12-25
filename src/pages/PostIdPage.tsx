@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { IPostListProps } from '../types/types'
 import { TheButton } from '../components/UI/TheButton/TheButton'
 import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
@@ -7,7 +7,6 @@ import { myPostList } from '../utils'
 
 export const PostIdPage: FC = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
 
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
 
@@ -30,7 +29,7 @@ export const PostIdPage: FC = () => {
 
             <div className='flex items-center'>
               <CalendarIcon className='icon text-pink-600' />
-              <p className='text-gray-700 font-bold mt-1'>{post.dateOfCreation.toLocaleString()}</p>
+              <p className='text-gray-700 font-bold mt-1'>{post.dateOfCreation}</p>
             </div>
           </div>
 

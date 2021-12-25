@@ -3,7 +3,7 @@ export interface IPostListProps {
   authorPhoto: string
   title: string
   previewImage: string
-  dateOfCreation: Date
+  dateOfCreation: string
   content: string
   excerpt: string
   slug: string

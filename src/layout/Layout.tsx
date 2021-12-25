@@ -7,15 +7,19 @@ import { Sidebar } from '../components/Sidebar/Sidebar'
 export const Layout = () => {
   return (
     <div className='px-6 min-h-screen' style={{ background: `url(${Background}) no-repeat center/cover` }}>
-      <div className='grid md:grid-cols-12 gap-5  container mx-auto '>
-        <header className='md:col-span-12'>
+      <header className='w-full'>
+        <div className='container mx-auto'>
           <NavBar />
-        </header>
-        <main className='md:col-span-9'>
-          <AppRouter />
-        </main>
-        <Sidebar />
-      </div>
+        </div>
+      </header>
+      <main className='w-full mt-10'>
+        <div className='container mx-auto flex-1 flex gap-5'>
+          <div className='flex-1'>
+            <AppRouter />
+          </div>
+          <Sidebar />
+        </div>
+      </main>
     </div>
   )
 }

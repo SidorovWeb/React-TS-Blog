@@ -21,4 +21,12 @@ code {
   .icon {
     @apply w-6 h-6 rounded;
   }
+
+  .img {
+    @apply w-full object-cover cursor-pointer h-full;
+  }
+
+  .mw-sidebar {
+    width: 370px;
+  }
 }
