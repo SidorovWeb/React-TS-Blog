@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@layer utilities {
+  .btn {
+    @apply transition-all font-bold bg-pink-600 hover:bg-pink-500 rounded-md px-6 text-white whitespace-nowrap;
+  }
+
+  .icon {
+    @apply w-6 h-6 rounded;
+  }
+}
