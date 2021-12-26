@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { IPostListProps } from '../../types/types'
 import { myPostList } from '../../utils'
-import { SidebarItem } from '../SidebarItem/SidebarItem'
+import { SidebarItem } from './SidebarItem'
 
 export const Sidebar: FC = () => {
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
@@ -13,9 +13,12 @@ export const Sidebar: FC = () => {
           <div className='bg-white p-8 pb-14 rounded-lg'>
             <h3 className='font-bold text-xl border-b pb-4 mb-8'>Недавние посты</h3>
             <div className=''>
-              {postList.slice(-3).map((post) => (
-                <SidebarItem post={post} key={post.id} />
-              ))}
+              {postList
+                .slice(-3)
+                .reverse()
+                .map((post) => (
+                  <SidebarItem post={post} key={post.id} />
+                ))}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { IPostListProps } from '../../types/types'
-import { PostItem } from '../PostItem/PostItem'
+import { PostItem } from './PostListItem'
 
 interface PostListProps {
   posts: IPostListProps[]
