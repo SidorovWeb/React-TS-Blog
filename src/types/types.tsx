@@ -1,3 +1,8 @@
+interface Categories {
+  name: string
+  slug: string
+}
+
 export interface IPostListProps {
   author: string
   authorPhoto: string
@@ -7,5 +12,6 @@ export interface IPostListProps {
   content: string
   excerpt: string
   slug: string
+  categories: Categories[]
   id: number
 }

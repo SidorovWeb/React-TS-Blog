@@ -6,12 +6,18 @@ export const formatDate = () => {
   return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()
 }
 
+export const uniqueList = (list: [], key: string) => [...new Set(list.flat().map((data) => data[key]))]
+export const uniqueListOfObject = (list: [], key: string) => [
+  ...new Map(list.flat().map((item) => [item[key], item])).values(),
+]
+
 export const myPostList = [
   {
     author: 'Сидоров Александр',
     authorPhoto: Pushkin,
     title: 'Выучи VUE и React',
     slug: 'Learn-VUE-and-React',
+    categories: [{ name: 'Web Development', slug: 'web-development' }],
     previewImage: Image,
     dateOfCreation: formatDate(),
     excerpt:
@@ -25,6 +31,11 @@ export const myPostList = [
     authorPhoto: Pushkin,
     title: 'Какой-то текст',
     slug: 'Some-text',
+    categories: [
+      { name: 'Web Development', slug: 'web-development' },
+      { name: 'Sports', slug: 'sports' },
+      { name: 'Astronomy', slug: 'astronomy' },
+    ],
     previewImage: Image,
     dateOfCreation: formatDate(),
     excerpt:
@@ -38,6 +49,7 @@ export const myPostList = [
     authorPhoto: Pushkin,
     title: 'Молодец, не останавливайся!',
     slug: 'Well-done-dont-stop',
+    categories: [{ name: 'Web Development', slug: 'web-development' }],
     previewImage: Image,
     dateOfCreation: formatDate(),
     excerpt:
@@ -49,8 +61,12 @@ export const myPostList = [
   {
     author: 'Сидоров Александр',
     authorPhoto: Pushkin,
-    title: 'Ты получишь свою работу awdaw awdawd awdawd awdaw dawd wd !',
+    title: 'Ты получишь свою работу!',
     slug: 'Youll-get-your-job',
+    categories: [
+      { name: 'Web Development', slug: 'web-development' },
+      { name: 'Education', slug: 'education' },
+    ],
     previewImage: Image,
     dateOfCreation: formatDate(),
     excerpt:

@@ -14,7 +14,7 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
         style={{ background: `url(${post.previewImage}) no-repeat center/cover`, width: '55%' }}
         to={`post/${post.id}`}
       ></Link>
-      <div className='flex flex-col justify-between w-1/2 p-8 z-10 relative'>
+      <div className='flex flex-col justify-between w-1/2 p-8 py-16 z-10 relative'>
         <Link className='text-black text-4xl font-bold mb-10 hover:opacity-60 transition-all' to={`post/${post.id}`}>
           {post.title}
         </Link>

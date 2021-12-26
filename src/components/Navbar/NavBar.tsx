@@ -1,15 +1,14 @@
 import { Logo } from '../Logo/Logo'
 import { Navigation } from '../Navigation/Navigation'
-import { TheButton } from '../UI/TheButton/TheButton'
 import { Link, useLocation } from 'react-router-dom'
 
 export const NavBar = () => {
-  const Navigate = useLocation()
+  const pathname = useLocation().pathname
 
   return (
-    <div className='py-6 text-white border-b border-blue-400'>
+    <div className='py-6 text-white border-b border-gray-500'>
       <div className='flex items-center justify-between'>
-        {Navigate.pathname === '/' ? (
+        {pathname === '/' ? (
           <Logo height='34px' color='#61dafb' textSize='text-2xl' />
         ) : (
           <Link to='/'>
@@ -19,7 +18,11 @@ export const NavBar = () => {
 
         <div className='flex items-center'>
           <Navigation />
-          <TheButton className='btn py-2 ml-4'>Войти</TheButton>
+          {pathname !== '/login' && (
+            <Link className='btn py-2 ml-4' to={`login`}>
+              Войти
+            </Link>
+          )}
         </div>
       </div>
     </div>

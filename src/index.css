@@ -73,3 +73,19 @@ code {
   height: 100%;
   z-index: 2;
 }
+.thumbnail-gradient-before::before {
+  pointer-events: none;
+  content: '';
+  width: 100%;
+  opacity: 0.2;
+  min-height: 500px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  content: '';
+  background: linear-gradient(130deg, #ff7a18, #db2777 41.07%, #319197 76.05%);
+  mix-blend-mode: screen;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

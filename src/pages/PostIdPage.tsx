@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IPostListProps } from '../types/types'
-import { TheButton } from '../components/UI/TheButton/TheButton'
 import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
 import { myPostList } from '../utils'
 
@@ -35,9 +34,6 @@ export const PostIdPage: FC = () => {
 
           <div>
             <p className='text-gray-700 mb-10 font-normal text-lg'>{post.content}</p>
-          </div>
-          <div className='flex items-center justify-center mb-6'>
-            <TheButton className='btn text-xl py-4'>Продолжить чтение</TheButton>
           </div>
         </div>
       )}
