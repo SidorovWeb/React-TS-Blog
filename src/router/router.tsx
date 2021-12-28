@@ -6,14 +6,16 @@ import { Categories } from '../pages/Categories'
 import { CategoriesSlugPage } from '../pages/CategoriesSlugPage'
 import { ArchivesPosts } from '../pages/ArchivesPosts'
 import { Login } from '../pages/Login'
+import { Register } from '../pages/Register'
 
 export const routes = [
-  { path: '/', element: <Home />, exact: true },
-  { path: 'login', element: <Login />, exact: true },
-  { path: 'contacts', element: <Contacts />, exact: true },
-  { path: 'archives', element: <ArchivesPosts />, exact: true },
+  { path: '/', element: <Home /> },
+  { path: 'login', element: <Login /> },
+  { path: 'register', element: <Register /> },
+  { path: 'contacts', element: <Contacts /> },
+  { path: 'archives', element: <ArchivesPosts /> },
   { path: 'post/:id', element: <PostIdPage /> },
-  { path: 'categories', element: <Categories />, exact: true },
+  { path: 'categories', element: <Categories /> },
   { path: 'category/:slug', element: <CategoriesSlugPage /> },
-  { path: '*', element: <Navigate replace to='/' />, exact: true },
+  { path: '*', element: <Navigate replace to='/' /> },
 ]

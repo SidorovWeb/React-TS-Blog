@@ -1,14 +1,13 @@
 import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IPostListProps } from '../../types/types'
-import { myPostList, uniqueListOfObject } from '../../utils'
+import { myPostList, uniqueListCategories } from '../../utils'
 import { SidebarCategoryPost } from './SidebarCategoryPost'
 import { SidebarRecentPost } from './SidebarRecentPost'
 
 export const Sidebar: FC = () => {
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
-  const categoryList = postList.map(({ categories }) => categories)
-  const UniqueList = uniqueListOfObject(categoryList as [], 'name')
+  const UniqueList = uniqueListCategories(postList as [], 'name')
 
   return (
     <aside className='md:mw-sidebar'>

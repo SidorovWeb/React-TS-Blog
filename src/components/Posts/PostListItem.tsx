@@ -15,7 +15,7 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
         <img className='max-h-80 img' src={post.previewImage} alt='Изображение' />
       </Link>
       <Link
-        className='block text-black text-4xl font-bold mb-10 text-center hover:opacity-60 transition-all'
+        className='block text-black text-3xl font-bold mb-10 hover:opacity-60 transition-all'
         to={`post/${post.id}`}
       >
         {post.title}
@@ -42,11 +42,11 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
       <div>
         <p className='text-gray-700 mb-10 font-normal text-lg'>{post.excerpt}</p>
       </div>
-      <div className='flex items-center justify-center mb-6'>
+      {/* <div className='flex items-center justify-center mb-6'>
         <Link to={`post/${post.id}`}>
           <MyButton className='btn text-xl py-4'>Продолжить чтение</MyButton>
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }

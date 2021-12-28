@@ -8,10 +8,10 @@ interface PostListProps {
 
 export const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <div>
+    <>
       {posts.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}
-    </div>
+    </>
   )
 }

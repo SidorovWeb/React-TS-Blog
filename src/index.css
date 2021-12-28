@@ -15,7 +15,7 @@ code {
 
 @layer utilities {
   .btn {
-    @apply transition-all font-bold bg-pink-600 hover:bg-pink-500 rounded-md px-6 text-white whitespace-nowrap;
+    @apply transition-all font-bold bg-gray-600 hover:bg-pink-500 rounded-md px-6 text-white whitespace-nowrap;
   }
 
   .icon {
@@ -88,4 +88,30 @@ code {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.my-select {
+  position: relative;
+}
+
+.my-select select {
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+.my-select select::-ms-expand {
+  display: none;
+}
+.my-select::before {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  transition: 0.25s all ease;
+  z-index: 1;
+  pointer-events: none;
 }

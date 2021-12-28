@@ -13,13 +13,13 @@ export const Layout = () => {
   const pathname = useLocation().pathname
 
   return (
-    <div className='px-6 pb-20 min-h-screen' style={{ background: `#2d2d2d` }}>
+    <div className='px-6 pb-20 min-h-screen flex flex-col' style={{ background: `#2d2d2d` }}>
       <header className='w-full'>
         <div className='container mx-auto'>
           <NavBar />
         </div>
       </header>
-      <main className='w-full mt-10'>
+      <main className='w-full mt-10 flex-grow'>
         <div className='container mx-auto flex-1 flex flex-wrap gap-5'>
           {pathname === '/' && (
             <div className='w-full'>
@@ -30,7 +30,7 @@ export const Layout = () => {
           <div className='flex-1'>
             <AppRouter />
           </div>
-          {pathname !== '/login' && <Sidebar />}
+          {pathname === '/' && <Sidebar />}
         </div>
       </main>
     </div>
