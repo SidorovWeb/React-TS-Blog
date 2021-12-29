@@ -1,4 +1,7 @@
 import Image from '../images/img.webp'
+import Code from '../images/code.webp'
+import Css from '../images/css.webp'
+import Js from '../images/JS.webp'
 import Pushkin from '../images/pushkin.webp'
 
 export const isMyAccount = (pathname: string) => pathname !== '/login' && pathname !== '/register'
@@ -18,6 +21,12 @@ export const uniqueListCategories = (list: [], key: string) => {
 export const wordForm = (num: number, word: string[]) => {
   const cases = [2, 0, 1, 1, 1, 2]
   return word[num % 100 > 4 && num % 100 < 20 ? 2 : cases[num % 10 < 5 ? num % 10 : 5]]
+}
+
+export const getArrRange = (array: [], range: number, part: number) => {
+  var start = range * (part - 1)
+  var end = range * part
+  return array.slice(start, end)
 }
 
 export const myPostList = [
@@ -48,7 +57,7 @@ export const myPostList = [
       { name: 'Sports', slug: 'sports' },
       { name: 'Astronomy', slug: 'astronomy' },
     ],
-    previewImage: Image,
+    previewImage: Code,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -62,7 +71,7 @@ export const myPostList = [
     title: 'Молодец, не останавливайся!',
     slug: 'Well-done-dont-stop',
     categories: [{ name: 'Web Development', slug: 'web-development' }],
-    previewImage: Image,
+    previewImage: Css,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -75,16 +84,41 @@ export const myPostList = [
     authorPhoto: Pushkin,
     title: 'Ты получишь свою работу!',
     slug: 'Youll-get-your-job',
-    categories: [
-      { name: 'Web Development', slug: 'web-development' },
-      { name: 'Education', slug: 'education' },
-    ],
-    previewImage: Image,
+    categories: [{ name: 'Astronomy', slug: 'astronomy' }],
+    previewImage: Js,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     content:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: 3,
+  },
+  {
+    author: 'Сидоров Александр',
+    authorPhoto: Pushkin,
+    title: 'Css!',
+    slug: 'Css',
+    categories: [{ name: 'Web Development', slug: 'web-development' }],
+    previewImage: Css,
+    dateOfCreation: formatDate(),
+    excerpt:
+      'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
+    content:
+      'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
+    id: 5,
+  },
+  {
+    author: 'Сидоров Александр',
+    authorPhoto: Pushkin,
+    title: 'Js!',
+    slug: 'Js',
+    categories: [{ name: 'Education', slug: 'education' }],
+    previewImage: Js,
+    dateOfCreation: formatDate(),
+    excerpt:
+      'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
+    content:
+      'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
+    id: 6,
   },
 ]

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { IPostListProps } from '../../types/types'
 import { myPostList, uniqueListCategories, wordForm } from '../../utils'
 import { MySelect } from '../UI/MySelect/MySelect'
