@@ -14,7 +14,8 @@ export const SidebarCategoryPost: FC<SidebarCategoryPostProps> = ({ item }) => {
       <Link
         className='text-lg truncate overflow-hidden block p-2 hover:opacity-60 transition-all'
         style={{ width: '220px' }}
-        to={`category/${item.slug}`}
+        to={`archives`}
+        state={item}
       >
         {item.name}
       </Link>

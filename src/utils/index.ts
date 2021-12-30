@@ -2,7 +2,9 @@ import Image from '../images/img.webp'
 import Code from '../images/code.webp'
 import Css from '../images/css.webp'
 import Js from '../images/JS.webp'
+import Apple from '../images/apple.webp'
 import Pushkin from '../images/pushkin.webp'
+import Smile from '../images/smile.webp'
 
 export const isMyAccount = (pathname: string) => pathname !== '/login' && pathname !== '/register'
 
@@ -39,7 +41,7 @@ export const myPostList = [
       { name: 'Web Development', slug: 'web-development' },
       { name: 'Sports', slug: 'sports' },
     ],
-    previewImage: Image,
+    previewImage: Apple,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -85,7 +87,7 @@ export const myPostList = [
     title: 'Ты получишь свою работу!',
     slug: 'Youll-get-your-job',
     categories: [{ name: 'Astronomy', slug: 'astronomy' }],
-    previewImage: Js,
+    previewImage: Smile,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -99,7 +101,7 @@ export const myPostList = [
     title: 'Css!',
     slug: 'Css',
     categories: [{ name: 'Web Development', slug: 'web-development' }],
-    previewImage: Css,
+    previewImage: Image,
     dateOfCreation: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',

@@ -6,9 +6,6 @@ export const Navigation = () => {
       <Link className='ml-2 font-bold py-2 px-4 hover:opacity-80 transition-all' to='/archives'>
         Статьи
       </Link>
-      <Link className='ml-2 font-bold py-2 px-4 hover:opacity-80 transition-all' to='/Categories'>
-        Categories
-      </Link>
       <Link className='ml-2 font-bold py-2 px-4 hover:opacity-80 transition-all' to='/contacts'>
         Contacts
       </Link>

@@ -5,11 +5,11 @@ import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
 import { myPostList } from '../utils'
 
 export const PostIdPage: FC = () => {
-  const { id } = useParams()
+  const { slug } = useParams()
 
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
 
-  const post = postList.find((post) => post.id === Number(id))
+  const post = postList.find((post) => post.slug === slug)
 
   return (
     <>

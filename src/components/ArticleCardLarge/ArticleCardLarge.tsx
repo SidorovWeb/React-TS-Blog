@@ -12,10 +12,10 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
       <Link
         className='overflow-hidden h-full  absolute t-0 left-0 thumbnail-gradient'
         style={{ background: `url(${post.previewImage}) no-repeat center/cover`, width: '55%' }}
-        to={`post/${post.id}`}
+        to={`post/${post.slug}`}
       ></Link>
       <div className='flex flex-col justify-between w-1/2 p-8 py-16 z-10 relative'>
-        <Link className='text-black text-4xl font-bold mb-10 hover:opacity-60 transition-all' to={`post/${post.id}`}>
+        <Link className='text-black text-4xl font-bold mb-10 hover:opacity-60 transition-all' to={`post/${post.slug}`}>
           {post.title}
         </Link>
         <div>
@@ -24,11 +24,11 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
         <div className='flex items-center'>
           <Link
             className='w-11 h-11 rounded-full overflow-hidden mr-4 hover:opacity-60 transition-all'
-            to={`post/${post.id}`}
+            to={`post/${post.slug}`}
           >
             <img src={post.authorPhoto} alt={post.author} className='img' />
           </Link>
-          <Link className='text-gray-700 font-bold hover:opacity-60 transition-all' to={`post/${post.id}`}>
+          <Link className='text-gray-700 font-bold hover:opacity-60 transition-all' to={`post/${post.slug}`}>
             {post.author}
           </Link>
           <p className='px-2'>на</p>

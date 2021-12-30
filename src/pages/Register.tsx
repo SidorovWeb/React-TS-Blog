@@ -22,7 +22,7 @@ export const Register: FC = () => {
               <label htmlFor='useremail'>Email address *</label>
               <input
                 className='bg-gray-200 w-full text-xl py-2 px-4 rounded-lg  transition-all'
-                type='text'
+                type='email'
                 id='useremail'
                 name='useremail'
               />
@@ -31,7 +31,7 @@ export const Register: FC = () => {
               <label htmlFor='userpassword'>Password *</label>
               <input
                 className='bg-gray-200 w-full text-xl py-2 px-4 rounded-lg  transition-all'
-                type='text'
+                type='password'
                 id='userpassword'
                 name='userpassword'
               />

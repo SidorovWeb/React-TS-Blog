@@ -13,13 +13,13 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
     <div className='flex flex-col rounded-lg overflow-hidden bg-white shadow-lg mb-8 p-4 text-left'>
       <Link
         className='mb-8 rounded-lg overflow-hidden block relative thumbnail-gradient-before aspect-video max-h-80 '
-        to={`/post/${post.id}`}
+        to={`/post/${post.slug}`}
       >
         <img className='img' src={post.previewImage} alt='Изображение' />
       </Link>
       <Link
         className='block text-black text-3xl font-bold mb-10 hover:opacity-60 transition-all'
-        to={`/post/${post.id}`}
+        to={`/post/${post.slug}`}
       >
         {post.title}
       </Link>
@@ -30,11 +30,11 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
         <div className='flex items-center'>
           <Link
             className='w-10 h-10 flex-shrink-0 rounded-full overflow-hidden mr-4 hover:opacity-60 transition-all'
-            to={`/post/${post.id}`}
+            to={`/post/${post.slug}`}
           >
             <img src={post.authorPhoto} alt={post.author} className='img' />
           </Link>
-          <Link className='text-gray-700 font-bold mt-1 hover:opacity-60 transition-all' to={`/post/${post.id}`}>
+          <Link className='text-gray-700 font-bold mt-1 hover:opacity-60 transition-all' to={`/post/${post.slug}`}>
             {post.author}
           </Link>
         </div>
@@ -45,7 +45,7 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
         </div>
       </div>
       {/* <div className='flex items-center justify-center mb-6'>
-        <Link to={`post/${post.id}`}>
+        <Link to={`post/${post.slug}`}>
           <MyButton className='btn text-xl py-4'>Продолжить чтение</MyButton>
         </Link>
       </div> */}

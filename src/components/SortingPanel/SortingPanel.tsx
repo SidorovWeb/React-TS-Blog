@@ -5,13 +5,14 @@ import { MySelect } from '../UI/MySelect/MySelect'
 
 interface SortingPanelProps {
   posts: IPostListProps[]
+  valueSelect: string
   filter: (val: string) => void
+  setValueSelect: (val: string) => void
 }
 
-export const SortingPanel: FC<SortingPanelProps> = ({ posts, filter }) => {
+export const SortingPanel: FC<SortingPanelProps> = ({ posts, filter, valueSelect, setValueSelect }) => {
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
   const UniqueList = uniqueListCategories(postList as [], 'name')
-  const [valueSelect, setValueSelect] = useState('')
 
   const changeHandler = (val: string) => {
     setValueSelect(val)
