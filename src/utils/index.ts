@@ -6,7 +6,8 @@ import Apple from '../images/apple.webp'
 import Pushkin from '../images/pushkin.webp'
 import Smile from '../images/smile.webp'
 
-export const isMyAccount = (pathname: string) => pathname !== '/login' && pathname !== '/register'
+export const isMyAccount = (pathname: string) =>
+  pathname !== '/login' && pathname !== '/register' && pathname !== '/my-account'
 
 export const formatDate = () => {
   const date = new Date()

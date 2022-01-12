@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { IPostListProps } from '../../types/types'
+import { IPostListProps } from '../../types/posts'
 import { Link } from 'react-router-dom'
 
 interface SidebarItemProps {

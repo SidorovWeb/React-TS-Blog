@@ -1,9 +1,9 @@
-import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 import { privateRoutes, publicRoutes } from '../../router/router'
 
 export const AppRouter = () => {
-  const isAuth = false
+  const { user } = useAuth()
 
   return (
     <Routes>
@@ -13,7 +13,7 @@ export const AppRouter = () => {
       {privateRoutes.map((route, idx) => (
         <Route
           path={route.path}
-          element={isAuth ? route.element : <Navigate replace to='/login' />}
+          element={user ? route.element : <Navigate replace to='/' />}
           key={idx.toString()}
         ></Route>
       ))}

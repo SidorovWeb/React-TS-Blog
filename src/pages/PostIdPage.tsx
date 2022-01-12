@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { IPostListProps } from '../types/types'
+import { IPostListProps } from '../types/posts'
 import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
 import { myPostList } from '../utils'
 

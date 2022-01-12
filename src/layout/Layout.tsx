@@ -3,9 +3,10 @@ import { AppRouter } from '../components/AppRouter/AppRouter'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { ArticleCardLarge } from '../components/ArticleCardLarge/ArticleCardLarge'
 import { myPostList } from '../utils/index'
-import { IPostListProps } from '../types/types'
+import { IPostListProps } from '../types/posts'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 export const Layout = () => {
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
@@ -33,6 +34,17 @@ export const Layout = () => {
           {pathname === '/' && <Sidebar />}
         </div>
       </main>
+      <ToastContainer
+        position='bottom-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+      />
     </div>
   )
 }

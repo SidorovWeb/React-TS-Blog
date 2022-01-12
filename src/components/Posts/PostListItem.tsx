@@ -1,8 +1,7 @@
 import { CalendarIcon } from '@heroicons/react/solid'
 import { FC } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { IPostListProps } from '../../types/types'
-// import { MyButton } from '../UI/MyButton/MyButton'
+import { Link } from 'react-router-dom'
+import { IPostListProps } from '../../types/posts'
 
 interface PostItemPost {
   post: IPostListProps

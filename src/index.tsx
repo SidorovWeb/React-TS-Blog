@@ -2,12 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css'
+import './firebase'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
-const container = document.getElementById('App') as HTMLElement
-const root = ReactDOM.createRoot(container)
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('App')
 )

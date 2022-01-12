@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/types'
+import { IPostListProps } from '../../types/posts'
 
 interface ArticleCardLargeProps {
   post: IPostListProps
