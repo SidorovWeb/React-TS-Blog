@@ -17,6 +17,8 @@ export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerActi
         email: data.email,
         timestamp: serverTimestamp(),
         id: userCredential.user.uid,
+        userPhoto: '',
+        status: '',
       }
       addDoc(collection(db, 'users'), user)
       dispatch({

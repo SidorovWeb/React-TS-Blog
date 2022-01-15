@@ -32,7 +32,7 @@ export const Sidebar: FC = () => {
           ))}
 
           <div className='text-center mt-10'>
-            <Link className='p-2 text-pink-500 hover:text-pink-400 transition-all' to={'categories'}>
+            <Link className='p-2 font-bold hover' to={'/archives'}>
               Все категории
             </Link>
           </div>

@@ -3,10 +3,12 @@ export interface User {
   email: string
   timestamp: {}
   id: string
+  userPhoto: string
+  status: string
 }
 
 export interface userState {
-  user: User | null
+  user: User
   isLoading: boolean
 }
 

@@ -14,6 +14,14 @@ const App: FC = () => {
     dispatch({
       type: userType.SET_USER_START,
     })
+    const userLocalDate = localStorage.getItem('currentUser')
+    if (userLocalDate) {
+      dispatch({
+        type: userType.SET_USER,
+        payload: { ...JSON.parse(userLocalDate) } as User,
+      })
+    }
+
     const unsubscribe = onAuthStateChanged(getAuth(), async (user) => {
       if (user) {
         const uid = user.uid

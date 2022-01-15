@@ -4,6 +4,7 @@ import { privateRoutes, publicRoutes } from '../../router/router'
 
 export const AppRouter = () => {
   const { user } = useAuth()
+  const userLocalDate = localStorage.getItem('currentUser')
 
   return (
     <Routes>
@@ -13,7 +14,7 @@ export const AppRouter = () => {
       {privateRoutes.map((route, idx) => (
         <Route
           path={route.path}
-          element={user ? route.element : <Navigate replace to='/' />}
+          element={userLocalDate || user ? route.element : <Navigate replace to='/' />}
           key={idx.toString()}
         ></Route>
       ))}

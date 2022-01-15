@@ -14,4 +14,5 @@ export interface IPostListProps {
   slug: string
   categories: Categories[]
   id: number
+  status: string
 }

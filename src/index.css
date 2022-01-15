@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --headerheight: 80px;
+}
+
 body {
   margin: 0;
   font-family: Montserrat, sans-serif;
@@ -26,9 +30,16 @@ code {
     @apply w-full object-cover cursor-pointer h-full;
   }
 
-  .mw-sidebar {
-    width: 370px;
+  .hover {
+    @apply hover:opacity-80 transition-all;
   }
+}
+
+.mw-sidebar {
+  width: 370px;
+}
+.account-sidebar {
+  width: 270px;
 }
 
 .thumbnail-gradient::after {
@@ -114,4 +125,16 @@ code {
   transition: 0.25s all ease;
   z-index: 1;
   pointer-events: none;
+}
+
+.headerHeight {
+  height: var(--headerheight);
+}
+
+.accountSidebarHeight {
+  min-height: calc(100vh - var(--headerheight));
+}
+
+.currentGray {
+  background: #2d2d2d;
 }

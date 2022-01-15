@@ -43,11 +43,6 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
           <p className='text-gray-700 font-bold mt-1'>{post.dateOfCreation}</p>
         </div>
       </div>
-      {/* <div className='flex items-center justify-center mb-6'>
-        <Link to={`post/${post.slug}`}>
-          <MyButton className='btn text-xl py-4'>Продолжить чтение</MyButton>
-        </Link>
-      </div> */}
     </div>
   )
 }

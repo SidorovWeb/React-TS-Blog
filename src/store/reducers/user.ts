@@ -1,7 +1,14 @@
 import { userAction, userState, userType } from '../../types/user'
 
 const initialState: userState = {
-  user: null,
+  user: {
+    userName: '',
+    email: '',
+    timestamp: {},
+    id: '',
+    userPhoto: '',
+    status: '',
+  },
   isLoading: false,
 }
 
