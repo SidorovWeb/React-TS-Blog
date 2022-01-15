@@ -1,7 +1,7 @@
 import { AppRouter } from '../components/AppRouter/AppRouter'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { ArticleCardLarge } from '../components/ArticleCardLarge/ArticleCardLarge'
-import { myPostList } from '../utils/index'
+import { isDefinitePath, myPostList } from '../utils/index'
 import { IPostListProps } from '../types/posts'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -9,11 +9,11 @@ import { ToastContainer } from 'react-toastify'
 import { Header } from '../components/Header/Header'
 
 export const Layout = () => {
-  const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
+  const [postList] = useState<IPostListProps[]>([...myPostList])
   const idxLastPost = postList.length - 1
   const pathname = useLocation().pathname
-  const styleMain = pathname !== '/my-account' ? 'pb-20 px-6 w-full mt-10 flex-grow' : 'w-full flex-grow'
-  const styleContainer = pathname !== '/my-account' ? 'container mx-auto flex-1 flex flex-wrap gap-5' : 'flex-1 gap-5'
+  const styleMain = isDefinitePath(pathname) ? 'w-full flex-grow' : 'pb-20 px-6 w-full mt-10 flex-grow'
+  const styleContainer = isDefinitePath(pathname) ? 'flex-1 gap-5' : 'container mx-auto flex-1 flex flex-wrap gap-5'
 
   return (
     <div className='min-h-screen flex flex-col currentGray'>

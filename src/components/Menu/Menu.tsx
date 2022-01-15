@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { User, userType } from '../../types/user'
+import { isDefinitePath } from '../../utils'
 import { Profile } from '../Profile/Profile'
 import { MyButton } from '../UI/MyButton/MyButton'
 
@@ -35,11 +36,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
 
   return (
     <div className='relative font-bold'>
-      {pathname !== '/my-account' ? (
-        <Link className='flex items-center' to={`/my-account`}>
-          <Profile user={user} />
-        </Link>
-      ) : (
+      {isDefinitePath(pathname) ? (
         <div className='flex items-center'>
           <div className='flex items-center'>
             <Profile user={user} />
@@ -49,6 +46,10 @@ export const Menu: FC<MenuProps> = ({ user }) => {
             <LogoutIcon width={20} className='ml-2' />
           </MyButton>
         </div>
+      ) : (
+        <Link className='flex items-center' to={`/my-account/home`}>
+          <Profile user={user} />
+        </Link>
       )}
     </div>
   )

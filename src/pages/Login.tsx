@@ -36,7 +36,7 @@ export const Login: FC = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/my-account')
+      navigate('/my-account/home')
     }
   }, [user])
 

@@ -1,5 +1,7 @@
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
 import { FC } from 'react'
+import { useDispatch } from 'react-redux'
+import { modal } from '../../store/action-creators/modalAction'
 import { IPostListProps } from '../../types/posts'
 import { statusColor } from '../../utils'
 import { MyButton } from '../UI/MyButton/MyButton'
@@ -9,9 +11,14 @@ interface DashboardPostProps {
 }
 
 export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
+  const dispatch = useDispatch()
   const status = {
     color: `${statusColor(post.status)}`,
     border: `4px solid ${statusColor(post.status)}`,
+  }
+
+  const onClick = () => {
+    dispatch(modal(true))
   }
 
   return (
@@ -19,7 +26,6 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
       className='flex items-center justify-between mb-4 p-4 rounded-lg bg-blue-100 '
       style={{ borderLeft: status.border, borderRight: status.border }}
     >
-      {/* TODO: Цвет статуса поста распространяется на ? */}
       <div className='w-20 h-16 rounded-lg overflow-hidden shrink-0'>
         <img className='img' src={post.previewImage} alt={post.title} />
       </div>
@@ -50,7 +56,7 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
         <MyButton className='btn py-2'>
           <PencilAltIcon width={20} />
         </MyButton>
-        <MyButton className='btn py-2 ml-4'>
+        <MyButton className='btn py-2 ml-4' onClick={onClick}>
           <TrashIcon width={20} />
         </MyButton>
       </div>

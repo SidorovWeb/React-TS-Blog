@@ -19,8 +19,9 @@ export const statusColor = (statusPost: string) => {
   }
 }
 
-export const isMyAccount = (pathname: string) =>
-  pathname !== '/login' && pathname !== '/register' && pathname !== '/my-account'
+const path = ['login', 'register', 'my-account']
+
+export const isDefinitePath = (pathname: string) => path.includes(pathname.split('/', 2).join(''))
 
 export const formatDate = () => {
   const date = new Date()

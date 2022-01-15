@@ -16,7 +16,12 @@ export const AppRouter = () => {
           path={route.path}
           element={userLocalDate || user ? route.element : <Navigate replace to='/' />}
           key={idx.toString()}
-        ></Route>
+        >
+          {route.children &&
+            route.children.map((child, index) => (
+              <Route path={child.path} element={child.element} key={index.toString()}></Route>
+            ))}
+        </Route>
       ))}
     </Routes>
   )

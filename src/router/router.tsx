@@ -7,6 +7,7 @@ import { CategoriesSlugPage } from '../pages/CategoriesSlugPage'
 import { ArchivesPosts } from '../pages/ArchivesPosts'
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
+import { DashboardHome } from '../components/Dashboard/DashboardHome'
 
 export const publicRoutes = [
   { path: '/', element: <Home /> },
@@ -18,4 +19,10 @@ export const publicRoutes = [
   { path: 'category/:slug', element: <CategoriesSlugPage /> },
   { path: '*', element: <Navigate replace to='/' /> },
 ]
-export const privateRoutes = [{ path: '/my-account', element: <MyAccount /> }]
+export const privateRoutes = [
+  {
+    path: '/my-account',
+    element: <MyAccount />,
+    children: [{ path: 'home', element: <DashboardHome /> }],
+  },
+]
