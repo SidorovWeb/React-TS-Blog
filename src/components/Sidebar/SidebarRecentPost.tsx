@@ -13,7 +13,7 @@ export const SidebarRecentPost: FC<SidebarItemProps> = ({ post }) => {
         <img src={post.previewImage} alt='author' className='img' />
       </Link>
       <div className='flex-grow ml-4'>
-        <p className='text-gray-400'>{post.dateOfCreation}</p>
+        <p className='text-gray-400'>{post.timestamp}</p>
 
         <Link className='text-lg truncate overflow-hidden block' style={{ width: '220px' }} to={`post/${post.slug}`}>
           {post.title}

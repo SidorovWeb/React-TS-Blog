@@ -7,7 +7,10 @@ import { CategoriesSlugPage } from '../pages/CategoriesSlugPage'
 import { ArchivesPosts } from '../pages/ArchivesPosts'
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
-import { DashboardHome } from '../components/Dashboard/DashboardHome'
+import { DashboardHome } from '../components/Dashboard/Home/DashboardHome'
+import { DashboardPosts } from '../components/Dashboard/Posts/DashboardPosts'
+import { DashboardTools } from '../components/Dashboard/Tools/DashboardTools'
+import { Editor } from '../components/Dashboard/Editor/Editor'
 
 export const publicRoutes = [
   { path: '/', element: <Home /> },
@@ -23,6 +26,12 @@ export const privateRoutes = [
   {
     path: '/my-account',
     element: <MyAccount />,
-    children: [{ path: 'home', element: <DashboardHome /> }],
+    children: [
+      { path: 'home', element: <DashboardHome /> },
+      { path: 'posts', element: <DashboardPosts /> },
+      { path: 'tools', element: <DashboardTools /> },
+      { path: 'editor', element: <Editor /> },
+      { path: 'editor/:id', element: <Editor /> },
+    ],
   },
 ]

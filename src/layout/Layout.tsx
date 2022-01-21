@@ -42,6 +42,7 @@ export const Layout = () => {
         pauseOnFocusLoss={false}
         draggable
         pauseOnHover
+        theme='colored'
       />
     </div>
   )

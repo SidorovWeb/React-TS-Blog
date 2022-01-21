@@ -1,7 +1,7 @@
 import { registerAction, registerState, registerType } from '../../types/register'
 
 const initialState: registerState = {
-  isLoading: false,
+  isLoading: true,
   error: null,
 }
 

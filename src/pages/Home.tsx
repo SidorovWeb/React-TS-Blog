@@ -9,7 +9,7 @@ export const Home = () => {
   const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
 
   return (
-    <div className='grid grid-cols-3 gap-5'>
+    <div className='grid grid-cols-1 gap-5'>
       <List
         items={postList.reverse().slice(1)}
         renderItem={(post: IPostListProps) => <PostItem post={post} key={post.id} />}

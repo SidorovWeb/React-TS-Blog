@@ -8,7 +8,7 @@ interface ArticleCardLargeProps {
 
 export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
   return (
-    <div className='rounded-lg overflow-hidden flex justify-end bg-white shadow-lg relative text-left'>
+    <div className='rounded-lg overflow-hidden flex justify-end bg-white shadow-lg relative text-left border border-gray-400'>
       <Link
         className='overflow-hidden h-full  absolute t-0 left-0 thumbnail-gradient'
         style={{ background: `url(${post.previewImage}) no-repeat center/cover`, width: '55%' }}
@@ -19,20 +19,20 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
           {post.title}
         </Link>
         <div>
-          <p className='text-gray-700 mb-10 font-normal text-lg'>{post.excerpt}</p>
+          <p className='text-gray-700 mb-10 font-bold text-lg'>{post.excerpt}</p>
         </div>
-        <div className='flex items-center'>
+        <div className='flex items-center font-bold text-gray-700'>
           <Link
-            className='w-11 h-11 rounded-full overflow-hidden mr-4 hover:opacity-60 transition-all'
+            className='w-11 h-11 rounded-lg overflow-hidden mr-4 hover:opacity-60 transition-all'
             to={`post/${post.slug}`}
           >
             <img src={post.authorPhoto} alt={post.author} className='img' />
           </Link>
-          <Link className='text-gray-700 font-bold hover:opacity-60 transition-all' to={`post/${post.slug}`}>
+          <Link className=' font-bold hover:opacity-60 transition-all' to={`post/${post.slug}`}>
             {post.author}
           </Link>
           <p className='px-2'>на</p>
-          <p className='text-gray-700'>{post.dateOfCreation}</p>
+          <p className=''>{post.timestamp}</p>
         </div>
       </div>
     </div>

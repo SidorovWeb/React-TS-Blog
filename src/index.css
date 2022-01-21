@@ -38,9 +38,6 @@ code {
 .mw-sidebar {
   width: 370px;
 }
-.account-sidebar {
-  width: 270px;
-}
 
 .thumbnail-gradient::after {
   pointer-events: none;
@@ -137,4 +134,24 @@ code {
 
 .currentGray {
   background: #2d2d2d;
+}
+
+.dashboard-drawer__list .active > div {
+  background-color: #a78bfa;
+}
+
+[contenteditable='true'] {
+  outline: none;
+}
+
+[contenteditable]:empty::after {
+  content: '';
+}
+
+[contenteditable]:empty::before {
+  content: attr(placeholder);
+}
+
+::selection {
+  background-color: #bae6fd;
 }

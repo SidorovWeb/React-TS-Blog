@@ -9,7 +9,7 @@ interface ProfileProps {
 export const Profile: FC<ProfileProps> = ({ user }) => {
   return (
     <>
-      <span className='mr-2'>{user.userName}</span>
+      {/* <span className='mr-2'>{user.userName}</span> */}
       {user.userPhoto ? (
         <div className='bg-white w-8 h-8 rounded-lg overflow-hidden shrink-0'>
           <img src={user.userPhoto} alt={user.userName} />

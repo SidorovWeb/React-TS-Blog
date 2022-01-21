@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { db } from './firebase'
 import { Layout } from './layout/Layout'
+import { postsRead } from './store/action-creators/postAction'
 import { User, userType } from './types/user'
 
 const App: FC = () => {
@@ -35,6 +36,8 @@ const App: FC = () => {
         })
       }
     })
+
+    dispatch(postsRead())
 
     return () => {
       unsubscribe()

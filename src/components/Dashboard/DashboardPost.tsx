@@ -1,6 +1,7 @@
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
 import { FC } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { modal } from '../../store/action-creators/modalAction'
 import { IPostListProps } from '../../types/posts'
 import { statusColor } from '../../utils'
@@ -21,23 +22,24 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
     dispatch(modal(true))
   }
 
+  // console.log(new Date(post.timestamp.seconds * 1000))
+
   return (
     <div
       className='flex items-center justify-between mb-4 p-4 rounded-lg bg-blue-100 '
       style={{ borderLeft: status.border, borderRight: status.border }}
     >
-      <div className='w-20 h-16 rounded-lg overflow-hidden shrink-0'>
-        <img className='img' src={post.previewImage} alt={post.title} />
-      </div>
+      {post.previewImage && (
+        <div className='w-20 h-16 rounded-lg overflow-hidden shrink-0'>
+          <img className='img' src={post.previewImage} alt={post.title} />
+        </div>
+      )}
+
       <div className='px-4 flex-grow'>
         <p className='font-bold text-lg'>{post.title}</p>
-        {/* <p className='text-sm'>{post.author}</p> */}
         <div className='flex'>
           <p className='mr-4'>
-            <span className='text-gray-500'>Слов:</span> 1200
-          </p>
-          <p>
-            <span className='text-gray-500'>Создан:</span> {post.dateOfCreation}
+            <span className='text-gray-700'>Слов:</span> 1200
           </p>
         </div>
         <div className='flex gap-4'>
@@ -48,17 +50,19 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
       </div>
       <div className='shrink-0'>
         <div className='mb-2'>
-          <span className='text-gray-500'>Статус:</span>{' '}
+          <span className='text-gray-700'>Статус:</span>{' '}
           <span className='font-bold' style={{ color: status.color }}>
             {post.status}
           </span>
         </div>
-        <MyButton className='btn py-2'>
-          <PencilAltIcon width={20} />
-        </MyButton>
-        <MyButton className='btn py-2 ml-4' onClick={onClick}>
-          <TrashIcon width={20} />
-        </MyButton>
+        <div className='flex items-center'>
+          <Link className='btn py-2 block' to={`/my-account/editor/${post.id}`}>
+            <PencilAltIcon width={20} />
+          </Link>
+          <MyButton className='btn py-2 ml-4' onClick={onClick}>
+            <TrashIcon width={20} />
+          </MyButton>
+        </div>
       </div>
     </div>
   )

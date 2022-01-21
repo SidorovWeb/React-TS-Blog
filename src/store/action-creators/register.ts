@@ -19,6 +19,7 @@ export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerActi
         id: userCredential.user.uid,
         userPhoto: '',
         status: '',
+        post_thumbnail: '',
       }
       addDoc(collection(db, 'users'), user)
       dispatch({

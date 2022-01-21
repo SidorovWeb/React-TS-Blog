@@ -8,8 +8,9 @@ const initialState: userState = {
     id: '',
     userPhoto: '',
     status: '',
+    post_thumbnail: '',
   },
-  isLoading: false,
+  isLoading: true,
 }
 
 export const userReducer = (state = initialState, action: userAction): userState => {

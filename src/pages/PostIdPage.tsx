@@ -7,7 +7,7 @@ import { myPostList } from '../utils'
 export const PostIdPage: FC = () => {
   const { slug } = useParams()
 
-  const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
+  const [postList] = useState<IPostListProps[]>([...myPostList])
 
   const post = postList.find((post) => post.slug === slug)
 
@@ -28,7 +28,7 @@ export const PostIdPage: FC = () => {
 
             <div className='flex items-center'>
               <CalendarIcon className='icon text-pink-600' />
-              <p className='text-gray-700 font-bold mt-1'>{post.dateOfCreation}</p>
+              <p className='text-gray-700 font-bold mt-1'>{post.timestamp}</p>
             </div>
           </div>
 
