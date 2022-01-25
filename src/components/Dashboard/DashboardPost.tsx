@@ -3,15 +3,17 @@ import { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { modal } from '../../store/action-creators/modalAction'
+import { postDelete } from '../../store/action-creators/postAction'
 import { IPostListProps } from '../../types/posts'
 import { statusColor } from '../../utils'
 import { MyButton } from '../UI/MyButton/MyButton'
 
 interface DashboardPostProps {
   post: IPostListProps
+  uid?: string
 }
 
-export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
+export const DashboardPost: FC<DashboardPostProps> = ({ post, uid }) => {
   const dispatch = useDispatch()
   const status = {
     color: `${statusColor(post.status)}`,
@@ -19,9 +21,9 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
   }
 
   const onClick = () => {
-    dispatch(modal(true))
+    // dispatch(modal(true))
+    dispatch(postDelete(post))
   }
-
   // console.log(new Date(post.timestamp.seconds * 1000))
 
   return (
@@ -55,14 +57,16 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post }) => {
             {post.status}
           </span>
         </div>
-        <div className='flex items-center'>
-          <Link className='btn py-2 block' to={`/my-account/editor/${post.id}`}>
-            <PencilAltIcon width={20} />
-          </Link>
-          <MyButton className='btn py-2 ml-4' onClick={onClick}>
-            <TrashIcon width={20} />
-          </MyButton>
-        </div>
+        {uid === post.uid && (
+          <div className='flex items-center'>
+            <Link className='btn py-2 block' to={`/my-account/editor/${post.id}`}>
+              <PencilAltIcon width={20} />
+            </Link>
+            <MyButton className='btn py-2 ml-4' onClick={onClick}>
+              <TrashIcon width={20} />
+            </MyButton>
+          </div>
+        )}
       </div>
     </div>
   )

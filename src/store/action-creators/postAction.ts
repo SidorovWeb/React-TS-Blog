@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, deleteField, doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore'
 import { Dispatch } from 'redux'
 import { db } from '../../firebase'
 import { IPostListProps, postAction, postStatusProps, postType } from '../../types/posts'
@@ -10,9 +10,7 @@ export const postsRead = () => (dispatch: Dispatch<postAction>) => {
     (snapshot) => {
       const newPosts: any = []
 
-      snapshot.docs.map((doc) => {
-        newPosts.push({ ...doc.data(), id: doc.id })
-      })
+      snapshot.docs.map((doc) => newPosts.push({ ...doc.data(), id: doc.id }))
       dispatch({ type: postType.POST_READ, payload: newPosts })
     },
     (error) => {
@@ -21,11 +19,16 @@ export const postsRead = () => (dispatch: Dispatch<postAction>) => {
   )
 }
 
-export const postCreate = (data: IPostListProps, postID: (id: string) => void) => (dispatch: Dispatch<postAction>) => {
+export const postCreate = (post: IPostListProps, postID: (id: string) => void) => (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_START })
-  addDoc(collection(db, 'posts'), data)
+  addDoc(collection(db, 'posts'), post)
     .then((newDate) => {
       dispatch({ type: postType.POST_CREATE })
+      updateDoc(doc(db, 'posts', newDate.id), {
+        id: newDate.id,
+      }).then(() => {
+        dispatch({ type: postType.POST_UPDATE })
+      })
       postID(newDate.id)
     })
     .catch((error) => {
@@ -33,23 +36,26 @@ export const postCreate = (data: IPostListProps, postID: (id: string) => void) =
     })
 }
 
-export const postDelete = (data: IPostListProps) => (dispatch: Dispatch<postAction>) => {
+export const postDelete = (post: IPostListProps) => (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_START })
-  // addDoc(collection(db, 'posts'), data)
-  //   .then((newDate) => {
-  //     dispatch({ type: postType.POST_CREATE })
-  //   })
-  //   .catch((error) => {
-  //     dispatch({ type: postType.POST_ERROR, payload: error.message })
-  //   })
 
-  const postRef = doc(db, 'post', data.id)
-
-  updateDoc(postRef, {
-    capital: deleteField(),
-  })
+  deleteDoc(doc(db, 'posts', post.id))
     .then(() => {
       dispatch({ type: postType.POST_DELETE })
+    })
+    .catch((error) => {
+      dispatch({ type: postType.POST_ERROR, payload: error.message })
+    })
+}
+
+export const postUpdate = (post: IPostListProps) => (dispatch: Dispatch<postAction>) => {
+  dispatch({ type: postType.POST_START })
+
+  updateDoc(doc(db, 'posts', post.id), {
+    ...post,
+  })
+    .then(() => {
+      dispatch({ type: postType.POST_UPDATE })
     })
     .catch((error) => {
       dispatch({ type: postType.POST_ERROR, payload: error.message })

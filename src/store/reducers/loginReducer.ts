@@ -1,7 +1,7 @@
 import { loginAction, loginState, loginType } from '../../types/login'
 
 const initialState: loginState = {
-  isLoading: true,
+  isLoading: false,
   error: null,
 }
 

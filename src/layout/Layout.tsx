@@ -1,7 +1,7 @@
 import { AppRouter } from '../components/AppRouter/AppRouter'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { ArticleCardLarge } from '../components/ArticleCardLarge/ArticleCardLarge'
-import { isDefinitePath, myPostList } from '../utils/index'
+import { isMyAccount, myPostList } from '../utils/index'
 import { IPostListProps } from '../types/posts'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -12,8 +12,8 @@ export const Layout = () => {
   const [postList] = useState<IPostListProps[]>([...myPostList])
   const idxLastPost = postList.length - 1
   const pathname = useLocation().pathname
-  const styleMain = isDefinitePath(pathname) ? 'w-full flex-grow' : 'pb-20 px-6 w-full mt-10 flex-grow'
-  const styleContainer = isDefinitePath(pathname) ? 'flex-1 gap-5' : 'container mx-auto flex-1 flex flex-wrap gap-5'
+  const styleMain = isMyAccount(pathname) ? 'w-full flex-grow ' : 'pb-20 px-6 w-full mt-10 flex-grow'
+  const styleContainer = isMyAccount(pathname) ? 'flex-1 gap-5' : 'container mx-auto flex-1 flex flex-wrap gap-5'
 
   return (
     <div className='min-h-screen flex flex-col currentGray'>
@@ -33,7 +33,7 @@ export const Layout = () => {
         </div>
       </main>
       <ToastContainer
-        position='bottom-center'
+        position='top-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -42,7 +42,6 @@ export const Layout = () => {
         pauseOnFocusLoss={false}
         draggable
         pauseOnHover
-        theme='colored'
       />
     </div>
   )

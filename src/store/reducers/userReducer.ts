@@ -1,15 +1,8 @@
+import { defaultUser } from '../../constants'
 import { userAction, userState, userType } from '../../types/user'
 
 const initialState: userState = {
-  user: {
-    userName: '',
-    email: '',
-    timestamp: {},
-    id: '',
-    userPhoto: '',
-    status: '',
-    post_thumbnail: '',
-  },
+  user: defaultUser,
   isLoading: true,
 }
 

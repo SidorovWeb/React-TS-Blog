@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { DashboardDrawer } from '../components/Dashboard/DashboardDrawer'
 import { Modal } from '../components/UI/Modal/Modal'

@@ -11,5 +11,17 @@ export const defaultPost = {
   excerpt: '',
   content: '',
   id: '',
+  uid: '',
   status: '',
+}
+
+export const defaultUser = {
+  userName: '',
+  email: '',
+  timestamp: {},
+  id: '',
+  userPhoto: '',
+  status: '',
+  post_thumbnail: '',
+  notification: [],
 }

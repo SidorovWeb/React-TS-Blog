@@ -13,7 +13,7 @@ import { SignUpData } from '../types/register'
 export const Register: FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user } = useAuth()
+  const { isUser } = useAuth()
   const { isLoading } = useSelector((state) => state.register)
 
   const {
@@ -31,10 +31,10 @@ export const Register: FC = () => {
   })
 
   useEffect(() => {
-    if (user) {
+    if (isUser) {
       navigate('/my-account/home')
     }
-  }, [user])
+  }, [isUser])
 
   const onSubmit = (data: SignUpData) => {
     dispatch(createUser(data))
@@ -124,7 +124,7 @@ export const Register: FC = () => {
               type='submit'
               disabled={!isValid}
             >
-              {isLoading ? <Spin displayText='Обработка...' /> : 'Войти'}
+              {isLoading ? <Spin displayText='Обработка...' /> : 'Зарегистрироваться'}
             </MyButton>
           </form>
           <Link className='font-bold text-pink-600 underline' to={'/login'}>

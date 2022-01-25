@@ -6,18 +6,20 @@ import { DashboardPost } from '../DashboardPost'
 
 export const DashboardPosts: FC = () => {
   const { posts, isLoading } = useSelector((state) => state.post)
+  const { user } = useSelector((state) => state.user)
+  const userPosts = posts.filter((post) => post.uid === user.id)
 
   return (
     <div className='flex-grow p-4'>
       <div className='flex justify-end mb-6 text-gray-700'>
-        <span className='text-xl font-bold'>Постов: {posts.length}</span>
+        <span className='text-xl font-bold'>Постов: {userPosts.length}</span>
       </div>
       <div className='rounded-lg '>
-        {!posts.length && <p className='font-bold text-2xl mt-10'>Список постов пуст &#128546;</p>}
+        {!userPosts.length && <p className='font-bold text-2xl mt-10'>Список постов пуст &#128546;</p>}
         {!isLoading && (
           <List
-            items={posts.reverse()}
-            renderItem={(post: IPostListProps) => <DashboardPost post={post} key={post.id} />}
+            items={userPosts.reverse()}
+            renderItem={(post: IPostListProps) => <DashboardPost post={post} key={post.id} uid={user.id} />}
           />
         )}
       </div>

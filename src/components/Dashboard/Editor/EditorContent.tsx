@@ -3,12 +3,13 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { postCreate } from '../../../store/action-creators/postAction'
+import { postCreate, postUpdate } from '../../../store/action-creators/postAction'
 import { IPostListProps } from '../../../types/posts'
 import { User } from '../../../types/user'
+import { Fieldset } from '../../UI/Fieldset/Fieldset'
 interface EditorContentProps {
   user: User
   post: IPostListProps
@@ -17,6 +18,7 @@ interface EditorContentProps {
 export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const params = useParams()
   const postStatus = useSelector((state) => state.post.postStatus)
   const [urlPreviewImage, setUrlPreviewImage] = useState<any>('')
   const refSubmitButton = useRef<HTMLButtonElement>(null)
@@ -65,6 +67,10 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
     }
   }
 
+  const onChange = (val: string) => {
+    console.log(val)
+  }
+
   const createPost = (data: any) => {
     const value = data.title ? data.title.trim().replace(/\s{2,}/g, ' ') : data.title
 
@@ -78,16 +84,24 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
       ...post,
       ...data,
       author: user.userName,
+      uid: user.id,
       title: value,
       slug: cyrillicToTranslit.transform(value, '_').toLocaleLowerCase(),
       previewImage: data.previewImage.name ?? '',
       status: postStatus.type,
     }
 
-    const postID = (id: string) => {
-      navigate(`/my-account/editor/${id}`)
+    if (post.id) {
+      dispatch(postUpdate(newPost))
+    } else {
+      const postID = (id: string) => {
+        if (!params.id) {
+          navigate(`/my-account/editor/${id}`)
+        }
+      }
+
+      dispatch(postCreate(newPost, postID))
     }
-    dispatch(postCreate(newPost, postID))
 
     toast.success(postStatus.message)
   }
@@ -143,6 +157,9 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
         >
           {post.content}
         </div>
+      </div>
+      <div>
+        <Fieldset labelText='Теги' id='tags' type='text' value='' onChange={onChange}></Fieldset>
       </div>
       <button hidden={true} ref={refSubmitButton} type={'submit'} />
     </form>

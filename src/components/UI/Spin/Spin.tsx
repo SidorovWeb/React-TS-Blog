@@ -1,5 +1,5 @@
+import { RefreshIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
-import { ReactComponent as SpinIcon } from '../../../icons/spin.svg'
 
 interface SpinProps {
   displayText: string
@@ -8,8 +8,8 @@ interface SpinProps {
 export const Spin: FC<SpinProps> = ({ displayText }) => {
   return (
     <div className='flex items-center'>
-      <SpinIcon />
-      {displayText}
+      <RefreshIcon className='animate-spin' width={20} />
+      <p className='ml-2'>{displayText}</p>
     </div>
   )
 }

@@ -20,6 +20,8 @@ export const postReducer = (state = initialState, action: postAction): postState
       return { ...state, isLoading: false, posts: action.payload }
     case postType.POST_DELETE:
       return { ...state, isLoading: false }
+    case postType.POST_UPDATE:
+      return { ...state, isLoading: false }
     case postType.POST_STATUS:
       return { ...state, postStatus: { ...action.payload } }
     case postType.POST_ERROR:

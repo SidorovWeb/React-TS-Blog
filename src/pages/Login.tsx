@@ -11,7 +11,7 @@ import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
 
 export const Login: FC = () => {
-  const { user } = useAuth()
+  const { isUser } = useAuth()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.login)
@@ -35,10 +35,10 @@ export const Login: FC = () => {
   }
 
   useEffect(() => {
-    if (user) {
+    if (isUser) {
       navigate('/my-account/home')
     }
-  }, [user])
+  }, [isUser])
 
   return (
     <div className='container'>

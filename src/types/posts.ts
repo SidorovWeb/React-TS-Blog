@@ -14,6 +14,7 @@ export interface IPostListProps {
   slug: string
   categories: Categories[]
   id: string
+  uid: string
   status: string
 }
 
@@ -36,6 +37,7 @@ export enum postType {
   POST_DELETE = 'POST_DELETE',
   POST_ERROR = 'POST_ERROR',
   POST_STATUS = 'POST_STATUS',
+  POST_UPDATE = 'POST_UPDATE',
 }
 
 interface postActionStart {
@@ -53,6 +55,9 @@ interface postActionRead {
 
 interface postActionDelete {
   type: postType.POST_DELETE
+}
+interface postActionUpdate {
+  type: postType.POST_UPDATE
 }
 
 interface postActionError {
@@ -75,3 +80,4 @@ export type postAction =
   | postActionRead
   | postActionStatus
   | postActionDelete
+  | postActionUpdate

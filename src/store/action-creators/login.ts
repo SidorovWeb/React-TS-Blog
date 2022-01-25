@@ -23,8 +23,8 @@ export const login = (data: SignInData) => (dispatch: Dispatch<loginAction | use
           type: userType.SET_USER,
           payload: { ...doc.data() } as User,
         })
-        toast.success('Success')
         localStorage.setItem('currentUser', JSON.stringify({ ...doc.data() }))
+        toast.success('Вы успешно вошли')
       })
 
       dispatch({
