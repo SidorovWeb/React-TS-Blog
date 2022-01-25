@@ -1,4 +1,4 @@
-import { HomeIcon, LogoutIcon } from '@heroicons/react/solid'
+import { BellIcon, HomeIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { User } from '../../types/user'
@@ -25,8 +25,11 @@ export const Menu: FC<MenuProps> = ({ user }) => {
           <div className='flex items-center'>
             <Profile user={user} />
           </div>
-          <MyButton className='flex items-center p-2 ml-4 font-bold hover' onClick={onClick}>
-            <HomeIcon width={34} className='ml-2' />
+          <MyButton className='flex items-center p-2  font-bold hover' onClick={onClick}>
+            <BellIcon width={24} className='ml-2' />
+          </MyButton>
+          <MyButton className='flex items-center p-2 font-bold hover' onClick={onClick}>
+            <HomeIcon width={24} className='' />
           </MyButton>
         </div>
       ) : (

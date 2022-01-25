@@ -2,13 +2,12 @@ import { CheckIcon } from '@heroicons/react/solid'
 import { FC } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { defaultPost } from '../../../constants'
-import { useAuth } from '../../../hooks/useAuth'
 import { useSelector } from '../../../hooks/useTypedSelector'
 import { DashboardSidebar } from '../DashboardSidebar'
 import { EditorContent } from './EditorContent'
 
 export const Editor: FC = () => {
-  const { user } = useAuth()
+  const { user } = useSelector((state) => state.user)
   const { id } = useParams()
   const { posts } = useSelector((state) => state.post)
   const post = posts.find((post) => post.id === id) ?? defaultPost

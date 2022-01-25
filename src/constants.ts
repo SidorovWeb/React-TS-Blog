@@ -1,4 +1,4 @@
-import { serverTimestamp } from 'firebase/firestore'
+import { Timestamp } from 'firebase/firestore'
 
 export const defaultPost = {
   author: '',
@@ -7,7 +7,7 @@ export const defaultPost = {
   slug: '',
   categories: [],
   previewImage: '',
-  timestamp: serverTimestamp(),
+  timestamp: new Date(Timestamp.now().seconds * 1000).toLocaleDateString(),
   excerpt: '',
   content: '',
   id: '',
@@ -22,6 +22,5 @@ export const defaultUser = {
   id: '',
   userPhoto: '',
   status: '',
-  post_thumbnail: '',
   notification: [],
 }

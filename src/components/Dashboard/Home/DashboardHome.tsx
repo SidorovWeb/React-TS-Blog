@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import { useAuth } from '../../../hooks/useAuth'
 import { DashboardHomeContent } from './DashboardHomeContent'
 import { DashboardSidebar } from '../DashboardSidebar'
+import { useSelector } from '../../../hooks/useTypedSelector'
 
 export const DashboardHome: FC = () => {
-  const { user, isLoading } = useAuth()
-
+  const { user, isLoading } = useSelector((state) => state.user)
   return (
     <>
       <DashboardHomeContent user={user} isLoading={isLoading} />

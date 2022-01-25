@@ -5,7 +5,6 @@ export interface User {
   id: string
   userPhoto: string
   status: string
-  post_thumbnail: string
   notification: string[]
 }
 

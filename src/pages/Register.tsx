@@ -11,9 +11,9 @@ import { createUser } from '../store/action-creators/register'
 import { SignUpData } from '../types/register'
 
 export const Register: FC = () => {
+  const currentUser = useAuth()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isUser } = useAuth()
   const { isLoading } = useSelector((state) => state.register)
 
   const {
@@ -31,10 +31,10 @@ export const Register: FC = () => {
   })
 
   useEffect(() => {
-    if (isUser) {
+    if (currentUser) {
       navigate('/my-account/home')
     }
-  }, [isUser])
+  }, [currentUser])
 
   const onSubmit = (data: SignUpData) => {
     dispatch(createUser(data))

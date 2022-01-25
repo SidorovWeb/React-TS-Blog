@@ -5,10 +5,12 @@ import { isMyAccount } from '../../utils'
 import { FC } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { Menu } from '../Menu/Menu'
+import { useSelector } from '../../hooks/useTypedSelector'
 
 export const NavBar: FC = () => {
   const pathname = useLocation().pathname
-  const { user, isUser } = useAuth()
+  const currentUser = useAuth()
+  const { user } = useSelector((state) => state.user)
   const styles = isMyAccount(pathname) ? 'text-white' : 'py-4 text-white border-b border-gray-500'
 
   return (
@@ -23,9 +25,9 @@ export const NavBar: FC = () => {
         <div className='flex items-center'>
           {!isMyAccount(pathname) && <Navigation />}
 
-          {isUser ? (
+          {currentUser ? (
             <Menu user={user} />
-          ) : !isMyAccount(pathname) && !isUser && pathname !== '/' ? (
+          ) : !isMyAccount(pathname) && !currentUser && pathname !== '/' ? (
             <Link className='btn py-2 ml-4' to={`/`}>
               На главную
             </Link>

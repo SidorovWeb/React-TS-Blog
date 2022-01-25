@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { privateRoutes, publicRoutes } from '../../router/router'
 
 export const AppRouter = () => {
-  const { isUser } = useAuth()
+  const currentUser = useAuth()
   const isUserLocalDate = localStorage.getItem('currentUser')
 
   return (
@@ -14,7 +14,7 @@ export const AppRouter = () => {
       {privateRoutes.map((route, idx) => (
         <Route
           path={route.path}
-          element={isUserLocalDate || isUser ? route.element : <Navigate replace to='/' />}
+          element={isUserLocalDate || currentUser ? route.element : <Navigate replace to='/' />}
           key={idx.toString()}
         >
           {route.children &&

@@ -30,7 +30,7 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
       </div>
       <div className='flex items-start justify-between'>
         <Link
-          className='block text-black text-3xl font-bold mb-10 hover:opacity-60 transition-all '
+          className='block text-black text-3xl font-bold mb-10 hover:opacity-60 transition-all mr-20'
           to={`/post/${post.slug}`}
         >
           {post.title}

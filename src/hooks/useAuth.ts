@@ -1,11 +1,14 @@
-import { useSelector } from './useTypedSelector'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
 
-export const useAuth = () => {
-  const { user, isLoading } = useSelector((state) => state.user)
+export function useAuth() {
+  const auth = getAuth()
+  const [currentUser, setCurrentUser] = useState<any>()
 
-  return {
-    user,
-    isLoading,
-    isUser: !!user.id,
-  }
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user))
+    return unsub
+  }, [])
+
+  return currentUser
 }
