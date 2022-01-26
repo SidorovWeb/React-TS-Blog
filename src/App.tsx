@@ -23,15 +23,17 @@ const App: FC = () => {
       })
     }
 
-    const unsubscribe = onAuthStateChanged(getAuth(), async (user) => {
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
       if (user) {
         const uid = user.uid
-        const q = query(collection(db, 'users'), where('id', '==', uid))
-        const querySnapshot = await getDocs(q)
-        querySnapshot.forEach((doc) => {
-          dispatch({
-            type: userType.SET_USER,
-            payload: { ...doc.data() } as User,
+        const q = query(collection(db, 'users'), where('uid', '==', uid))
+        getDocs(q).then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            dispatch({
+              type: userType.SET_USER,
+              payload: { ...doc.data() } as User,
+            })
+            localStorage.setItem('currentUser', JSON.stringify({ ...doc.data() }))
           })
         })
       }

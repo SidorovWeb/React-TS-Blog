@@ -1,7 +1,6 @@
 import { HashtagIcon } from '@heroicons/react/outline'
 import { PhotographIcon } from '@heroicons/react/solid'
 import CyrillicToTranslit from 'cyrillic-to-translit-js'
-import { Timestamp } from 'firebase/firestore'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'

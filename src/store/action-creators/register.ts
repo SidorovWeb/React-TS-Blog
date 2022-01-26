@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { Dispatch } from 'redux'
 import { defaultUser } from '../../constants'
@@ -18,18 +18,30 @@ export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerActi
         userName: data.username,
         email: data.email,
         timestamp: serverTimestamp(),
-        id: userCredential.user.uid,
+        uid: userCredential.user.uid,
       }
 
-      addDoc(collection(db, 'users'), user)
-      dispatch({
-        type: userType.SET_USER,
-        payload: user,
+      addDoc(collection(db, 'users'), user).then((newDate) => {
+        dispatch({
+          type: userType.SET_USER,
+          payload: { ...user, id: newDate.id },
+        })
+
+        updateDoc(doc(db, 'users', newDate.id), { ...user, id: newDate.id })
+          .then(() => {
+            dispatch({ type: userType.UPDATE_USER, payload: { ...user, id: newDate.id } })
+          })
+          .catch((error) => {
+            dispatch({ type: userType.SET_USER_ERROR, payload: error.message })
+          })
+
+        localStorage.setItem('currentUser', JSON.stringify({ ...user, id: newDate.id }))
       })
+
       dispatch({
         type: registerType.REGISTER_SUCCESS,
       })
-      toast.success('Регистрация прошла успешно')
+      toast.success('Вы успешно зарегистрировались')
     })
     .catch((error) => {
       dispatch({ type: registerType.REGISTER_ERROR, payload: error.message })
