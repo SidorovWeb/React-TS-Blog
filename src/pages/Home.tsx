@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IPostListProps } from '../types/posts'
+import { IPostListProps } from '../types/postsTypes'
 
 import List from '../components/List/List'
 import { PostItem } from '../components/Posts/PostListItem'

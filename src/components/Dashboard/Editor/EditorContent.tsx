@@ -8,8 +8,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useSelector } from '../../../hooks/useTypedSelector'
 import { postCreate, postUpdate } from '../../../store/action-creators/postAction'
-import { IPostListProps } from '../../../types/posts'
-import { User } from '../../../types/user'
+import { storage } from '../../../store/action-creators/storageAction'
+import { IPostListProps } from '../../../types/postsTypes'
+import { User } from '../../../types/userTypes'
 interface EditorContentProps {
   user: User
   post: IPostListProps
@@ -20,7 +21,7 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
   const navigate = useNavigate()
   const params = useParams()
   const postStatus = useSelector((state) => state.post.postStatus)
-  const [urlPreviewImage, setUrlPreviewImage] = useState<any>('')
+  const [urlPreviewImage, setUrlPreviewImage] = useState<any>()
   const refSubmitButton = useRef<HTMLButtonElement>(null)
   const cyrillicToTranslit = new CyrillicToTranslit()
   const [inputTags, setInputTags] = useState('')
@@ -42,6 +43,9 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
   useEffect(() => {
     reset(post)
     setCategories([...post.categories])
+    if (post.previewImage) {
+      setUrlPreviewImage(post.previewImage)
+    }
   }, [post])
 
   useEffect(() => {
@@ -91,15 +95,23 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
     setCategories(categories.filter((item, idx) => idx !== tag))
   }
 
-  const createPost = (data: any) => {
+  const createPost = async (data: any) => {
     const value = data.title ? data.title.trim().replace(/\s{2,}/g, ' ') : data.title
-    const prevImgName = post.previewImage !== '' ? post.previewImage : data.previewImage.name
-
     if (!value || (value && value.length < 15)) {
       setError('title', { type: 'Error' })
       toast.error('Заголовок не должен быть пустым и меньше 15 символов')
       return
     }
+
+    const file = data.previewImage
+    let prevImgName = post.previewImage
+
+    if (file) {
+      const url = await new Promise((resolve) => resolve(dispatch(storage(file, user))))
+      prevImgName = String(url)
+    }
+
+    // TODO: удаление картинки из storage
 
     const newPost: IPostListProps = {
       ...post,
@@ -108,18 +120,17 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
       uid: user.id,
       title: value,
       slug: cyrillicToTranslit.transform(value, '_').toLocaleLowerCase(),
-      previewImage: prevImgName ?? '',
+      previewImage: prevImgName,
       status: postStatus.type,
       categories: categories,
     }
-
-    console.log(newPost)
 
     if (post.id) {
       dispatch(postUpdate(newPost))
     } else {
       const postID = (id: string) => {
         if (!params.id) {
+          dispatch(postUpdate({ ...newPost, id: id }))
           navigate(`/my-account/editor/${id}`)
         }
       }
@@ -161,10 +172,9 @@ export const EditorContent: FC<EditorContentProps> = React.memo(({ user, post })
           </div>
         </div>
         <div className='mb-10'>
-          {urlPreviewImage || post.previewImage ? (
+          {urlPreviewImage ? (
             <div className='rounded-lg overflow-hidden'>
               <img className='w-full object-cover h-full max-h-80' src={urlPreviewImage} alt={post.title} />
-              Картинка скоро будет
             </div>
           ) : (
             <div className='text-center text-xl font-bold mb-4'>

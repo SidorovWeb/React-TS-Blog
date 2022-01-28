@@ -1,7 +1,7 @@
 import { CalendarIcon } from '@heroicons/react/solid'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/posts'
+import { IPostListProps } from '../../types/postsTypes'
 
 interface PostItemPost {
   post: IPostListProps

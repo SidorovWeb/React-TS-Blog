@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { User } from '../../../types/user'
+import { User } from '../../../types/userTypes'
 import { MyButton } from '../../UI/MyButton/MyButton'
 import { ReactComponent as Writer } from '../../../images/writer.svg'
 import { useNavigate } from 'react-router-dom'

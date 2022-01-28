@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { IPostListProps } from '../../types/posts'
+import { IPostListProps } from '../../types/postsTypes'
 import { myPostList, uniqueListCategories, wordForm } from '../../utils'
 import { MySelect } from '../UI/MySelect/MySelect'
 

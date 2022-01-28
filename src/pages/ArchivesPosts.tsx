@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FC } from 'react'
-import { IPostListProps } from '../types/posts'
+import { IPostListProps } from '../types/postsTypes'
 import { getArrRange, myPostList } from '../utils'
 import List from '../components/List/List'
 import { PostItem } from '../components/Posts/PostListItem'

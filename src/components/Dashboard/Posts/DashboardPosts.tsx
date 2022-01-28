@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { IPostListProps } from '../../../types/posts'
+import { IPostListProps } from '../../../types/postsTypes'
 import List from '../../List/List'
 import { DashboardPost } from '../DashboardPost'
 

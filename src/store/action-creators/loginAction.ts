@@ -3,8 +3,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { Dispatch } from 'react'
 import { toast } from 'react-toastify'
 import { db } from '../../firebase'
-import { loginAction, loginType, SignInData } from '../../types/login'
-import { User, userAction, userType } from '../../types/user'
+import { loginAction, loginType, SignInData } from '../../types/loginTypes'
+import { User, userAction, userType } from '../../types/userTypes'
 
 export const login = (data: SignInData) => (dispatch: Dispatch<loginAction | userAction>) => {
   dispatch({
@@ -20,7 +20,7 @@ export const login = (data: SignInData) => (dispatch: Dispatch<loginAction | use
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
         dispatch({
-          type: userType.SET_USER,
+          type: userType.USER_READ_SUCCESS,
           payload: { ...doc.data() } as User,
         })
         localStorage.setItem('currentUser', JSON.stringify({ ...doc.data() }))

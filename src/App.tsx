@@ -6,19 +6,19 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { db } from './firebase'
 import { Layout } from './layout/Layout'
 import { postsRead } from './store/action-creators/postAction'
-import { User, userType } from './types/user'
+import { User, userType } from './types/userTypes'
 
 const App: FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch({
-      type: userType.SET_USER_START,
+      type: userType.USER_READ_START,
     })
     const userLocalDate = localStorage.getItem('currentUser')
     if (userLocalDate) {
       dispatch({
-        type: userType.SET_USER,
+        type: userType.USER_READ_SUCCESS,
         payload: { ...JSON.parse(userLocalDate) } as User,
       })
     }
@@ -30,7 +30,7 @@ const App: FC = () => {
         getDocs(q).then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             dispatch({
-              type: userType.SET_USER,
+              type: userType.USER_READ_SUCCESS,
               payload: { ...doc.data() } as User,
             })
             localStorage.setItem('currentUser', JSON.stringify({ ...doc.data() }))

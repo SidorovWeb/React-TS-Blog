@@ -1,4 +1,4 @@
-import { registerAction, registerState, registerType } from '../../types/register'
+import { registerAction, registerState, registerType } from '../../types/registerTypes'
 
 const initialState: registerState = {
   isLoading: false,

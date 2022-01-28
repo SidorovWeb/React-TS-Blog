@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { defaultUser } from '../../constants'
 import { postStatus } from '../../store/action-creators/postAction'
-import { IPostListProps } from '../../types/posts'
-import { userType } from '../../types/user'
+import { IPostListProps } from '../../types/postsTypes'
+import { userType } from '../../types/userTypes'
 import { statusColor } from '../../utils'
 import { MyButton } from '../UI/MyButton/MyButton'
 
@@ -25,7 +25,7 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = ({ post }) => {
       .then(() => {
         localStorage.removeItem('currentUser')
         dispatch({
-          type: userType.SET_USER,
+          type: userType.USER_READ_SUCCESS,
           payload: defaultUser,
         })
         navigate('/')

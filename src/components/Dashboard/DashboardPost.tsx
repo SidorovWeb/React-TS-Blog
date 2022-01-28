@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { modal } from '../../store/action-creators/modalAction'
 import { postDelete } from '../../store/action-creators/postAction'
-import { IPostListProps } from '../../types/posts'
+import { IPostListProps } from '../../types/postsTypes'
 import { statusColor } from '../../utils'
 import { MyButton } from '../UI/MyButton/MyButton'
 

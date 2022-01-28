@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from '../../../hooks/useTypedSelector'
 import { Profile } from '../../Profile/Profile'
 import { Spin } from '../../UI/Spin/Spin'
+import { userUpdate } from '../../../store/action-creators/userAction'
 import { storage } from '../../../store/action-creators/storageAction'
 
 export const DashboardTools: FC = () => {
@@ -15,7 +16,8 @@ export const DashboardTools: FC = () => {
     const file = event.target.files[0]
 
     if (file) {
-      dispatch(storage('users', user, file))
+      const url = await new Promise((resolve) => resolve(dispatch(storage(file, user))))
+      dispatch(userUpdate({ ...user, userPhoto: String(url) }))
     }
   }
 

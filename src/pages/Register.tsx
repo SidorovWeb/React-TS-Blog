@@ -7,8 +7,8 @@ import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
 import { useAuth } from '../hooks/useAuth'
 import { useSelector } from '../hooks/useTypedSelector'
-import { createUser } from '../store/action-creators/register'
-import { SignUpData } from '../types/register'
+import { createUser } from '../store/action-creators/registerAction'
+import { SignUpData } from '../types/registerTypes'
 
 export const Register: FC = () => {
   const currentUser = useAuth()

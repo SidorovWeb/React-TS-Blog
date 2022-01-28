@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/posts'
+import { IPostListProps } from '../../types/postsTypes'
 import { myPostList, uniqueListCategories } from '../../utils'
 import { SidebarCategoryPost } from './SidebarCategoryPost'
 import { SidebarRecentPost } from './SidebarRecentPost'

@@ -11,7 +11,7 @@ export const storageReducer = (state = initialState, action: storageAction): sto
     case storageType.STORAGE_START:
       return { ...state, isLoading: true, error: null }
     case storageType.STORAGE_SUCCESS:
-      return { ...state, isLoading: false, url: action.payload }
+      return { ...state, isLoading: false }
     case storageType.STORAGE_ERROR:
       return { ...state, isLoading: false, error: action.payload }
     default:

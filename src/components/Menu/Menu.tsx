@@ -1,7 +1,7 @@
 import { BellIcon, HomeIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { User } from '../../types/user'
+import { User } from '../../types/userTypes'
 import { isMyAccount } from '../../utils'
 import { Profile } from '../Profile/Profile'
 import { MyButton } from '../UI/MyButton/MyButton'

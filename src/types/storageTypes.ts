@@ -16,7 +16,6 @@ export interface storageActionStart {
 
 export interface storageActionSuccess {
   type: storageType.STORAGE_SUCCESS
-  payload: string
 }
 export interface storageActionError {
   type: storageType.STORAGE_ERROR

@@ -1,4 +1,4 @@
-import { loginAction, loginState, loginType } from '../../types/login'
+import { loginAction, loginState, loginType } from '../../types/loginTypes'
 
 const initialState: loginState = {
   isLoading: false,

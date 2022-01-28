@@ -4,8 +4,8 @@ import { toast } from 'react-toastify'
 import { Dispatch } from 'redux'
 import { defaultUser } from '../../constants'
 import { db } from '../../firebase'
-import { registerAction, registerType, SignUpData } from '../../types/register'
-import { userAction, userType } from '../../types/user'
+import { registerAction, registerType, SignUpData } from '../../types/registerTypes'
+import { userAction, userType } from '../../types/userTypes'
 
 export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerAction | userAction>) => {
   dispatch({
@@ -23,16 +23,16 @@ export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerActi
 
       addDoc(collection(db, 'users'), user).then((newDate) => {
         dispatch({
-          type: userType.SET_USER,
+          type: userType.USER_READ_SUCCESS,
           payload: { ...user, id: newDate.id },
         })
 
         updateDoc(doc(db, 'users', newDate.id), { ...user, id: newDate.id })
           .then(() => {
-            dispatch({ type: userType.UPDATE_USER, payload: { ...user, id: newDate.id } })
+            dispatch({ type: userType.USER_UPDATE_SUCCESS, payload: { ...user, id: newDate.id } })
           })
           .catch((error) => {
-            dispatch({ type: userType.SET_USER_ERROR, payload: error.message })
+            dispatch({ type: userType.USER_READ_ERROR, payload: error.message })
           })
 
         localStorage.setItem('currentUser', JSON.stringify({ ...user, id: newDate.id }))
