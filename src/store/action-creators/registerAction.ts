@@ -7,11 +7,11 @@ import { db } from '../../firebase'
 import { registerAction, registerType, SignUpData } from '../../types/registerTypes'
 import { userAction, userType } from '../../types/userTypes'
 
-export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerAction | userAction>) => {
+export const createUser = (data: SignUpData) => async (dispatch: Dispatch<registerAction | userAction>) => {
   dispatch({
     type: registerType.REGISTER_START,
   })
-  createUserWithEmailAndPassword(getAuth(), data.email, data.password)
+  await createUserWithEmailAndPassword(getAuth(), data.email, data.password)
     .then((userCredential) => {
       const user = {
         ...defaultUser,
@@ -19,6 +19,7 @@ export const createUser = (data: SignUpData) => (dispatch: Dispatch<registerActi
         email: data.email,
         timestamp: serverTimestamp(),
         uid: userCredential.user.uid,
+        status: data.email === 'admin@info.ru' ? 'admin' : 'user',
       }
 
       addDoc(collection(db, 'users'), user).then((newDate) => {

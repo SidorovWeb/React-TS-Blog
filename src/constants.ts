@@ -1,13 +1,14 @@
-import { Timestamp } from 'firebase/firestore'
-
 export const defaultPost = {
   author: '',
   authorPhoto: '',
   title: '',
   slug: '',
   categories: [],
-  previewImage: '',
-  timestamp: new Date(Timestamp.now().seconds * 1000).toLocaleDateString(),
+  previewImage: {
+    url: '',
+    fileLocated: '',
+  },
+  timestamp: '',
   excerpt: '',
   content: '',
   id: '',
@@ -18,10 +19,14 @@ export const defaultPost = {
 export const defaultUser = {
   userName: '',
   email: '',
-  timestamp: new Date(Timestamp.now().seconds * 1000).toLocaleDateString(),
+  // timestamp: new Date(Timestamp.now().seconds * 1000).toLocaleDateString(),
+  timestamp: '',
   id: '',
   uid: '',
-  userPhoto: '',
+  userPhoto: {
+    url: '',
+    fileLocated: '',
+  },
   status: '',
   notification: [],
 }

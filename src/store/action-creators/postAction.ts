@@ -1,56 +1,56 @@
-import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc } from 'firebase/firestore'
 import { Dispatch } from 'redux'
 import { db } from '../../firebase'
 import { IPostListProps, postAction, postStatusProps, postType } from '../../types/postsTypes'
 
-export const postCreate = (post: IPostListProps, postID: (id: string) => void) => (dispatch: Dispatch<postAction>) => {
-  dispatch({ type: postType.POST__CREATE_START })
-  addDoc(collection(db, 'posts'), post)
+export const postCreate = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
+  dispatch({ type: postType.POST_CREATE_START })
+  return await addDoc(collection(db, 'posts'), post)
     .then((newDate) => {
-      dispatch({ type: postType.POST_CREATE_SUCCESS })
-      postID(newDate.id)
+      dispatch({ type: postType.POST_CREATE_SUCCESS, payload: { ...post, id: newDate.id } })
+      return newDate.id
     })
     .catch((error) => {
       dispatch({ type: postType.POST__CREATE_ERROR, payload: error.message })
     })
 }
 
-export const postsRead = () => (dispatch: Dispatch<postAction>) => {
-  onSnapshot(
-    collection(db, 'posts'),
-    (snapshot) => {
-      dispatch({ type: postType.POSTS_READ_START })
-      const newPosts: any = []
-
-      snapshot.docs.map((doc) => newPosts.push({ ...doc.data(), id: doc.id }))
-      dispatch({ type: postType.POSTS_READ_SUCCESS, payload: newPosts })
-    },
-    (error) => {
+export const postsRead = () => async (dispatch: Dispatch<postAction>) => {
+  dispatch({ type: postType.POSTS_READ_START })
+  const q = query(collection(db, 'posts'), orderBy('timestamp', 'asc'))
+  await getDocs(q)
+    .then((querySnapshot) => {
+      let posts: any = []
+      querySnapshot.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id })
+      })
+      dispatch({ type: postType.POSTS_READ_SUCCESS, payload: posts })
+    })
+    .catch((error) => {
       dispatch({ type: postType.POSTS_READ_ERROR, payload: error.message })
-    }
-  )
+    })
 }
 
-export const postUpdate = (post: IPostListProps) => (dispatch: Dispatch<postAction>) => {
+export const postUpdate = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_UPDATE_START })
 
-  updateDoc(doc(db, 'posts', post.id), {
+  await updateDoc(doc(db, 'posts', post.id), {
     ...post,
   })
     .then(() => {
-      dispatch({ type: postType.POST_UPDATE_SUCCESS })
+      dispatch({ type: postType.POST_UPDATE_SUCCESS, payload: post })
     })
     .catch((error) => {
       dispatch({ type: postType.POST_UPDATE_ERROR, payload: error.message })
     })
 }
 
-export const postDelete = (post: IPostListProps) => (dispatch: Dispatch<postAction>) => {
+export const postDelete = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_DELETE_START })
 
-  deleteDoc(doc(db, 'posts', post.id))
+  await deleteDoc(doc(db, 'posts', post.id))
     .then(() => {
-      dispatch({ type: postType.POST_DELETE_SUCCESS })
+      dispatch({ type: postType.POST_DELETE_SUCCESS, payload: post })
     })
     .catch((error) => {
       dispatch({ type: postType.POST_DELETE_ERROR, payload: error.message })

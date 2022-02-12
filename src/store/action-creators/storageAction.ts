@@ -1,18 +1,32 @@
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { Dispatch } from 'redux'
 import { storageAction, storageType } from '../../types/storageTypes'
-import { User, userAction } from '../../types/userTypes'
+import { userAction } from '../../types/userTypes'
 
-export const storage = (file: File, user: User) => async (dispatch: Dispatch<storageAction | userAction>) => {
+export const storage = (file: File, fileLocated: string) => async (dispatch: Dispatch<storageAction | userAction>) => {
   dispatch({ type: storageType.STORAGE_START })
   try {
     const storage = getStorage()
-    const fileRef = ref(storage, `${user.uid}/${user.uid + file.name}`)
+    const fileRef = ref(storage, fileLocated)
     await uploadBytes(fileRef, file)
-    const utl = await getDownloadURL(fileRef)
+    const url = await getDownloadURL(fileRef)
     dispatch({ type: storageType.STORAGE_SUCCESS })
-    return utl
+    return url
   } catch (error) {
     dispatch({ type: storageType.STORAGE_ERROR, payload: 'STORAGE_ERROR' })
   }
+}
+
+export const storageDelete = (fileLocated: string) => (dispatch: Dispatch<storageAction>) => {
+  dispatch({ type: storageType.STORAGE_DELETE_START })
+  const storage = getStorage()
+  const desertRef = ref(storage, fileLocated)
+
+  deleteObject(desertRef)
+    .then(() => {
+      dispatch({ type: storageType.STORAGE_DELETE_SUCCESS })
+    })
+    .catch((error) => {
+      dispatch({ type: storageType.STORAGE_DELETE_ERROR, payload: error })
+    })
 }

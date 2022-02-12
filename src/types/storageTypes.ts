@@ -8,6 +8,9 @@ export enum storageType {
   STORAGE_START = 'STORAGE_START',
   STORAGE_SUCCESS = 'STORAGE_SUCCESS',
   STORAGE_ERROR = 'STORAGE_ERROR',
+  STORAGE_DELETE_START = 'STORAGE_DELETE_START',
+  STORAGE_DELETE_SUCCESS = 'STORAGE_DELETE_SUCCESS',
+  STORAGE_DELETE_ERROR = 'STORAGE_DELETE_ERROR',
 }
 
 export interface storageActionStart {
@@ -22,4 +25,22 @@ export interface storageActionError {
   payload: null | string
 }
 
-export type storageAction = storageActionStart | storageActionSuccess | storageActionError
+export interface storageActionDeleteStart {
+  type: storageType.STORAGE_DELETE_START
+}
+
+export interface storageActionDeleteSuccess {
+  type: storageType.STORAGE_DELETE_SUCCESS
+}
+export interface storageActionDeleteError {
+  type: storageType.STORAGE_DELETE_ERROR
+  payload: null | string
+}
+
+export type storageAction =
+  | storageActionStart
+  | storageActionSuccess
+  | storageActionError
+  | storageActionDeleteStart
+  | storageActionDeleteSuccess
+  | storageActionDeleteError

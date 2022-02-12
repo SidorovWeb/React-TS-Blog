@@ -11,9 +11,9 @@ interface ProfileProps {
 export const Profile: FC<ProfileProps> = ({ user, width = '34px', height = '34px' }) => {
   return (
     <>
-      {user.userPhoto ? (
+      {user.userPhoto.url ? (
         <div className='bg-white rounded-lg overflow-hidden shrink-0' style={{ width: width, height: height }}>
-          <img className='w-full object-cover  h-full' src={user.userPhoto} alt={user.userName} />
+          <img className='w-full object-cover  h-full' src={user.userPhoto.url} alt={user.userName} />
         </div>
       ) : (
         <div

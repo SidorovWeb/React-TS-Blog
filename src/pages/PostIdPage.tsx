@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IPostListProps } from '../types/postsTypes'
 import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
-import { myPostList } from '../utils'
+import { formatTimestamp, myPostList } from '../utils'
 
 export const PostIdPage: FC = () => {
   const { slug } = useParams()
@@ -16,7 +16,11 @@ export const PostIdPage: FC = () => {
       {post && (
         <div className='rounded-lg overflow-hidden bg-white shadow-lg mb-8 p-8'>
           <div className='mb-8 rounded-lg overflow-hidden'>
-            <img className='max-h-80 w-full object-cover cursor-pointer' src={post.previewImage} alt='Изображение' />
+            <img
+              className='max-h-80 w-full object-cover cursor-pointer'
+              src={post.previewImage.url}
+              alt='Изображение'
+            />
           </div>
           <h2 className='text-black text-4xl font-bold mb-10 text-center'>{post.title}</h2>
           <div className='flex items-center justify-between mb-6'>
@@ -28,7 +32,7 @@ export const PostIdPage: FC = () => {
 
             <div className='flex items-center'>
               <CalendarIcon className='icon text-pink-600' />
-              <p className='text-gray-700 font-bold mt-1'>{post.timestamp}</p>
+              <p className='text-gray-700 font-bold mt-1'>{formatTimestamp(post.timestamp)}</p>
             </div>
           </div>
 

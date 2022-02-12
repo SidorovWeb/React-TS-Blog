@@ -6,12 +6,12 @@ import { db } from '../../firebase'
 import { loginAction, loginType, SignInData } from '../../types/loginTypes'
 import { User, userAction, userType } from '../../types/userTypes'
 
-export const login = (data: SignInData) => (dispatch: Dispatch<loginAction | userAction>) => {
+export const login = (data: SignInData) => async (dispatch: Dispatch<loginAction | userAction>) => {
   dispatch({
     type: loginType.LOGIN_START,
   })
 
-  signInWithEmailAndPassword(getAuth(), data.email, data.password)
+  await signInWithEmailAndPassword(getAuth(), data.email, data.password)
     .then(async (userCredential) => {
       const auth = getAuth()
       const uid = auth?.currentUser?.uid

@@ -12,10 +12,10 @@ const initialState: postState = {
 
 export const postReducer = (state = initialState, action: postAction): postState => {
   switch (action.type) {
-    case postType.POST__CREATE_START:
+    case postType.POST_CREATE_START:
       return { ...state, isLoading: true, error: null }
     case postType.POST_CREATE_SUCCESS:
-      return { ...state, isLoading: false }
+      return { ...state, isLoading: false, posts: [...state.posts, action.payload] }
     case postType.POST__CREATE_ERROR:
       return { ...state, isLoading: false, error: action.payload }
     case postType.POSTS_READ_START:
@@ -27,13 +27,21 @@ export const postReducer = (state = initialState, action: postAction): postState
     case postType.POST_UPDATE_START:
       return { ...state, isLoading: true, error: null }
     case postType.POST_UPDATE_SUCCESS:
-      return { ...state, isLoading: false }
+      const postsMap = state.posts.map(function (item) {
+        if (item.id === action.payload.id) {
+          return action.payload
+        }
+        return item
+      })
+
+      return { ...state, isLoading: false, posts: postsMap }
     case postType.POST_UPDATE_ERROR:
       return { ...state, isLoading: false, error: action.payload }
     case postType.POST_DELETE_START:
       return { ...state, isLoading: true, error: null }
     case postType.POST_DELETE_SUCCESS:
-      return { ...state, isLoading: false }
+      const postsFilter = state.posts.filter((item) => item.id !== action.payload.id)
+      return { ...state, isLoading: false, posts: postsFilter }
     case postType.POST_DELETE_ERROR:
       return { ...state, isLoading: false, error: action.payload }
 

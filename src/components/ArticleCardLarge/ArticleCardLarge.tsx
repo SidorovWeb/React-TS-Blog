@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { IPostListProps } from '../../types/postsTypes'
+import { formatTimestamp } from '../../utils'
 
 interface ArticleCardLargeProps {
   post: IPostListProps
@@ -32,7 +33,7 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
             {post.author}
           </Link>
           <p className='px-2'>на</p>
-          <p className=''>{post.timestamp}</p>
+          <p className=''>{formatTimestamp(post.timestamp)}</p>
         </div>
       </div>
     </div>

@@ -16,6 +16,12 @@ export const Register: FC = () => {
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.register)
 
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/my-account/home')
+    }
+  }, [currentUser])
+
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -30,14 +36,8 @@ export const Register: FC = () => {
     },
   })
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/my-account/home')
-    }
-  }, [currentUser])
-
-  const onSubmit = (data: SignUpData) => {
-    dispatch(createUser(data))
+  const onSubmit = async (data: SignUpData) => {
+    await new Promise((resolve) => resolve(dispatch(createUser(data))))
     reset()
   }
 
@@ -122,7 +122,7 @@ export const Register: FC = () => {
             <MyButton
               className='btn py-4 disabled:opacity-60 disabled:cursor-not-allowed'
               type='submit'
-              disabled={!isValid}
+              disabled={isLoading}
             >
               {isLoading ? <Spin displayText='Обработка...' /> : 'Зарегистрироваться'}
             </MyButton>

@@ -16,6 +16,12 @@ export const Login: FC = () => {
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.login)
 
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/my-account/home')
+    }
+  }, [currentUser])
+
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -29,16 +35,10 @@ export const Login: FC = () => {
     },
   })
 
-  const onSubmit = (data: SignInData) => {
-    dispatch(login(data))
+  const onSubmit = async (data: SignInData) => {
+    await new Promise((resolve) => resolve(dispatch(login(data))))
     reset()
   }
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/my-account/home')
-    }
-  }, [currentUser])
 
   return (
     <div className='container'>
@@ -97,7 +97,7 @@ export const Login: FC = () => {
             <MyButton
               className='btn py-4 disabled:opacity-60 disabled:cursor-not-allowed'
               type='submit'
-              disabled={!isValid}
+              disabled={isLoading}
             >
               {isLoading ? <Spin displayText='Обработка...' /> : 'Войти'}
             </MyButton>

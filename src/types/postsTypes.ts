@@ -3,11 +3,16 @@ interface Categories {
   slug: string
 }
 
+interface previewImage {
+  url: string
+  fileLocated: string
+}
+
 export interface IPostListProps {
   author: string
   authorPhoto: string
   title: string
-  previewImage: string
+  previewImage: previewImage
   timestamp: any
   content: string
   excerpt: string
@@ -31,7 +36,7 @@ export interface postState {
 }
 
 export enum postType {
-  POST__CREATE_START = 'POST__CREATE_START',
+  POST_CREATE_START = 'POST__CREATE_START',
   POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS',
   POST__CREATE_ERROR = 'POST__CREATE_ERROR',
   POSTS_READ_START = 'POSTS_READ_START',
@@ -47,10 +52,11 @@ export enum postType {
 }
 
 interface postActionCreateStart {
-  type: postType.POST__CREATE_START
+  type: postType.POST_CREATE_START
 }
 interface postActionCreateSuccess {
   type: postType.POST_CREATE_SUCCESS
+  payload: IPostListProps
 }
 interface postActionCreateError {
   type: postType.POST__CREATE_ERROR
@@ -74,6 +80,7 @@ interface postActionUpdateStart {
 }
 interface postActionUpdateSuccess {
   type: postType.POST_UPDATE_SUCCESS
+  payload: IPostListProps
 }
 interface postActionUpdateError {
   type: postType.POST_UPDATE_ERROR
@@ -85,6 +92,7 @@ interface postActionDeleteStart {
 }
 interface postActionDeleteSuccess {
   type: postType.POST_DELETE_SUCCESS
+  payload: IPostListProps
 }
 interface postActionDeleteError {
   type: postType.POST_DELETE_ERROR

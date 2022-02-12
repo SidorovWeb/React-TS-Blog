@@ -25,10 +25,17 @@ const path = ['my-account']
 
 export const isMyAccount = (pathname: string) => path.includes(pathname.split('/', 2).join(''))
 // export const isDefinitePath = (pathname: string) => path.includes(pathname.split('/', 2).join(''))
-
 export const formatDate = () => {
   const date = new Date()
   return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()
+}
+
+export const formatTimestamp = (timestamp: any) => {
+  if (timestamp.seconds) {
+    return new Date(timestamp.seconds * 1000).toLocaleDateString()
+  }
+
+  return formatDate()
 }
 
 export const uniqueList = (list: [], key: string) => [...new Set(list.flat().map((data) => data[key]))]
@@ -59,7 +66,10 @@ export const myPostList = [
       { name: 'Web Development', slug: 'web-development' },
       { name: 'Sports', slug: 'sports' },
     ],
-    previewImage: Apple,
+    previewImage: {
+      url: Apple,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -79,7 +89,10 @@ export const myPostList = [
       { name: 'Sports', slug: 'sports' },
       { name: 'Astronomy', slug: 'astronomy' },
     ],
-    previewImage: Code,
+    previewImage: {
+      url: Code,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -95,7 +108,10 @@ export const myPostList = [
     title: 'Молодец, не останавливайся!',
     slug: 'Well-done-dont-stop',
     categories: [{ name: 'Web Development', slug: 'web-development' }],
-    previewImage: Css,
+    previewImage: {
+      url: Css,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -111,7 +127,10 @@ export const myPostList = [
     title: 'Ты получишь свою работу!',
     slug: 'Youll-get-your-job',
     categories: [{ name: 'Astronomy', slug: 'astronomy' }],
-    previewImage: Smile,
+    previewImage: {
+      url: Smile,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -127,7 +146,10 @@ export const myPostList = [
     title: 'Css!',
     slug: 'Css',
     categories: [{ name: 'Web Development', slug: 'web-development' }],
-    previewImage: Image,
+    previewImage: {
+      url: Image,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
@@ -143,7 +165,10 @@ export const myPostList = [
     title: 'Js!',
     slug: 'Js',
     categories: [{ name: 'Education', slug: 'education' }],
-    previewImage: Js,
+    previewImage: {
+      url: Js,
+      fileLocated: '',
+    },
     timestamp: formatDate(),
     excerpt:
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',

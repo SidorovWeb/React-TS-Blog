@@ -8,7 +8,9 @@ import { ArchivesPosts } from '../pages/ArchivesPosts'
 import { Login } from '../pages/Login'
 import { Register } from '../pages/Register'
 import { DashboardHome } from '../components/Dashboard/Home/DashboardHome'
-import { DashboardPosts } from '../components/Dashboard/Posts/DashboardPosts'
+import { DashboardMyPosts } from '../components/Dashboard/MyPosts/DashboardMyPosts'
+import { DashboardAllPosts } from '../components/Dashboard/AllPosts/DashboardAllPosts'
+import { DashboardAllUsers } from '../components/Dashboard/AllUsers/DashboardAllUsers'
 import { DashboardTools } from '../components/Dashboard/Tools/DashboardTools'
 import { Editor } from '../components/Dashboard/Editor/Editor'
 
@@ -28,7 +30,9 @@ export const privateRoutes = [
     element: <MyAccount />,
     children: [
       { path: 'home', element: <DashboardHome /> },
-      { path: 'posts', element: <DashboardPosts /> },
+      { path: 'posts', element: <DashboardMyPosts /> },
+      { path: 'all_posts', element: <DashboardAllPosts /> },
+      { path: 'all_users', element: <DashboardAllUsers /> },
       { path: 'tools', element: <DashboardTools /> },
       { path: 'editor', element: <Editor /> },
       { path: 'editor/:id', element: <Editor /> },

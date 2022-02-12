@@ -3,7 +3,10 @@ export interface User {
   email: string
   timestamp: {}
   id: string
-  userPhoto: string
+  userPhoto: {
+    url: string
+    fileLocated: string
+  }
   status: string
   notification: string[]
   uid: string

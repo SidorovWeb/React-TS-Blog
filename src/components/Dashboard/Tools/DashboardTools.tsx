@@ -5,7 +5,8 @@ import { useSelector } from '../../../hooks/useTypedSelector'
 import { Profile } from '../../Profile/Profile'
 import { Spin } from '../../UI/Spin/Spin'
 import { userUpdate } from '../../../store/action-creators/userAction'
-import { storage } from '../../../store/action-creators/storageAction'
+import { storage, storageDelete } from '../../../store/action-creators/storageAction'
+import { Timestamp } from 'firebase/firestore'
 
 export const DashboardTools: FC = () => {
   const { user } = useSelector((state) => state.user)
@@ -15,9 +16,23 @@ export const DashboardTools: FC = () => {
   const onChangeFile = async (event: any) => {
     const file = event.target.files[0]
 
+    // TODO: сделать загрузку фото как в посте
+
     if (file) {
-      const url = await new Promise((resolve) => resolve(dispatch(storage(file, user))))
-      dispatch(userUpdate({ ...user, userPhoto: String(url) }))
+      const fileLocated = `${user.uid}/${Timestamp.now() + file.name}`
+      if (user.userPhoto.url) {
+        dispatch(storageDelete(user.userPhoto.fileLocated))
+      }
+      const url = await new Promise((resolve) => resolve(dispatch(storage(file, fileLocated))))
+      dispatch(
+        userUpdate({
+          ...user,
+          userPhoto: {
+            url: String(url),
+            fileLocated,
+          },
+        })
+      )
     }
   }
 
