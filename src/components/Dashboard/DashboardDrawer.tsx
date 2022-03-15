@@ -21,6 +21,13 @@ export const DashboardDrawer: FC<DashboardDrawerProps> = ({ user }) => {
           <BookOpenIcon width={22} /> <span className='ml-2'>Мои посты</span>
         </DashboardDrawerItem>
       </NavLink>
+      <NavLink to={'/my-account/tools'}>
+        <DashboardDrawerItem activeItem={false}>
+          <CogIcon width={22} /> <span className='ml-2'>Настройки</span>
+        </DashboardDrawerItem>
+      </NavLink>
+      {user.status === 'admin' && <div className='border mb-2'></div>}
+
       {user.status === 'admin' && (
         <NavLink to={'/my-account/all_posts'}>
           <DashboardDrawerItem activeItem={false}>
@@ -35,11 +42,6 @@ export const DashboardDrawer: FC<DashboardDrawerProps> = ({ user }) => {
           </DashboardDrawerItem>
         </NavLink>
       )}
-      <NavLink to={'/my-account/tools'}>
-        <DashboardDrawerItem activeItem={false}>
-          <CogIcon width={22} /> <span className='ml-2'>Настройки</span>
-        </DashboardDrawerItem>
-      </NavLink>
     </div>
   )
 }

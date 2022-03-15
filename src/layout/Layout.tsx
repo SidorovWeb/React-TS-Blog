@@ -1,16 +1,15 @@
 import { AppRouter } from '../components/AppRouter/AppRouter'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { ArticleCardLarge } from '../components/ArticleCardLarge/ArticleCardLarge'
-import { isMyAccount, myPostList } from '../utils/index'
-import { IPostListProps } from '../types/postsTypes'
-import { useState } from 'react'
+import { isMyAccount } from '../utils/index'
 import { useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Header } from '../components/Header/Header'
+import { useSelector } from '../hooks/useTypedSelector'
 
 export const Layout = () => {
-  const [postList] = useState<IPostListProps[]>([...myPostList])
-  const idxLastPost = postList.length - 1
+  const posts = useSelector((state) => state.post.posts.filter((p) => p.status.type === 'published'))
+  const idxLastPost = posts.length - 1
   const pathname = useLocation().pathname
   const styleMain = isMyAccount(pathname) ? 'w-full flex-grow ' : 'pb-20 px-6 w-full mt-10 flex-grow'
   const styleContainer = isMyAccount(pathname) ? 'flex-1 gap-5' : 'container mx-auto flex-1 flex flex-wrap gap-5'
@@ -20,9 +19,9 @@ export const Layout = () => {
       <Header />
       <main className={styleMain}>
         <div className={styleContainer}>
-          {pathname === '/' && (
+          {posts.length && pathname === '/' && (
             <div className='w-full'>
-              <ArticleCardLarge post={postList[idxLastPost]} />
+              <ArticleCardLarge post={posts[idxLastPost]} />
             </div>
           )}
 
@@ -34,7 +33,7 @@ export const Layout = () => {
       </main>
       <ToastContainer
         position='top-right'
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

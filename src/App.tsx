@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { db } from './firebase'
 import { Layout } from './layout/Layout'
 import { postsRead } from './store/action-creators/postAction'
+import { usersRead } from './store/action-creators/userAction'
 import { User, userType } from './types/userTypes'
 
 const App: FC = () => {
@@ -40,6 +41,7 @@ const App: FC = () => {
     })
 
     dispatch(postsRead())
+    dispatch(usersRead())
 
     return () => {
       unsubscribe()

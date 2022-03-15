@@ -1,43 +1,48 @@
-import React, { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { IPostListProps } from '../types/postsTypes'
-import { CalendarIcon, UserIcon } from '@heroicons/react/solid'
-import { formatTimestamp, myPostList } from '../utils'
+import { formatTimestamp } from '../utils'
+import { useSelector } from '../hooks/useTypedSelector'
+import { User } from '../types/userTypes'
 
 export const PostIdPage: FC = () => {
   const { slug } = useParams()
 
-  const [postList] = useState<IPostListProps[]>([...myPostList])
+  const posts = useSelector((state) => state.post.posts)
+  const post = posts.find((post) => post.slug === slug)
+  const users = useSelector((state) => state.user.users)
+  const [postUser, setPostUser] = useState<User>()
 
-  const post = postList.find((post) => post.slug === slug)
+  useEffect(() => {
+    const user = users.filter((u: User) => u.id === post?.uid)
+    setPostUser(user[0])
+  }, [post])
 
   return (
     <>
       {post && (
         <div className='rounded-lg overflow-hidden bg-white shadow-lg mb-8 p-8'>
           <div className='mb-8 rounded-lg overflow-hidden'>
-            <img
-              className='max-h-80 w-full object-cover cursor-pointer'
-              src={post.previewImage.url}
-              alt='Изображение'
-            />
+            <img className='max-h-80 w-full object-cover' src={post.previewImage.url} alt='Изображение' />
           </div>
           <h2 className='text-black text-4xl font-bold mb-10 text-center'>{post.title}</h2>
           <div className='flex items-center justify-between mb-6'>
-            <div className='flex items-center'>
-              {/* <img src={post.authorPhoto} alt={post.author} /> */}
-              <UserIcon className='icon text-pink-600' />
-              <p className='text-gray-700 font-bold mt-1'>{post.author}</p>
+            <div className='flex items-center '>
+              <div className='w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden mr-4'>
+                {postUser && postUser.userPhoto.url && (
+                  <img src={postUser.userPhoto.url} alt={post.author} className='img' />
+                )}
+              </div>
+
+              <div className='text-gray-700 font-bold mt-1'>{post.author}</div>
             </div>
 
             <div className='flex items-center'>
-              <CalendarIcon className='icon text-pink-600' />
-              <p className='text-gray-700 font-bold mt-1'>{formatTimestamp(post.timestamp)}</p>
+              <div className='text-gray-700 font-bold mt-1'>{formatTimestamp(post.timestamp)}</div>
             </div>
           </div>
 
           <div>
-            <p className='text-gray-700 mb-10 font-normal text-lg'>{post.content}</p>
+            <div className='text-gray-700 mb-10 font-normal text-lg'>{post.content}</div>
           </div>
         </div>
       )}

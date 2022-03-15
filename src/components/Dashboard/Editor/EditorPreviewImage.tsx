@@ -59,7 +59,12 @@ export const EditorPreviewImage: FC<EditorPreviewImageProps> = ({ post, register
             {...register('previewImage')}
             onChange={(e) => onChangeFile(e)}
           />
-          <label className=' p-2 cursor-pointer inline-flex items-center  rounded-lg btn py-4' htmlFor='imageInput'>
+          <label
+            className={`${
+              isModeration && 'opacity-60 pointer-events-none'
+            } p-2 cursor-pointer inline-flex items-center  rounded-lg btn py-4`}
+            htmlFor='imageInput'
+          >
             <PhotographIcon width={26} /> <p className='ml-1'>Добавить обложку</p>
           </label>
         </div>

@@ -22,7 +22,7 @@ export const EditorLoader: FC<EditorLoaderProps> = ({ isLoading }) => {
 
   return isLoading ? (
     createPortal(
-      <div className='fixed top-0 left-0 ring-0 bottom-0 w-screen h-screen flex items-center justify-center z-50 bg-black/70 backdrop-blur-sm'>
+      <div className='fixed top-0 left-0 ring-0 bottom-0 w-screen h-screen flex items-center justify-center z-50 bg-black/50'>
         <div className='text-2xl text-white font-bold'>Обработка задания...</div>
       </div>,
       element

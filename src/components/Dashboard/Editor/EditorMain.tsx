@@ -10,7 +10,7 @@ import { postCreate, postUpdate } from '../../../store/action-creators/postActio
 import { storage, storageDelete } from '../../../store/action-creators/storageAction'
 import { IPostListProps } from '../../../types/postsTypes'
 import { User } from '../../../types/userTypes'
-import { formatTimestamp } from '../../../utils'
+import { formatTimestamp, statusColor } from '../../../utils'
 import { EditorContent } from './EditorContent'
 import { EditorLoader } from './EditorLoader'
 import { EditorPreviewImage } from './EditorPreviewImage'
@@ -96,7 +96,10 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
         url: urlPrevImg,
         fileLocated: fileLocated,
       },
-      status: postStatus.type,
+      status: {
+        type: postStatus.type,
+        message: post.status.message !== '' ? post.status.message : '',
+      },
       categories: data.categories,
       timestamp: post.timestamp === '' ? serverTimestamp() : post.timestamp,
     }
@@ -114,9 +117,18 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
 
   return (
     <>
-      <EditorLoader isLoading={isLoadingPost} />
+      {post.status.type !== 'draft' && (
+        <div
+          className='text-white py-2 px-4 font-bold rounded-lg mb-10'
+          style={{ backgroundColor: statusColor(post.status.type) }}
+        >
+          <span>Сообщение от модератора: </span>
+          <span className='ml-4'>{post.status.message}</span>
+        </div>
+      )}
+
       <form
-        className='flex flex-col h-full'
+        className='flex flex-col'
         onSubmit={handleSubmit(onSaveUpdatingPost)}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
@@ -124,9 +136,9 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
           }
         }}
       >
-        <div className='flex-grow '>
+        <div className='flex-grow mb-10'>
           <div className='text-md font-bold mb-10 flex justify-between'>
-            <p>Автор: {user.userName}</p>
+            <p>Автор: {post.author}</p>
             {post.uid && <p>Пост создан: {formatTimestamp(post.timestamp)}</p>}
           </div>
           <EditorTitle
@@ -157,6 +169,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
         />
         <button hidden={true} ref={refSubmitButton} type={'submit'} />
       </form>
+      <EditorLoader isLoading={isLoadingPost} />
     </>
   )
 }

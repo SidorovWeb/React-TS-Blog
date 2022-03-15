@@ -13,7 +13,10 @@ export const defaultPost = {
   content: '',
   id: '',
   uid: '',
-  status: '',
+  status: {
+    type: 'draft',
+    message: '',
+  },
 }
 
 export const defaultUser = {

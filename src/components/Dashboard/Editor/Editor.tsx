@@ -18,7 +18,7 @@ export const Editor: FC = () => {
   return (
     <>
       <div className='flex-grow pb-14 bg-gray-100 px-6 pt-6 rounded-lg'>
-        {post.status === 'pending' && !isModeration ? (
+        {post.status.type === 'pending' && !isModeration ? (
           <div className='bg-green-300 flex items-start p-4 font-bold max-w-lg mx-auto rounded-lg'>
             <CheckIcon width={34} />
             <div className='pl-4'>
@@ -39,7 +39,7 @@ export const Editor: FC = () => {
         )}
       </div>
       <DashboardSidebar>
-        <EditorSidebar post={post} isModeration={isModeration} />
+        <EditorSidebar user={user} post={post} isModeration={isModeration} />
       </DashboardSidebar>
     </>
   )

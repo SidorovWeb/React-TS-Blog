@@ -14,48 +14,54 @@ export const EditorSidebarUser: FC<EditorSidebarUserProps> = ({ post }) => {
   const dispatch = useDispatch()
   return (
     <>
-      <MyButton
-        className={`${post.status === 'pending' && `opacity-60 pointer-events-none`} btn p-4 w-full mb-4`}
-        onClick={() =>
-          dispatch(
-            postStatus({
-              type: 'pending',
-              message: 'Пост успешно отправлен на модерацию',
-            })
-          )
-        }
-      >
-        На модерацию
-      </MyButton>
-      <MyButton
-        className={`${
-          post.status === 'pending' && `opacity-60 pointer-events-none`
-        } p-4 w-full flex items-center justify-center hover:bg-gray-300 bg-transparent transition-all rounded-lg mb-4 font-bold`}
-        onClick={() => {
-          post.id
-            ? dispatch(
-                postStatus({
-                  type: 'draft',
-                  message: 'Пост успешно обновлен',
-                })
-              )
-            : dispatch(
-                postStatus({
-                  type: 'draft',
-                  message: 'Пост успешно сохранен в черновик',
-                })
-              )
-        }}
-      >
-        <PlusSmIcon width={24} /> Сохранить
-      </MyButton>
-      <p className='mb-10'>
+      <div className='mb-4'>
+        <MyButton
+          className={`${post.status.type === 'pending' && `opacity-60 pointer-events-none`} btn p-4 w-full mb-4`}
+          onClick={() =>
+            dispatch(
+              postStatus({
+                type: 'pending',
+                message: 'Статья успешно отправлена на модерацию',
+              })
+            )
+          }
+        >
+          На модерацию
+        </MyButton>
+        {post.status.type === 'draft' && (
+          <>
+            <MyButton
+              className='p-4 w-full flex items-center justify-center hover:bg-gray-300 bg-transparent transition-all rounded-lg mb-4 font-bold'
+              onClick={() => {
+                post.id
+                  ? dispatch(
+                      postStatus({
+                        type: 'draft',
+                        message: 'Статья успешно обновлена',
+                      })
+                    )
+                  : dispatch(
+                      postStatus({
+                        type: 'draft',
+                        message: 'Статья успешно сохранена в черновик',
+                      })
+                    )
+              }}
+            >
+              <PlusSmIcon width={24} /> Сохранить
+            </MyButton>
+            <p>
+              Не забудьте сохранить пост. Все сохранённые черновики вы найдёте на вкладке «Мои посты» в личном кабинете.
+            </p>
+          </>
+        )}
+      </div>
+      <div>
         Статья:{' '}
-        <span className='' style={{ color: statusColor(post.status) }}>
-          {post.status !== '' ? post.status : 'черновик'}
+        <span className='' style={{ color: statusColor(post.status.type) }}>
+          {post.status.type !== '' ? post.status.type : 'draft'}
         </span>
-      </p>
-      <p>Не забудьте сохранить пост. Все сохранённые черновики вы найдёте на вкладке «Мои посты» в личном кабинете.</p>
+      </div>
     </>
   )
 }

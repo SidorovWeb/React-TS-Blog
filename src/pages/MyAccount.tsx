@@ -1,11 +1,9 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { DashboardDrawer } from '../components/Dashboard/DashboardDrawer'
-import { Modal } from '../components/UI/Modal/Modal'
 import { useSelector } from '../hooks/useTypedSelector'
 
 export const MyAccount: FC = () => {
-  const { open } = useSelector((state) => state.modal)
   const { user } = useSelector((state) => state.user)
 
   return (
@@ -14,10 +12,6 @@ export const MyAccount: FC = () => {
       <div className='flex gap-5 flex-1 rounded-lg p-6 bg-white'>
         <Outlet />
       </div>
-
-      <Modal open={open}>
-        <div>Modal</div>
-      </Modal>
     </div>
   )
 }

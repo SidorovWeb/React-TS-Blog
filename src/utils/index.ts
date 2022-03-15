@@ -77,7 +77,10 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '1',
     uid: '',
-    status: 'published',
+    status: {
+      type: 'published',
+      message: '',
+    },
   },
   {
     author: 'Sasskaa',
@@ -100,7 +103,10 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '4',
     uid: '',
-    status: 'pending',
+    status: {
+      type: 'pending',
+      message: '',
+    },
   },
   {
     author: 'Сидоров Александр',
@@ -119,7 +125,10 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '2',
     uid: '',
-    status: 'rejected',
+    status: {
+      type: 'rejected',
+      message: '',
+    },
   },
   {
     author: 'Сидоров Александр',
@@ -138,7 +147,10 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '3',
     uid: '',
-    status: 'rejected',
+    status: {
+      type: 'rejected',
+      message: '',
+    },
   },
   {
     author: 'Сидоров Александр',
@@ -157,7 +169,10 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '5',
     uid: '',
-    status: 'published',
+    status: {
+      type: 'published',
+      message: '',
+    },
   },
   {
     author: 'Сидоров Александр',
@@ -176,6 +191,9 @@ export const myPostList = [
       'Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!Type errors will show up in the same console as the build one. You have to fix these type errors before you continue development or build your project. For advanced configuration!',
     id: '6',
     uid: '',
-    status: 'pending',
+    status: {
+      type: 'pending',
+      message: '',
+    },
   },
 ]

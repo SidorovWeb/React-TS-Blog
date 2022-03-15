@@ -8,6 +8,11 @@ interface previewImage {
   fileLocated: string
 }
 
+interface status {
+  type: string
+  message: string
+}
+
 export interface IPostListProps {
   author: string
   authorPhoto: string
@@ -20,7 +25,7 @@ export interface IPostListProps {
   categories: Categories[]
   id: string
   uid: string
-  status: string
+  status: status
 }
 
 export interface postStatusProps {
