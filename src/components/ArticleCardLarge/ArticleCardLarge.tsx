@@ -23,10 +23,10 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
       <Link
         className='overflow-hidden h-full  absolute t-0 left-0 thumbnail-gradient'
         style={{ background: `url(${post.previewImage.url}) no-repeat center/cover`, width: '55%' }}
-        to={`post/${post.slug}`}
+        to={`/post/${post.slug}`}
       ></Link>
       <div className='flex flex-col justify-between w-1/2 p-8 py-16 z-10 relative'>
-        <Link className='text-black text-4xl font-bold mb-10 hover:opacity-60 transition-all' to={`post/${post.slug}`}>
+        <Link className='text-black text-4xl font-bold mb-10 hover:opacity-60 transition-all' to={`/post/${post.slug}`}>
           {post.title}
         </Link>
         <div>

@@ -4,7 +4,7 @@ interface FieldsetProps {
   type: string
   id: string
   value: string
-  labelText: string
+  labelText?: string
   onChange: (e: any) => void
   onBlur?: (e: any) => void
   children?: React.ReactNode
@@ -23,9 +23,12 @@ export const Fieldset: FC<FieldsetProps> = ({
 }) => {
   return (
     <fieldset className='mb-10'>
-      <label className='mb-2 block' htmlFor={id}>
-        {labelText}
-      </label>
+      {labelText && (
+        <label className='mb-2 block' htmlFor={id}>
+          {labelText}
+        </label>
+      )}
+
       <input
         className={`bg-gray-200 w-full text-xl py-2 px-4 rounded-lg border-2 transition-all ${clName}`}
         type={type}

@@ -15,7 +15,7 @@ export const Layout = () => {
   const styleContainer = isMyAccount(pathname) ? 'flex-1 gap-5' : 'container mx-auto flex-1 flex flex-wrap gap-5'
 
   return (
-    <div className='min-h-screen flex flex-col currentGray'>
+    <div className='min-h-screen flex flex-col  bg-white dark:bg-purple-500 transition-all'>
       <Header />
       <main className={styleMain}>
         <div className={styleContainer}>
@@ -45,3 +45,4 @@ export const Layout = () => {
     </div>
   )
 }
+// currentGray

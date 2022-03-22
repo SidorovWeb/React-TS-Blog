@@ -14,13 +14,13 @@ export const Logo: FC<LogoProps> = ({ width, textSize }) => {
   return pathname === '/' ? (
     <div className='flex items-center'>
       <LogoIcon width={width} />
-      <span className={text}>React</span>
+      <span className={text}>ReactProger</span>
     </div>
   ) : (
     <Link to='/'>
       <div className='flex items-center'>
         <LogoIcon width={width} />
-        <span className={text}>React</span>
+        <span className={text}>ReactProger</span>
       </div>
     </Link>
   )

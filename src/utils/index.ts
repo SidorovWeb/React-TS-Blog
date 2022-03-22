@@ -56,6 +56,10 @@ export const getArrRange = (array: [], range: number, part: number) => {
   return array.slice(start, end)
 }
 
+export const ucFirst = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export const myPostList = [
   {
     author: 'Сидоров Александр',

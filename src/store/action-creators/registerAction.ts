@@ -15,7 +15,7 @@ export const createUser = (data: SignUpData) => async (dispatch: Dispatch<regist
     .then((userCredential) => {
       const user = {
         ...defaultUser,
-        userName: data.username,
+        userName: data.username.trim(),
         email: data.email,
         timestamp: serverTimestamp(),
         uid: userCredential.user.uid,

@@ -8,6 +8,8 @@ export const DashboardAllPosts: FC = () => {
   const { posts, isLoading } = useSelector((state) => state.post)
   const allPostsPending = posts.filter((post) => post.status.type !== 'draft')
 
+  allPostsPending.sort((a, b) => (a.status.type < b.status.type ? 1 : -1))
+
   return (
     <div className='flex-grow pb-14 bg-gray-100 px-6 pt-6 rounded-lg'>
       <div className='flex justify-between mb-6 text-gray-700 font-bold'>

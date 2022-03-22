@@ -54,7 +54,7 @@ export const Register: FC = () => {
                 required: 'Поле обязательно',
                 pattern: {
                   value: /^([^0-9]*)$/,
-                  message: 'Имя не должна содержать цифр',
+                  message: 'Имя не должно содержать цифр',
                 },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
@@ -63,7 +63,7 @@ export const Register: FC = () => {
                   id='username'
                   onBlur={onBlur}
                   onChange={onChange}
-                  value={value.trim()}
+                  value={value}
                   labelText={'Username *'}
                 >
                   {errors.username && <p className='text-red-600 mt-2'>{errors?.username?.message}</p>}

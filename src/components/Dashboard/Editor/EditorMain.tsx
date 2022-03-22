@@ -10,8 +10,9 @@ import { postCreate, postUpdate } from '../../../store/action-creators/postActio
 import { storage, storageDelete } from '../../../store/action-creators/storageAction'
 import { IPostListProps } from '../../../types/postsTypes'
 import { User } from '../../../types/userTypes'
-import { formatTimestamp, statusColor } from '../../../utils'
+import { formatTimestamp, statusColor, ucFirst } from '../../../utils'
 import { EditorContent } from './EditorContent'
+import { EditorExcerpt } from './EditorExcerpt'
 import { EditorLoader } from './EditorLoader'
 import { EditorPreviewImage } from './EditorPreviewImage'
 import { EditorTags } from './EditorTags'
@@ -54,15 +55,24 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
   }, [postStatus])
 
   const onSaveUpdatingPost = async (data: any) => {
+    // TODO: Как сократить
     const titleText = data.title ? data.title.trim().replace(/\s{2,}/g, ' ') : data.title
     const contentText = data.content ? data.content.trim().replace(/\s{2,}/g, ' ') : data.content
-
+    const excerptText = data.excerpt ? data.excerpt.trim().replace(/\s{2,}/g, ' ') : data.excerpt
+    // TODO: Как сократить
     if (!titleText || (titleText && titleText.length < 1)) {
       setError('title', { type: 'Error' })
       toast.error('Поле не должно быть пустым')
       return
     }
+    // TODO: Как сократить
+    if (postStatus.type === 'pending' && excerptText.length < 1) {
+      setError('excerpt', { type: 'Error' })
+      toast.error('Поле не должно быть пустым')
+      return
+    }
 
+    // TODO: Как сократить
     if (postStatus.type === 'pending' && contentText.length < 1) {
       setError('content', { type: 'Error' })
       toast.error('Поле не должно быть пустым')
@@ -85,13 +95,18 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
       await new Promise((resolve) => resolve(dispatch(storageDelete(post.previewImage.fileLocated))))
     }
 
+    let slug = cyrillicToTranslit.transform(titleText, '_').toLocaleLowerCase()
+    slug = slug.endsWith('?') ? slug.slice(0, -1) : slug
+
     const newPost: IPostListProps = {
       ...post,
       ...data,
       author: user.userName,
       uid: user.id,
-      title: titleText,
-      slug: cyrillicToTranslit.transform(titleText, '_').toLocaleLowerCase(),
+      title: ucFirst(titleText),
+      slug: slug,
+      content: ucFirst(contentText),
+      excerpt: ucFirst(excerptText),
       previewImage: {
         url: urlPrevImg,
         fileLocated: fileLocated,
@@ -117,7 +132,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
 
   return (
     <>
-      {post.status.type !== 'draft' && (
+      {post.status.type !== 'draft' && post.status.message && (
         <div
           className='text-white py-2 px-4 font-bold rounded-lg mb-10'
           style={{ backgroundColor: statusColor(post.status.type) }}
@@ -138,7 +153,8 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
       >
         <div className='flex-grow mb-10'>
           <div className='text-md font-bold mb-10 flex justify-between'>
-            <p>Автор: {post.author}</p>
+            {post.author && <div>Автор: {post.author}</div>}
+
             {post.uid && <p>Пост создан: {formatTimestamp(post.timestamp)}</p>}
           </div>
           <EditorTitle
@@ -150,6 +166,14 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
             isModeration={isModeration}
           />
           <EditorPreviewImage post={post} register={register} setValue={setValue} isModeration={isModeration} />
+          <EditorExcerpt
+            post={post}
+            errors={errors}
+            clearErrors={clearErrors}
+            watch={watch}
+            setValue={setValue}
+            isModeration={isModeration}
+          />
           <EditorContent
             post={post}
             errors={errors}

@@ -37,7 +37,7 @@ export const PostItem: FC<PostItemPost> = ({ post }) => {
           {post.title}
         </Link>
         <Link
-          className='mb-8 rounded-lg overflow-hidden block relative thumbnail-gradient-before aspect-video w-32 h-32 md:max-h-80 shrink-0'
+          className='mb-8 rounded-lg overflow-hidden block relative aspect-video w-32 h-32 md:max-h-80 shrink-0'
           to={`/post/${post.slug}`}
         >
           <img className='img' src={post.previewImage.url} alt='Изображение' loading='lazy' />
