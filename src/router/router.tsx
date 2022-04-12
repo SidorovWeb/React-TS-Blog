@@ -20,6 +20,7 @@ export const publicRoutes = [
   { path: 'register', element: <Register /> },
   { path: 'contacts', element: <Contacts /> },
   { path: 'archives', element: <ArchivesPosts /> },
+  { path: 'archives/:slug', element: <ArchivesPosts /> },
   { path: 'post/:slug', element: <PostIdPage /> },
   { path: 'category/:slug', element: <CategoriesSlugPage /> },
   { path: '*', element: <Navigate replace to='/' /> },

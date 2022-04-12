@@ -41,7 +41,7 @@ export const EditorPreviewImage: FC<EditorPreviewImageProps> = ({ post, register
   return (
     <div className='mb-10'>
       {urlPreviewImage ? (
-        <div className='rounded-lg overflow-hidden relative'>
+        <div className='rounded-lg overflow-hidden relative shadow-lg'>
           <img className='w-full object-cover h-full max-h-80' src={urlPreviewImage} alt={post.title} loading='lazy' />
           {!isModeration && (
             <MyButton className='btn py-2 absolute top-2 right-2' type='button' onClick={() => onDeleteImage()}>
@@ -50,7 +50,7 @@ export const EditorPreviewImage: FC<EditorPreviewImageProps> = ({ post, register
           )}
         </div>
       ) : (
-        <div className='text-center text-xl font-bold mb-4'>
+        <div className='text-center text-md md:text-xl font-bold mb-4'>
           <input
             className='hidden opacity-0 w-0'
             type='file'
@@ -62,7 +62,7 @@ export const EditorPreviewImage: FC<EditorPreviewImageProps> = ({ post, register
           <label
             className={`${
               isModeration && 'opacity-60 pointer-events-none'
-            } p-2 cursor-pointer inline-flex items-center  rounded-lg btn py-4`}
+            } p-2 cursor-pointer inline-flex items-center  rounded-lg btn py-4 !px-4`}
             htmlFor='imageInput'
           >
             <PhotographIcon width={26} /> <p className='ml-1'>Добавить обложку</p>

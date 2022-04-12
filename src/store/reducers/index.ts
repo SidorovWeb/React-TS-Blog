@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { loginReducer } from './loginReducer'
+import { menuReducer } from './menuReducer'
 import { modalReducer } from './modalReducer'
 import { postReducer } from './postReducer'
 import { registerReducer } from './registerReducer'
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   modal: modalReducer,
   post: postReducer,
   storage: storageReducer,
+  menu: menuReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

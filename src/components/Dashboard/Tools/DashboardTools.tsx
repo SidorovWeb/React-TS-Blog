@@ -12,6 +12,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { MyButton } from '../../UI/MyButton/MyButton'
 import { User } from '../../../types/userTypes'
 import { toast } from 'react-toastify'
+import { DashboardContainerContent } from '../DashboardContainerContent'
 
 export const DashboardTools: FC = () => {
   const { user } = useSelector((state) => state.user)
@@ -68,11 +69,12 @@ export const DashboardTools: FC = () => {
   }
 
   return (
-    <div className='flex-grow pb-14 bg-gray-100 px-6 pt-6 rounded-lg font-bold'>
+    <DashboardContainerContent>
       <div className='flex flex-col'>
-        <div className='flex items-center mb-8'>
+        <div className='mr-4 text-xl text-black mb-6'>Мои настройки</div>
+        <div className='flex items-center flex-col md:flex-row mb-8'>
           <Profile user={user} width='80px' height='80px' />
-          <div className='ml-4'>
+          <div className='ml-0 md:ml-4 mt-6 md:mt-0'>
             <input
               className='hidden opacity-0 w-0'
               type='file'
@@ -89,7 +91,7 @@ export const DashboardTools: FC = () => {
             )}
           </div>
         </div>
-        <div className='text-xl mb-5'>Персональная информация</div>
+        <div className='text-xl mb-5 text-black'>Персональная информация</div>
         <form className='mb-10' onSubmit={handleSubmit(onSubmit)} noValidate>
           <Controller
             control={control}
@@ -119,6 +121,6 @@ export const DashboardTools: FC = () => {
           </MyButton>
         </form>
       </div>
-    </div>
+    </DashboardContainerContent>
   )
 }

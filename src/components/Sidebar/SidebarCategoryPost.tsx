@@ -10,11 +10,11 @@ interface SidebarCategoryPostProps {
 
 export const SidebarCategoryPost: FC<SidebarCategoryPostProps> = ({ item }) => {
   return (
-    <div className='border-b mb-2'>
+    <div className='w-full border-b mb-2'>
       <Link
-        className='text-lg truncate overflow-hidden block p-2 hover:opacity-60 transition-all'
+        className='text-lg truncate overflow-hidden block p-2 hover:opacity-60 transition-all text-gray-700 font-bold'
         style={{ width: '220px' }}
-        to={`archives`}
+        to={`/archives/${item.slug}`}
         state={item}
       >
         {item.name}

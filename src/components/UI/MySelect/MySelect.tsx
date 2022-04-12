@@ -12,10 +12,10 @@ interface MySelect {
 
 export const MySelect: FC<MySelect> = ({ options, defaultValue, value, onChange }) => {
   return (
-    <div className='my-select'>
+    <div className='my-select w-full sm:w-auto'>
       <select
         value={value}
-        className='relative bg-black bg-opacity-50 rounded-lg p-3 w-48 text-white font-bold'
+        className='relative bg-black bg-opacity-50 rounded-lg p-3 text-white font-bold w-full sm:w-48'
         onChange={(e) => onChange(e.target.value)}
       >
         <option className='w-44 truncate overflow-hidden' value='all'>

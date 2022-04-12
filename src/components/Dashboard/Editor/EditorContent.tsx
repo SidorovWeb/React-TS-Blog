@@ -20,11 +20,11 @@ export const EditorContent: FC<EditorContentProps> = ({ post, errors, clearError
   }, [content])
 
   return (
-    <div className='mb-6'>
+    <div className='mb-6 text-black'>
       <div
         className={`${
           errors.content ? 'border-red-500' : 'border-transparent'
-        } before:text-gray-700 border-2 text-2xl font-bold cursor-text`}
+        } before:text-gray-700 border-2 text-xl md:text-2xl font-bold cursor-text`}
         contentEditable={!isModeration}
         suppressContentEditableWarning
         placeholder='Придумали что написать?'

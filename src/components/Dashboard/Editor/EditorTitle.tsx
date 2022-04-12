@@ -20,11 +20,11 @@ export const EditorTitle: FC<EditorTitleProps> = ({ post, errors, clearErrors, w
   }, [title])
 
   return (
-    <div className='mb-12'>
+    <div className='mb-12 text-black'>
       <div
         className={`${
           errors.title ? 'border-red-500' : 'border-transparent'
-        } font-bold text-4xl before:text-gray-700 border-2 cursor-text`}
+        } font-bold text-xl md:text-4xl before:text-gray-700 border-2 cursor-text`}
         contentEditable={!isModeration}
         placeholder='Как будет называться статья?'
         suppressContentEditableWarning

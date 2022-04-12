@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { Title } from '../components/Title/Title'
 import { Fieldset } from '../components/UI/Fieldset/Fieldset'
 import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
@@ -23,7 +24,7 @@ export const Register: FC = () => {
   }, [currentUser])
 
   const {
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     control,
     reset,
@@ -42,10 +43,10 @@ export const Register: FC = () => {
   }
 
   return (
-    <div className='container'>
-      <span className='text-5xl font-bold text-white pt-3 pb-12 block'>Зарегистрироваться</span>
-      <div className='bg-white p-16 rounded-lg'>
-        <div className='w-8/12'>
+    <div className='container mx-auto pt-7'>
+      <Title title='Зарегистрироваться' />
+      <div className='bg-white py-6 px-3 md:p-8 lg:p-16 rounded-lg'>
+        <div className='w-full lg:w-8/12'>
           <form className='mb-10' onSubmit={handleSubmit(onSubmit)} noValidate>
             <Controller
               control={control}

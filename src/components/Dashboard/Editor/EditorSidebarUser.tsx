@@ -14,7 +14,7 @@ export const EditorSidebarUser: FC<EditorSidebarUserProps> = ({ post }) => {
   const dispatch = useDispatch()
   return (
     <>
-      <div className='mb-4'>
+      <div className='mb-4 text-black'>
         <MyButton
           className={`${post.status.type === 'pending' && `opacity-60 pointer-events-none`} btn p-4 w-full mb-4`}
           onClick={() =>
@@ -56,7 +56,7 @@ export const EditorSidebarUser: FC<EditorSidebarUserProps> = ({ post }) => {
           </>
         )}
       </div>
-      <div>
+      <div className='text-black'>
         Статья:{' '}
         <span className='' style={{ color: statusColor(post.status.type) }}>
           {post.status.type !== '' ? post.status.type : 'draft'}

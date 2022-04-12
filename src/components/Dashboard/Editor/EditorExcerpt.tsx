@@ -20,11 +20,11 @@ export const EditorExcerpt: FC<EditorExcerptProps> = ({ post, errors, clearError
   }, [excerpt])
 
   return (
-    <div className='mb-6'>
+    <div className='mb-6 text-black'>
       <div
         className={`${
           errors.excerpt ? 'border-red-500' : 'border-transparent'
-        } before:text-gray-700 border-2 text-2xl font-bold cursor-text`}
+        } before:text-gray-700 border-2 text-xl md:text-2xl font-bold cursor-text`}
         contentEditable={!isModeration}
         suppressContentEditableWarning
         placeholder='Короткое описание'

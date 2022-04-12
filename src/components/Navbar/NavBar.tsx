@@ -1,50 +1,70 @@
 import { Logo } from '../Logo/Logo'
 import { Navigation } from '../Navigation/Navigation'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { isMyAccount } from '../../utils'
 import { FC } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { Menu } from '../Menu/Menu'
 import { useSelector } from '../../hooks/useTypedSelector'
-import { MoonIcon, SunIcon } from '@heroicons/react/solid'
-import useDarkMode from '../../hooks/useDarkMode'
+import { MenuIcon, XIcon } from '@heroicons/react/solid'
+import { ThemeSwitcher } from '../UI/ThemeSwitcher/ThemeSwitcher'
+import { useDispatch } from 'react-redux'
+import { menu } from '../../store/action-creators/menuAction'
+import { HomeIcon, UserIcon } from '@heroicons/react/outline'
 
 export const NavBar: FC = () => {
   const pathname = useLocation().pathname
   const currentUser = useAuth()
+  const isPath = !isMyAccount(pathname) && !currentUser && pathname !== '/'
   const { user } = useSelector((state) => state.user)
-  const styles = isMyAccount(pathname) ? 'text-white' : 'py-4 text-white border-b border-gray-500'
-  const [colorTheme, setTheme] = useDarkMode()
+  const { open } = useSelector((state) => state.menu)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const onClickMenu = () => {
+    dispatch(menu(false))
+  }
 
   return (
-    <div className={styles}>
-      <div className='flex items-center justify-between'>
-        {isMyAccount(pathname) ? (
-          <span className='text-3xl font-bold'>My account</span>
-        ) : (
-          <Logo width='45px' textSize='text-4xl' />
-        )}
+    <div className='flex items-center'>
+      {isMyAccount(pathname) ? (
+        <Link className='text-md md:text-3xl font-bold mr-auto' to={'/my-account/home'}>
+          My account
+        </Link>
+      ) : (
+        <Logo />
+      )}
 
-        <div className='flex items-center'>
-          {!isMyAccount(pathname) && <Navigation />}
-
-          {currentUser ? (
-            <Menu user={user} />
-          ) : !isMyAccount(pathname) && !currentUser && pathname !== '/' ? (
-            <Link className='btn py-2 ml-4' to={`/`}>
-              На главную
-            </Link>
-          ) : (
-            <Link className='btn py-2 ml-4' to={`login`}>
-              Войти
-            </Link>
-          )}
-          {colorTheme === 'light' ? (
-            <MoonIcon className='iconMoon cursor-pointer hover' width={24} onClick={() => setTheme(colorTheme)} />
-          ) : (
-            <SunIcon className='iconSun cursor-pointer hover' width={24} onClick={() => setTheme(colorTheme)} />
-          )}
+      {!isMyAccount(pathname) && (
+        <div
+          className={`${open ? 'block' : 'hidden'} lg:block menu cursor-pointer`}
+          onClick={() => dispatch(menu(!open))}
+        >
+          <div className='items-start hidden lg:flex menu__content cursor-default' onClick={(e) => e.stopPropagation()}>
+            <Navigation onClickMenu={onClickMenu} />
+          </div>
         </div>
+      )}
+
+      <div className='flex items-center z-[1002]'>
+        {currentUser ? (
+          <Menu user={user} />
+        ) : (
+          <div
+            className='p-1 cursor-pointer flex justify-center'
+            onClick={() => {
+              isPath ? navigate('/') : navigate('login')
+              dispatch(menu(false))
+            }}
+          >
+            {isPath ? <HomeIcon width={24} /> : <UserIcon width={24} />}
+          </div>
+        )}
+        <ThemeSwitcher />
+      </div>
+
+      <div className='block lg:hidden cursor-pointer z-[1000]' onClick={() => dispatch(menu(!open))}>
+        {open ? <XIcon width={30} /> : <MenuIcon width={30} />}
       </div>
     </div>
   )

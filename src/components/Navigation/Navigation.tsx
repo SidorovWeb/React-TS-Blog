@@ -1,16 +1,22 @@
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-export const Navigation = () => {
+interface NavigationProps {
+  onClickMenu: () => void
+}
+
+export const Navigation: FC<NavigationProps> = ({ onClickMenu }) => {
   return (
-    <div className='flex'>
-      <Link className='mr-2 font-bold py-2 px-4 hover' to='/archives'>
+    <div className='flex flex-col lg:flex-row order-1 lg:-order-none mt-6 lg:mt-0 mr-2'>
+      <Link className='font-bold py-2 px-2 hover' to='/' onClick={onClickMenu}>
+        Главная
+      </Link>
+      <Link className='font-bold py-2 px-2 hover' to='/archives' onClick={onClickMenu}>
         Статьи
       </Link>
-      <Link className='mr-2 font-bold py-2 px-4 hover' to='/contacts'>
+      {/* <Link className='font-bold py-2 px-2 hover' to='/contacts' onClick={onClickMenu}>
         Contacts
-      </Link>
+      </Link> */}
     </div>
   )
 }
-
-// NavLink

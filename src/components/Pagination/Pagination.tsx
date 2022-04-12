@@ -10,8 +10,7 @@ interface PaginationProps {
 export const Pagination: FC<PaginationProps> = ({ listLength, part, page, changePage }) => {
   const numberOfPages = Array.from({ length: Math.ceil(listLength / part) }, (x, i) => i + 1)
 
-  const initialStyle =
-    'text-white text-lg hover:opacity-70 p-1 px-2 cursor-pointer rounded-lg font-extrabold transition-all'
+  const initialStyle = 'text-lg hover:opacity-70 p-1 px-2 cursor-pointer rounded-lg font-extrabold transition-all'
   return (
     <div className='page__wrapper flex justify-center'>
       {numberOfPages.length > 1 &&

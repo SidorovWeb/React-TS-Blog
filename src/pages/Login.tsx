@@ -9,6 +9,7 @@ import { useSelector } from '../hooks/useTypedSelector'
 import { Fieldset } from '../components/UI/Fieldset/Fieldset'
 import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
+import { Title } from '../components/Title/Title'
 
 export const Login: FC = () => {
   const currentUser = useAuth()
@@ -23,7 +24,7 @@ export const Login: FC = () => {
   }, [currentUser])
 
   const {
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     control,
     reset,
@@ -41,10 +42,10 @@ export const Login: FC = () => {
   }
 
   return (
-    <div className='container'>
-      <span className='text-5xl font-bold text-white pt-3 pb-12 block'>Войти в мою учётную запись</span>
-      <div className='bg-white p-16 rounded-lg'>
-        <div className='w-8/12'>
+    <div className='container mx-auto pt-7'>
+      <Title title='Войти в мою учётную запись' />
+      <div className='bg-white py-6 px-3 md:p-8 lg:p-16 rounded-lg'>
+        <div className='w-full lg:w-8/12'>
           <form className='mb-10' onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>
             <Controller
               control={control}

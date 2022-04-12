@@ -1,30 +1,35 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/postsTypes'
-import { myPostList, uniqueListCategories } from '../../utils'
+import { SkeletonList } from '../Skeleton/SkeletonList'
 import { SidebarCategoryPost } from './SidebarCategoryPost'
-import { SidebarRecentPost } from './SidebarRecentPost'
 
-export const Sidebar: FC = () => {
-  const [postList, setPostList] = useState<IPostListProps[]>([...myPostList])
-  const UniqueList = uniqueListCategories(postList as [], 'name')
+interface SidebarProps {
+  UniqueList: []
+  isLoading: boolean
+}
 
+export const Sidebar: FC<SidebarProps> = ({ UniqueList, isLoading }) => {
   return (
-    <aside className='md:mw-sidebar'>
-      <div className='lg:sticky relative top-8'>
-        <div className='bg-white p-4 pb-10 rounded-lg mb-8'>
-          <h3 className='font-bold text-xl border-b pb-4 mb-8'>Categories</h3>
-          {UniqueList.map((item, idx) => (
-            <SidebarCategoryPost item={item} key={idx} />
-          ))}
-
-          <div className='text-center mt-10'>
-            <Link className='p-2 font-bold hover' to={'/archives'}>
-              Все категории
-            </Link>
+    <aside className='md:w-[370px] hidden lg:block'>
+      <>
+        {isLoading ? (
+          <SkeletonList cl='h-[275px]' />
+        ) : (
+          <div className='relative lg:sticky top-24 shadow-lg'>
+            <div className='bg-white px-8 py-4 pb-10 rounded-lg mb-8'>
+              <h3 className='font-bold text-xl pb-4 mb-4 text-black'>Категории</h3>
+              {UniqueList.slice(0, 3).map((item, idx) => (
+                <SidebarCategoryPost item={item} key={idx} />
+              ))}
+              <div className='text-center mt-10'>
+                <Link className='p-2 font-bold hover text-gray-700' to={'/archives'}>
+                  Все категории
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     </aside>
   )
 }

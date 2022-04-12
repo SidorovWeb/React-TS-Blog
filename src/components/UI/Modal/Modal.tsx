@@ -1,48 +1,24 @@
-import React, { FC, useEffect, useMemo } from 'react'
+import React, { FC } from 'react'
 import { createPortal } from 'react-dom'
-import { useDispatch } from 'react-redux'
-import { modal } from '../../../store/action-creators/modalAction'
 
 interface ModalProps {
   children: React.ReactNode
-  open: boolean
+  open?: boolean
 }
 
-export const Modal: FC<ModalProps> = ({ children, open }) => {
-  const appRootElement = document.querySelector('#App')
-  const element = useMemo(() => document.createElement('div'), [])
-  const dispatch = useDispatch()
+export const Modal: FC<ModalProps> = React.memo(({ children, open }) => {
+  const modalEle = document.getElementById('modal')
+  if (!modalEle) return null
 
-  useEffect(() => {
-    if (open) {
-      appRootElement?.appendChild(element)
-
-      return () => {
-        appRootElement?.removeChild(element)
-      }
-    }
-  }, [open])
-
-  const onClick = () => {
-    dispatch(modal(false))
-  }
-
-  return open ? (
-    createPortal(
+  return createPortal(
+    <div className='overlay shadow-lg fade flex items-center justify-center !z-[1020] bg-black/30 cursor-pointer'>
       <div
-        className='fixed top-0 left-0 ring-0 bottom-0 w-screen h-screen flex items-center justify-center z-50 bg-black/30 cursor-pointer'
-        onClick={onClick}
+        className='bg-white w-full lg:w-[450px] rounded-lg overflow-hidden mx-4 px-4 py-6 lg:p-8 cursor-auto lg:mx-4'
+        onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className='bg-white max-w-xl  rounded-lg overflow-hidden p-10 pt-7 cursor-auto'
-          onClick={(e) => e.stopPropagation()}
-        >
-          {children}
-        </div>
-      </div>,
-      element
-    )
-  ) : (
-    <></>
+        {children}
+      </div>
+    </div>,
+    modalEle
   )
-}
+})

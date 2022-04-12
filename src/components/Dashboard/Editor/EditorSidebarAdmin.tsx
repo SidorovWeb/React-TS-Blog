@@ -5,14 +5,13 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { db } from '../../../firebase'
+import { useModal } from '../../../hooks/useModal'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { modal } from '../../../store/action-creators/modalAction'
 import { postUpdate } from '../../../store/action-creators/postAction'
 import { usersUpdate } from '../../../store/action-creators/userAction'
 import { IPostListProps } from '../../../types/postsTypes'
 import { User, userType } from '../../../types/userTypes'
 import { statusColor } from '../../../utils'
-import { Modal } from '../../UI/Modal/Modal'
 import { MyButton } from '../../UI/MyButton/MyButton'
 import { EditorLoader } from './EditorLoader'
 
@@ -22,13 +21,13 @@ interface EditorSidebarAdminProps {
 }
 
 export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, post }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const users = useSelector((state) => state.user.users)
-  const open = useSelector((state) => state.modal.open)
   const [publish, setPublish] = useState(false)
   const [postUser, setPostUser] = useState<any>()
   const [isLoadingPost, setIsLoadingPost] = useState(false)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const { hide, show, Modal } = useModal()
 
   useEffect(() => {
     if (users.length) {
@@ -46,6 +45,8 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
 
   const onSubmit = async (data: { message: string }) => {
     setIsLoadingPost(true)
+
+    hide()
 
     const message = data.message ? data.message : publish ? 'Статья опубликована' : 'Статья отклонена'
     const notification = [...postUser.notification]
@@ -84,8 +85,8 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
     await new Promise((resolve) => resolve(dispatch(postUpdate(newPost))))
 
     toast.success(publish ? 'Статья опубликована' : 'Статья отклонена')
-    dispatch(modal(false))
     setIsLoadingPost(false)
+
     reset()
     navigate(-1)
   }
@@ -99,7 +100,7 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
           } btn p-4 w-full mb-4 !bg-green-600`}
           onClick={() => {
             setPublish(true)
-            dispatch(modal(true))
+            show()
           }}
         >
           Опубликовать
@@ -110,19 +111,20 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
           } btn p-4 w-full mb-4 !bg-sky-600`}
           onClick={() => {
             setPublish(false)
-            dispatch(modal(true))
+            show()
           }}
         >
           Вернуть
         </MyButton>
       </div>
-      <div>
+      <div className='text-black'>
         Статья:{' '}
         <span className='' style={{ color: statusColor(post.status.type) }}>
           {post.status.type !== '' ? post.status.type : 'черновик'}
         </span>
       </div>
-      <Modal open={open}>
+
+      <Modal>
         <div className='text-center'>
           <div className='font-bold text-2xl mb-10'>{!publish ? 'Вернуть на доработку?' : 'Опубликовать пост?'}</div>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -141,7 +143,13 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
             <MyButton className={`${!publish ? '!bg-sky-600' : '!bg-green-600'} btn py-2 `} type='submit'>
               {!publish ? 'Вернуть' : 'Опубликовать'}{' '}
             </MyButton>
-            <MyButton className='btn py-2 ml-4' onClick={() => dispatch(modal(false))}>
+            <MyButton
+              type='button'
+              className='btn py-2 ml-4'
+              onClick={() => {
+                hide()
+              }}
+            >
               Отменить
             </MyButton>
           </form>

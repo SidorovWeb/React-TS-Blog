@@ -55,24 +55,22 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
   }, [postStatus])
 
   const onSaveUpdatingPost = async (data: any) => {
-    // TODO: Как сократить
     const titleText = data.title ? data.title.trim().replace(/\s{2,}/g, ' ') : data.title
     const contentText = data.content ? data.content.trim().replace(/\s{2,}/g, ' ') : data.content
     const excerptText = data.excerpt ? data.excerpt.trim().replace(/\s{2,}/g, ' ') : data.excerpt
-    // TODO: Как сократить
+
     if (!titleText || (titleText && titleText.length < 1)) {
       setError('title', { type: 'Error' })
       toast.error('Поле не должно быть пустым')
       return
     }
-    // TODO: Как сократить
+
     if (postStatus.type === 'pending' && excerptText.length < 1) {
       setError('excerpt', { type: 'Error' })
       toast.error('Поле не должно быть пустым')
       return
     }
 
-    // TODO: Как сократить
     if (postStatus.type === 'pending' && contentText.length < 1) {
       setError('content', { type: 'Error' })
       toast.error('Поле не должно быть пустым')
@@ -98,6 +96,9 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
     let slug = cyrillicToTranslit.transform(titleText, '_').toLocaleLowerCase()
     slug = slug.endsWith('?') ? slug.slice(0, -1) : slug
 
+    let categories =
+      data.categories.length > 0 ? data.categories : [{ name: 'Web Development', slug: 'web_development' }]
+
     const newPost: IPostListProps = {
       ...post,
       ...data,
@@ -115,7 +116,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
         type: postStatus.type,
         message: post.status.message !== '' ? post.status.message : '',
       },
-      categories: data.categories,
+      categories: categories,
       timestamp: post.timestamp === '' ? serverTimestamp() : post.timestamp,
     }
 
@@ -134,11 +135,11 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
     <>
       {post.status.type !== 'draft' && post.status.message && (
         <div
-          className='text-white py-2 px-4 font-bold rounded-lg mb-10'
+          className='flex flex-wrap text-white py-2 px-4 font-bold rounded-lg mb-10 shadow-lg'
           style={{ backgroundColor: statusColor(post.status.type) }}
         >
-          <span>Сообщение от модератора: </span>
-          <span className='ml-4'>{post.status.message}</span>
+          <div className='mb-4 md:mb-0'>Сообщение от модератора: </div>
+          <div className='md:ml-4'>{post.status.message}</div>
         </div>
       )}
 
@@ -152,7 +153,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
         }}
       >
         <div className='flex-grow mb-10'>
-          <div className='text-md font-bold mb-10 flex justify-between'>
+          <div className='text-md font-bold mb-10 flex justify-between text-black'>
             {post.author && <div>Автор: {post.author}</div>}
 
             {post.uid && <p>Пост создан: {formatTimestamp(post.timestamp)}</p>}

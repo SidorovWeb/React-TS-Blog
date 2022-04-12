@@ -1,7 +1,8 @@
 import { HashtagIcon } from '@heroicons/react/outline'
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { IPostListProps } from '../../../types/postsTypes'
+import CyrillicToTranslit from 'cyrillic-to-translit-js'
 
 interface EditorTagsProps {
   post: IPostListProps
@@ -15,6 +16,7 @@ interface EditorTagsProps {
 export const EditorTags: FC<EditorTagsProps> = ({ post, errors, setError, clearErrors, setValue, isModeration }) => {
   const [categories, setCategories] = useState<any[]>([])
   const [inputTags, setInputTags] = useState('')
+  const cyrillicToTranslit = new CyrillicToTranslit()
 
   useEffect(() => {
     setCategories([...post.categories])
@@ -40,52 +42,52 @@ export const EditorTags: FC<EditorTagsProps> = ({ post, errors, setError, clearE
       toast.error('Поле не должно быть пустым и меньше 2 символов')
       return
     }
-    setCategories((old) => [...old, inputTags])
+    let slug = cyrillicToTranslit.transform(inputTags, '_').toLocaleLowerCase()
+    setCategories((old) => [...old, { name: inputTags, slug: slug }])
     setInputTags('')
   }
 
-  const onDeleteCat = (tag: number) => {
-    setCategories(categories.filter((item, idx) => idx !== tag))
+  const onDeleteCat = (idxTag: number) => {
+    setCategories(categories.filter((item, idx) => idx !== idxTag))
   }
 
   return (
     <div className='flex-grow-0 font-bold flex flex-col'>
-      <label className='mb-2 block text-lg' htmlFor='tags'>
-        Теги
-      </label>
-      <div className='flex'>
-        <div className='flex items-center'>
-          {categories.map((tag, idx) => (
-            <div
-              className={`${
-                !isModeration && 'hover:cursor-pointer hover:line-through'
-              } mr-4 px-4 h-12 bg-pink-500 text-white font-bold rounded-lg  hover flex items-center`}
-              onClick={() => {
-                if (!isModeration) onDeleteCat(idx)
-              }}
-              key={idx}
-            >
-              {tag}
-            </div>
-          ))}
-        </div>
-        {!isModeration && (
-          <div className={`${errors.tags ? 'border-red-500' : 'border-transparent'} flex w-80 shrink-0  border-2`}>
-            <input
-              className='bg-gray-300 w-full text-xl py-2 px-4 rounded-tl-lg rounded-bl-lg transition-all font-bold outline-none'
-              type='text'
-              id='tags'
-              name='tags'
-              value={inputTags}
-              onChange={(e) => onChange(e.target.value)}
-              placeholder='Добавить метку'
-            />
-            <button className='px-4 !rounded-tl-none !rounded-bl-none btn' type='button' onClick={() => onAddingCat()}>
-              <HashtagIcon className='' width={30} height={48} />
-            </button>
+      <div className='flex flex-wrap mr-2 w-full mb-2'>
+        {categories.map((tag, idx) => (
+          <div
+            className={`${
+              !isModeration && 'mr-2 mb-2 hover:cursor-pointer hover:line-through'
+            } mr-2 mb-2 py-3 px-4 text-xs  bg-pink-500 text-white font-bold rounded-lg  hover shadow-lg`}
+            onClick={() => {
+              if (!isModeration) onDeleteCat(idx)
+            }}
+            key={idx}
+          >
+            {tag.name}
           </div>
-        )}
+        ))}
       </div>
+      {!isModeration && (
+        <div
+          className={`${
+            errors.tags ? 'border-red-500' : 'border-transparent'
+          } flex md:w-80 md:shrink-0  border-2 h-[50px]`}
+        >
+          <input
+            className='bg-gray-300 w-full text-sm md:text-xl py-2 px-4 rounded-tl-lg rounded-bl-lg transition-all font-bold outline-none  text-black'
+            type='text'
+            id='tags'
+            name='tags'
+            value={inputTags}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder='Добавить метку'
+          />
+          <button className='px-4 !rounded-tl-none !rounded-bl-none btn' type='button' onClick={() => onAddingCat()}>
+            <HashtagIcon className='w-[20px] md:w-[30px] h-[48px]' />
+          </button>
+        </div>
+      )}
     </div>
   )
 }
