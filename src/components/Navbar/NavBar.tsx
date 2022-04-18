@@ -1,5 +1,4 @@
 import { Logo } from '../Logo/Logo'
-import { Navigation } from '../Navigation/Navigation'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { isMyAccount } from '../../utils'
 import { FC } from 'react'
@@ -37,7 +36,14 @@ export const NavBar: FC = () => {
       {!isMyAccount(pathname) && (
         <div className={`${open ? 'block' : 'hidden'} lg:block fade menu cursor-pointer`} onClick={() => menu(!open)}>
           <div className='items-start hidden lg:flex menu__content cursor-default' onClick={(e) => e.stopPropagation()}>
-            <Navigation onClickMenu={onClickMenu} />
+            <div className='flex flex-col lg:flex-row order-1 lg:-order-none mt-6 lg:mt-0 mr-2'>
+              <Link className='font-bold py-2 px-2 hover' to='/' onClick={onClickMenu}>
+                Главная
+              </Link>
+              <Link className='font-bold py-2 px-2 hover' to='/archives' onClick={onClickMenu}>
+                Статьи
+              </Link>
+            </div>
           </div>
         </div>
       )}
@@ -53,7 +59,18 @@ export const NavBar: FC = () => {
               menu(false)
             }}
           >
-            {isPath ? <HomeIcon width={24} /> : <UserIcon width={24} />}
+            <UserIcon width={24} />
+          </div>
+        )}
+        {isMyAccount(pathname) && (
+          <div
+            className='p-1 cursor-pointer flex justify-center'
+            onClick={() => {
+              navigate('/')
+              menu(false)
+            }}
+          >
+            <HomeIcon width={24} />
           </div>
         )}
         <ThemeSwitcher />

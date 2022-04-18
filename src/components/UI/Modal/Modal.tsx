@@ -1,12 +1,11 @@
-import React, { FC } from 'react'
+import { FC, memo } from 'react'
 import { createPortal } from 'react-dom'
 
 interface ModalProps {
   children: React.ReactNode
-  open?: boolean
 }
 
-export const Modal: FC<ModalProps> = React.memo(({ children, open }) => {
+export const Modal: FC<ModalProps> = memo(({ children }) => {
   const modalEle = document.getElementById('modal')
   if (!modalEle) return null
 

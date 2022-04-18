@@ -30,7 +30,7 @@ export const Fieldset: FC<FieldsetProps> = ({
       )}
 
       <input
-        className={`bg-gray-200 w-full text-black text-xl py-2 px-4 rounded-lg border-2 transition-all ${clName}`}
+        className={`bg-gray-200 w-full text-black text-sm lg:text-xl py-2 px-4 rounded-lg border-2 transition-all ${clName}`}
         type={type}
         id={id}
         name={id}

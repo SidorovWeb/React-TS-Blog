@@ -1,11 +1,11 @@
-import { BellIcon, HomeIcon } from '@heroicons/react/outline'
+import { BellIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useActions } from '../../hooks/useActions'
 import { useModal } from '../../hooks/useModal'
 import { User } from '../../types/userTypes'
-import { isMyAccount, statusColor } from '../../utils'
+import { statusColor } from '../../utils'
 import { Profile } from '../Profile/Profile'
 
 interface MenuProps {
@@ -13,11 +13,10 @@ interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ user }) => {
-  const pathname = useLocation().pathname
-  const { usersUpdate, userUpdate, menu } = useActions()
+  const { usersUpdate, userUpdate } = useActions()
   const { show, Modal } = useModal()
 
-  const onClickReadMessage = async (notification: any) => {
+  const onClickReadMessage = (notification: any) => {
     const notificationFilter = user.notification.filter((n) => n.id !== notification.id)
 
     const newUser: User = {
@@ -25,7 +24,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
       notification: notificationFilter,
     }
 
-    await new Promise((resolve) => resolve(userUpdate(newUser)))
+    userUpdate(newUser)
     usersUpdate(newUser)
     toast.success('Сообщение прочитано')
   }
@@ -46,13 +45,6 @@ export const Menu: FC<MenuProps> = ({ user }) => {
           <div className='absolute bottom-1 right-1 h-3 w-3 rounded-full bg-red-500 animate-pulse'></div>
         )}
       </div>
-
-      {isMyAccount(pathname) && (
-        <Link className='flex items-center p-2 font-bold hover' to={`/`} onClick={() => menu(false)}>
-          <HomeIcon width={24} />
-        </Link>
-      )}
-
       <Modal>
         <div className='flex flex-col'>
           <div className='font-bold mb-2 text-xl'>Сообщения</div>
@@ -61,7 +53,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
           </div>
           <div className='mb-6'>
             {user.notification.length > 0 && (
-              <div className='border-t border-gray-100 text-sm pt-2'>
+              <div className='border-t border-gray-100 text-md pt-2'>
                 {user.notification.map((n) => (
                   <div
                     className='cursor-pointer hover:bg-slate-100 transition-all py-2 rounded-lg'
