@@ -68,7 +68,7 @@ export const DashboardTools: FC = () => {
   return (
     <DashboardContainerContent>
       <div className='flex flex-col'>
-        <div className='mr-4 text-xl text-black mb-6'>Мои настройки</div>
+        <div className='mr-4 text-xl text-gray-900 mb-6'>Мои настройки</div>
         <div className='flex items-center flex-col md:flex-row mb-8'>
           <Profile user={user} width='80px' height='80px' />
           <div className='ml-0 md:ml-4 mt-6 md:mt-0'>
@@ -88,7 +88,7 @@ export const DashboardTools: FC = () => {
             )}
           </div>
         </div>
-        <div className='text-xl mb-5 text-black'>Персональная информация</div>
+        <div className='text-xl mb-5 text-gray-900'>Персональная информация</div>
         <form className='mb-10 max-w-md' onSubmit={handleSubmit(onSubmit)} noValidate>
           <Controller
             control={control}

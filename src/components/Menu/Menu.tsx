@@ -48,7 +48,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
       <Modal>
         <div className='flex flex-col'>
           <div className='font-bold mb-2 text-xl'>Сообщения</div>
-          <div className='text-black/50 mb-4 text-sm'>
+          <div className='text-gray-900/50 mb-4 text-sm'>
             Новых сообщений {user.notification.length > 0 ? `${user.notification.length}` : 'нет'}
           </div>
           <div className='mb-6'>
@@ -64,7 +64,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
                       {n.postStatus === 'published' && 'Опубликована'}
                       {n.postStatus === 'rejected' && 'Отклонена'}
                     </div>
-                    <div className='text-black font-bold'>{n.postName}</div>
+                    <div className='text-gray-900 font-bold'>{n.postName}</div>
                   </div>
                 ))}
               </div>

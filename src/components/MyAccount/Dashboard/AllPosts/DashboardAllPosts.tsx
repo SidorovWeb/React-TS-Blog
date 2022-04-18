@@ -13,12 +13,12 @@ export const DashboardAllPosts: FC = () => {
 
   return (
     <DashboardContainerContent>
-      <div className='flex justify-between mb-6 text-black font-bold'>
+      <div className='flex justify-between mb-6 text-gray-900 font-bold'>
         <span className='mr-4 text-xl font-bold '>Модерация постов</span>
         <span>постов: {allPostsPending.length}</span>
       </div>
       <div className='rounded-lg '>
-        {!allPostsPending.length && <p className='font-bold text-2xl mt-10 text-black'>Список постов пуст</p>}
+        {!allPostsPending.length && <p className='font-bold text-2xl mt-10 text-gray-900'>Список постов пуст</p>}
         {!isLoading && (
           <List
             items={allPostsPending.reverse()}

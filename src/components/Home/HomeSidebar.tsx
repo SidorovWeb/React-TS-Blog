@@ -17,7 +17,7 @@ export const HomeSidebar: FC<HomeSidebarProps> = ({ UniqueList, isLoading }) => 
         ) : (
           <div className='relative lg:sticky top-24 shadow-lg'>
             <div className='bg-white px-8 py-4 pb-10 rounded-lg mb-8'>
-              <h3 className='font-bold text-xl pb-4 mb-4 text-black'>Категории</h3>
+              <h3 className='font-bold text-xl pb-4 mb-4 text-gray-900'>Категории</h3>
               {UniqueList.slice(0, 3).map((item, idx) => (
                 <HomeSidebarCategoryPost item={item} key={idx} />
               ))}

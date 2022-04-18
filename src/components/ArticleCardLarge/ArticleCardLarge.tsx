@@ -29,7 +29,7 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post, users = [] }
 
       <div className='flex flex-col justify-between w-full lg:w-1/2 px-6 lg:p-8 py-16 z-10 relative'>
         <Link
-          className='text-2xl lg:text-4xl font-bold mb-10 hover:opacity-60 transition-all text-white lg:text-black'
+          className='text-2xl lg:text-4xl font-bold mb-10 hover:opacity-60 transition-all text-white lg:text-gray-900'
           to={`/post/${post.slug}`}
         >
           {post.title}

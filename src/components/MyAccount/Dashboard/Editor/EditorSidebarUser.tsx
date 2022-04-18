@@ -13,7 +13,7 @@ export const EditorSidebarUser: FC<EditorSidebarUserProps> = ({ post }) => {
   const { postStatus } = useActions()
   return (
     <>
-      <div className='mb-4 text-black'>
+      <div className='mb-4 text-gray-900'>
         <div className='flex flex-col md:flex-row xl:flex-col items-center justify-center'>
           <MyButton
             className={`${
@@ -56,7 +56,7 @@ export const EditorSidebarUser: FC<EditorSidebarUserProps> = ({ post }) => {
           </p>
         )}
       </div>
-      <div className='text-black'>
+      <div className='text-gray-900'>
         Статья:{' '}
         <span className='' style={{ color: statusColor(post.status.type) }}>
           {post.status.type !== '' ? post.status.type : 'draft'}

@@ -21,7 +21,7 @@ export const Editor: FC = () => {
         {post.status.type === 'pending' && !isModeration ? (
           <div className='bg-green-300 flex items-start p-4 font-bold max-w-lg mx-auto rounded-lg'>
             <CheckIcon width={34} color='black' />
-            <div className='pl-4  text-black'>
+            <div className='pl-4  text-gray-900'>
               <p>Пост успешно отправлен на модерацию.</p>
               <p>
                 <Link className='text-gray-700 underline hover' to={'/my-account/editor'}>

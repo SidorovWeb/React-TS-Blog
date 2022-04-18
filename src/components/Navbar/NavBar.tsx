@@ -26,7 +26,7 @@ export const NavBar: FC = () => {
   return (
     <div className='flex items-center'>
       {isMyAccount(pathname) ? (
-        <Link className='text-md md:text-3xl font-bold mr-auto' to={'/my-account/home'}>
+        <Link className='text-lg md:text-3xl font-bold mr-auto' to={'/my-account/home'}>
           My account
         </Link>
       ) : (

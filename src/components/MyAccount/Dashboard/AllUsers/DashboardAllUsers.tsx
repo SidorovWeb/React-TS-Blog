@@ -8,15 +8,15 @@ export const DashboardAllUsers: FC = () => {
 
   return (
     <DashboardContainerContent>
-      <div className='mr-4 text-xl text-black mb-6'>Все пользователи</div>
-      <div className='hidden md:grid grid-cols-3 gap-5 mb-5 text-lg px-2 text-black'>
+      <div className='mr-4 text-xl text-gray-900 mb-6'>Все пользователи</div>
+      <div className='hidden md:grid grid-cols-3 gap-5 mb-5 text-lg px-2 text-gray-900'>
         <div>Фото</div>
         <div>Имя</div>
         <div>Email</div>
       </div>
       {users.map((user) => (
         <div
-          className='grid md:grid-cols-3 gap-5 bg-blue-100 mb-4 px-2 py-4 rounded-lg text-black shadow-lg'
+          className='grid md:grid-cols-3 gap-5 bg-blue-100 mb-4 px-2 py-4 rounded-lg text-gray-900 shadow-lg'
           key={user.uid}
         >
           <Profile user={user} width={'34px'} height={'34px'} />

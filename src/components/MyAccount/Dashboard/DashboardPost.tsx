@@ -40,7 +40,7 @@ export const DashboardPost: FC<DashboardPostProps> = ({ post, uid, myPosts, dele
       )}
 
       <div className={`${post.previewImage.url && 'md:px-4 md:ml-4'}  flex-grow font-bold`}>
-        <div className='text-lg text-black mb-4 cursor-pointer hover block' onClick={onClickNavigation}>
+        <div className='text-lg text-gray-900 mb-4 cursor-pointer hover block' onClick={onClickNavigation}>
           {post.title}
         </div>
         <div className='flex'>

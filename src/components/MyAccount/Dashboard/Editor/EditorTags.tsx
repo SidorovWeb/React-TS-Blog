@@ -75,7 +75,7 @@ export const EditorTags: FC<EditorTagsProps> = ({ post, errors, setError, clearE
           } flex md:w-80 md:shrink-0  border-2 h-[50px]`}
         >
           <input
-            className='bg-gray-300 w-full text-sm md:text-xl py-2 px-4 rounded-tl-lg rounded-bl-lg transition-all font-bold outline-none  text-black'
+            className='bg-gray-300 w-full text-sm md:text-xl py-2 px-4 rounded-tl-lg rounded-bl-lg transition-all font-bold outline-none  text-gray-900'
             type='text'
             id='tags'
             name='tags'

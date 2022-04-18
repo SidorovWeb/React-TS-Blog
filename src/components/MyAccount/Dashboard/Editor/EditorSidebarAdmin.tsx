@@ -118,7 +118,7 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
           Вернуть
         </MyButton>
       </div>
-      <div className='text-black'>
+      <div className='text-gray-900'>
         Статья:{' '}
         <span className='' style={{ color: statusColor(post.status.type) }}>
           {post.status.type !== '' ? post.status.type : 'черновик'}

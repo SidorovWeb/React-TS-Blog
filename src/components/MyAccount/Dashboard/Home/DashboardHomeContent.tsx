@@ -36,24 +36,20 @@ export const DashboardHomeContent: FC<DashboardHomeContentProps> = ({ user, isLo
 
   return (
     <div className='flex-grow'>
-      <div className='flex justify-between gap-5 flex-wrap lg:bg-amber-400 rounded-lg overflow-hidden mb-10 lg:shadow-lg'>
-        <div className='flex flex-col items-start pt-4 lg:p-4 max-w-xl text-black'>
-          <div className='text-xl lg:text-3xl font-bold mb-4 flex flex-wrap'>
+      <div className='flex justify-center md:justify-between  gap-5 flex-wrap bg-amber-400 rounded-lg overflow-hidden mb-10 shadow-lg'>
+        <div className='flex flex-col items-center  justify-center md:items-start px-4 py-8 lg:p-8 md:max-w-xl text-gray-900'>
+          <div className='text-xl lg:text-2xl font-bold mb-12 flex flex-wrap hidden md:block'>
             Привет
             <span className='ml-2'>{!isLoading && user.userName}!</span>
           </div>
-          <p className='mb-10'>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem doloribus magnam earum labore iste omnis id
-            soluta ullam! Expedita.
-          </p>
           <MyButton
-            className='btn !bg-pink-500 hover:!bg-pink-700 !p-4 mt-auto mx-auto md:mx-0 shadow-lg'
+            className='btn !bg-pink-500 hover:!bg-pink-700 !p-4 mt-auto mx-auto md:mx-0'
             onClick={() => navigate('/my-account/editor')}
           >
             Написать новый пост
           </MyButton>
         </div>
-        <Writer className='2xl:block hidden' fill='#FBBF24' width={400} />
+        <Writer className='block md:w-[400px]' fill='#FBBF24' />
       </div>
       <div className='rounded-lg'>
         <div className={`${!user.notification.length ? 'justify-center text-gray-700' : 'justify-start'} flex`}>
@@ -69,7 +65,7 @@ export const DashboardHomeContent: FC<DashboardHomeContentProps> = ({ user, isLo
                   className='flex flex-col md:flex-row items-center justify-between font-bold text-xl p-4 rounded-lg bg-blue-100 mb-4'
                   key={n.id}
                 >
-                  <div className='text-black text-base mb-4 md:mb-0'>
+                  <div className='text-gray-900 text-base mb-4 md:mb-0'>
                     <span>Статья:</span> {n.postName}
                   </div>
                   <div className='text-right flex flex-col items-center md:block'>

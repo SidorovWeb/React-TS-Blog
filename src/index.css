@@ -27,7 +27,7 @@ code {
 
 @layer utilities {
   .btn {
-    @apply transition-all font-bold bg-gray-600 hover:!bg-pink-500 rounded-md px-6 text-white whitespace-nowrap;
+    @apply transition-all font-bold bg-gray-600 hover:!bg-pink-500 rounded-md px-6 text-white whitespace-nowrap shadow-lg;
   }
 
   .icon {

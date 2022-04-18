@@ -20,7 +20,7 @@ export const EditorExcerpt: FC<EditorExcerptProps> = ({ post, errors, clearError
   }, [excerpt])
 
   return (
-    <div className='mb-6 text-black'>
+    <div className='mb-6 text-gray-900'>
       <div
         className={`${
           errors.excerpt ? 'border-red-500' : 'border-transparent'

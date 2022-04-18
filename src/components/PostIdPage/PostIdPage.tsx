@@ -24,7 +24,7 @@ export const PostIdPage: FC = () => {
           <div className='mb-8 rounded-lg overflow-hidden'>
             <img className='max-h-80 w-full object-cover' src={post.previewImage.url} alt='Изображение' />
           </div>
-          <h2 className='text-black text-xl lg:text-2xl font-bold mb-10 text-center'>{post.title}</h2>
+          <h2 className='text-gray-900 text-xl lg:text-2xl font-bold mb-10 text-center'>{post.title}</h2>
           <div className='flex items-center justify-between mb-6'>
             <div className='flex items-center '>
               <div className='w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden mr-4'>

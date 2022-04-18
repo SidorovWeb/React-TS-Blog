@@ -141,7 +141,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
         }}
       >
         <div className='flex-grow mb-10'>
-          <div className='text-md font-bold mb-10 flex justify-between text-black'>
+          <div className='text-md font-bold mb-10 flex justify-between text-gray-900'>
             {post.author && <div>Автор: {post.author}</div>}
 
             {post.uid && <p>Пост создан: {formatTimestamp(post.timestamp)}</p>}

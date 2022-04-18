@@ -20,7 +20,7 @@ export const EditorTitle: FC<EditorTitleProps> = ({ post, errors, clearErrors, w
   }, [title])
 
   return (
-    <div className='mb-12 text-black'>
+    <div className='mb-12 text-gray-900'>
       <div
         className={`${
           errors.title ? 'border-red-500' : 'border-transparent'

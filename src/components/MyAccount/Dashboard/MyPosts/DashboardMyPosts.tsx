@@ -37,12 +37,12 @@ export const DashboardMyPosts: FC = () => {
   return (
     <DashboardContainerContent>
       <>
-        <div className='flex justify-between mb-6 font-bold text-black'>
+        <div className='flex justify-between mb-6 font-bold text-gray-900'>
           <span className='mr-4 text-xl'>Мои посты</span>
           <span>постов: {userPosts.length}</span>
         </div>
         <div className='rounded-lg'>
-          {!userPosts.length && <p className='font-bold text-2xl mt-10 text-black'>Список постов пуст</p>}
+          {!userPosts.length && <p className='font-bold text-2xl mt-10 text-gray-900'>Список постов пуст</p>}
           {!isLoading && (
             <List
               items={userPosts.reverse()}

@@ -34,7 +34,7 @@ export const PostItem: FC<PostItemPost> = ({ post, users = [] }) => {
       <div className='px-3 md:px-8 py-8 bg-white h-full'>
         <div className='text-gray-700 mb-2'>{formatTimestamp(post.timestamp)}</div>
         <Link
-          className='block text-black text-xl lg:text-2xl font-bold mb-6 hover:opacity-60 transition-all max-w-xl 2xl:max-w-2xl'
+          className='block text-gray-900 text-xl lg:text-2xl font-bold mb-6 hover:opacity-60 transition-all max-w-xl 2xl:max-w-2xl'
           to={`/post/${post.slug}`}
         >
           {post.title}

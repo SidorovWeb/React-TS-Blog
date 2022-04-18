@@ -20,7 +20,7 @@ export const EditorContent: FC<EditorContentProps> = ({ post, errors, clearError
   }, [content])
 
   return (
-    <div className='mb-6 text-black'>
+    <div className='mb-6 text-gray-900'>
       <div
         className={`${
           errors.content ? 'border-red-500' : 'border-transparent'
