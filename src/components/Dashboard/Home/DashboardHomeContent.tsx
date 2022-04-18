@@ -5,10 +5,9 @@ import { ReactComponent as Writer } from '../../../icons/writer.svg'
 import { useNavigate } from 'react-router-dom'
 import { BellIcon, CheckIcon, EyeIcon } from '@heroicons/react/outline'
 import { statusColor } from '../../../utils'
-import { useDispatch } from 'react-redux'
-import { usersUpdate, userUpdate } from '../../../store/action-creators/userAction'
 import { toast } from 'react-toastify'
 import { useModal } from '../../../hooks/useModal'
+import { useActions } from '../../../hooks/useActions'
 
 interface DashboardHomeContentProps {
   user: User
@@ -17,7 +16,7 @@ interface DashboardHomeContentProps {
 
 export const DashboardHomeContent: FC<DashboardHomeContentProps> = ({ user, isLoading }) => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { userUpdate, usersUpdate } = useActions()
   const [notification, setNotification] = useState<any>([])
   const { hide, show, Modal } = useModal()
 
@@ -30,8 +29,8 @@ export const DashboardHomeContent: FC<DashboardHomeContentProps> = ({ user, isLo
       notification: notificationFilter,
     }
 
-    await new Promise((resolve) => resolve(dispatch(userUpdate(newUser))))
-    dispatch(usersUpdate(newUser))
+    await new Promise((resolve) => resolve(userUpdate(newUser)))
+    usersUpdate(newUser)
     toast.success('Сообщение прочитано')
   }
 

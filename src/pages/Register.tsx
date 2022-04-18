@@ -1,19 +1,18 @@
 import { FC, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { Title } from '../components/Title/Title'
 import { Fieldset } from '../components/UI/Fieldset/Fieldset'
 import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
+import { useActions } from '../hooks/useActions'
 import { useAuth } from '../hooks/useAuth'
 import { useSelector } from '../hooks/useTypedSelector'
-import { createUser } from '../store/action-creators/registerAction'
 import { SignUpData } from '../types/registerTypes'
 
 export const Register: FC = () => {
   const currentUser = useAuth()
-  const dispatch = useDispatch()
+  const { createUser } = useActions()
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.register)
 
@@ -38,7 +37,7 @@ export const Register: FC = () => {
   })
 
   const onSubmit = async (data: SignUpData) => {
-    await new Promise((resolve) => resolve(dispatch(createUser(data))))
+    await new Promise((resolve) => resolve(createUser(data)))
     reset()
   }
 

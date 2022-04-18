@@ -1,9 +1,9 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc } from 'firebase/firestore'
 import { Dispatch } from 'redux'
 import { db } from '../../firebase'
-import { IPostListProps, postAction, postStatusProps, postType } from '../../types/postsTypes'
+import { postListProps, postAction, postStatusProps, postType } from '../../types/postsTypes'
 
-export const postCreate = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
+export const postCreate = (post: postListProps) => async (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_CREATE_START })
   return await addDoc(collection(db, 'posts'), post)
     .then((newDate) => {
@@ -31,7 +31,7 @@ export const postsRead = () => async (dispatch: Dispatch<postAction>) => {
     })
 }
 
-export const postUpdate = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
+export const postUpdate = (post: postListProps) => async (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_UPDATE_START })
 
   await updateDoc(doc(db, 'posts', post.id), {
@@ -45,7 +45,7 @@ export const postUpdate = (post: IPostListProps) => async (dispatch: Dispatch<po
     })
 }
 
-export const postDelete = (post: IPostListProps) => async (dispatch: Dispatch<postAction>) => {
+export const postDelete = (post: postListProps) => async (dispatch: Dispatch<postAction>) => {
   dispatch({ type: postType.POST_DELETE_START })
 
   await deleteDoc(doc(db, 'posts', post.id))

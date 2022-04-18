@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/postsTypes'
+import { postListProps } from '../../types/postsTypes'
 import { User } from '../../types/userTypes'
 import { Profile } from '../Profile/Profile'
 import { ReactComponent as ShapeAvatar } from '../../icons/shape-avatar.svg'
 import { formatTimestamp } from '../../utils'
 
 interface PostItemPost {
-  post: IPostListProps
+  post: postListProps
   users?: User[]
 }
 

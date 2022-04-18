@@ -8,9 +8,8 @@ import { Menu } from '../Menu/Menu'
 import { useSelector } from '../../hooks/useTypedSelector'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import { ThemeSwitcher } from '../UI/ThemeSwitcher/ThemeSwitcher'
-import { useDispatch } from 'react-redux'
-import { menu } from '../../store/action-creators/menuAction'
 import { HomeIcon, UserIcon } from '@heroicons/react/outline'
+import { useActions } from '../../hooks/useActions'
 
 export const NavBar: FC = () => {
   const pathname = useLocation().pathname
@@ -18,11 +17,11 @@ export const NavBar: FC = () => {
   const isPath = !isMyAccount(pathname) && !currentUser && pathname !== '/'
   const { user } = useSelector((state) => state.user)
   const { open } = useSelector((state) => state.menu)
-  const dispatch = useDispatch()
+  const { menu } = useActions()
   const navigate = useNavigate()
 
   const onClickMenu = () => {
-    dispatch(menu(false))
+    menu(false)
   }
 
   return (
@@ -36,10 +35,7 @@ export const NavBar: FC = () => {
       )}
 
       {!isMyAccount(pathname) && (
-        <div
-          className={`${open ? 'block' : 'hidden'} lg:block menu cursor-pointer`}
-          onClick={() => dispatch(menu(!open))}
-        >
+        <div className={`${open ? 'block' : 'hidden'} lg:block fade menu cursor-pointer`} onClick={() => menu(!open)}>
           <div className='items-start hidden lg:flex menu__content cursor-default' onClick={(e) => e.stopPropagation()}>
             <Navigation onClickMenu={onClickMenu} />
           </div>
@@ -54,7 +50,7 @@ export const NavBar: FC = () => {
             className='p-1 cursor-pointer flex justify-center'
             onClick={() => {
               isPath ? navigate('/') : navigate('login')
-              dispatch(menu(false))
+              menu(false)
             }}
           >
             {isPath ? <HomeIcon width={24} /> : <UserIcon width={24} />}
@@ -63,7 +59,7 @@ export const NavBar: FC = () => {
         <ThemeSwitcher />
       </div>
 
-      <div className='block lg:hidden cursor-pointer z-[1000]' onClick={() => dispatch(menu(!open))}>
+      <div className='block lg:hidden cursor-pointer z-[1000]' onClick={() => menu(!open)}>
         {open ? <XIcon width={30} /> : <MenuIcon width={30} />}
       </div>
     </div>

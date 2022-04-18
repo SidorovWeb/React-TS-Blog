@@ -1,4 +1,4 @@
-import { IPostListProps } from '../types/postsTypes'
+import { postListProps } from '../types/postsTypes'
 
 import List from '../components/List/List'
 import { PostItem } from '../components/Posts/PostListItem'
@@ -35,7 +35,7 @@ export const Home: FC = () => {
           ) : (
             <List
               items={postsList.reverse().slice(1)}
-              renderItem={(post: IPostListProps) => <PostItem post={post} key={post.id} users={users} />}
+              renderItem={(post: postListProps) => <PostItem post={post} key={post.id} users={users} />}
             />
           )}
         </div>

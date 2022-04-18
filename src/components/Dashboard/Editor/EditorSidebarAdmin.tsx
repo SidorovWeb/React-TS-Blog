@@ -1,27 +1,27 @@
 import { doc, updateDoc } from 'firebase/firestore'
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { db } from '../../../firebase'
+import { useActions } from '../../../hooks/useActions'
 import { useModal } from '../../../hooks/useModal'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { postUpdate } from '../../../store/action-creators/postAction'
-import { usersUpdate } from '../../../store/action-creators/userAction'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import { User, userType } from '../../../types/userTypes'
 import { statusColor } from '../../../utils'
 import { MyButton } from '../../UI/MyButton/MyButton'
 import { EditorLoader } from './EditorLoader'
 
 interface EditorSidebarAdminProps {
-  post: IPostListProps
+  post: postListProps
   currentUser: User
 }
 
 export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, post }) => {
   const dispatch = useDispatch()
+  const { usersUpdate, postUpdate } = useActions()
   const navigate = useNavigate()
   const users = useSelector((state) => state.user.users)
   const [publish, setPublish] = useState(false)
@@ -69,12 +69,13 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
     })
 
     if (currentUser.id === post.uid) {
+      // TODO: ????
       dispatch({ type: userType.USER_UPDATE_SUCCESS, payload: newUser })
     }
 
-    dispatch(usersUpdate(newUser))
+    usersUpdate(newUser)
 
-    const newPost: IPostListProps = {
+    const newPost: postListProps = {
       ...post,
       status: {
         type: publish ? 'published' : 'rejected',
@@ -82,7 +83,7 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
       },
     }
 
-    await new Promise((resolve) => resolve(dispatch(postUpdate(newPost))))
+    await new Promise((resolve) => resolve(postUpdate(newPost)))
 
     toast.success(publish ? 'Статья опубликована' : 'Статья отклонена')
     setIsLoadingPost(false)
@@ -93,11 +94,11 @@ export const EditorSidebarAdmin: FC<EditorSidebarAdminProps> = ({ currentUser, p
 
   return (
     <>
-      <div className='mb-4'>
+      <div className='mb-4 flex flex-col md:flex-row xl:flex-col items-center justify-center'>
         <MyButton
           className={`${
             post.status.type === 'published' && 'opacity-60 pointer-events-none'
-          } btn p-4 w-full mb-4 !bg-green-600`}
+          } btn p-4 w-full mb-4 !bg-green-600 mr-0 md:mr-4 xl:mr-0`}
           onClick={() => {
             setPublish(true)
             show()

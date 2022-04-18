@@ -1,11 +1,8 @@
 import { PhotographIcon } from '@heroicons/react/outline'
 import { FC, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSelector } from '../../../hooks/useTypedSelector'
 import { Profile } from '../../Profile/Profile'
 import { Spin } from '../../UI/Spin/Spin'
-import { userUpdate } from '../../../store/action-creators/userAction'
-import { storage, storageDelete } from '../../../store/action-creators/storageAction'
 import { Timestamp } from 'firebase/firestore'
 import { Fieldset } from '../../UI/Fieldset/Fieldset'
 import { Controller, useForm } from 'react-hook-form'
@@ -13,11 +10,12 @@ import { MyButton } from '../../UI/MyButton/MyButton'
 import { User } from '../../../types/userTypes'
 import { toast } from 'react-toastify'
 import { DashboardContainerContent } from '../DashboardContainerContent'
+import { useActions } from '../../../hooks/useActions'
 
 export const DashboardTools: FC = () => {
   const { user } = useSelector((state) => state.user)
   const { isLoading } = useSelector((state) => state.storage)
-  const dispatch = useDispatch()
+  const { userUpdate, storage, storageDelete } = useActions()
 
   const {
     formState: { errors },
@@ -43,7 +41,7 @@ export const DashboardTools: FC = () => {
       userName: data.username.trim(),
     }
 
-    await new Promise((resolve) => resolve(dispatch(userUpdate(newUser))))
+    await new Promise((resolve) => resolve(userUpdate(newUser)))
     toast.success('Успешно сохранено')
   }
 
@@ -53,18 +51,17 @@ export const DashboardTools: FC = () => {
     if (file) {
       const fileLocated = `${user.uid}/${Timestamp.now() + file.name}`
       if (user.userPhoto.url) {
-        dispatch(storageDelete(user.userPhoto.fileLocated))
+        storageDelete(user.userPhoto.fileLocated)
       }
-      const url = await new Promise((resolve) => resolve(dispatch(storage(file, fileLocated))))
-      dispatch(
-        userUpdate({
-          ...user,
-          userPhoto: {
-            url: String(url),
-            fileLocated,
-          },
-        })
-      )
+      const url = await new Promise((resolve) => resolve(storage(file, fileLocated)))
+
+      userUpdate({
+        ...user,
+        userPhoto: {
+          url: String(url),
+          fileLocated,
+        },
+      })
     }
   }
 

@@ -14,9 +14,6 @@ export const Navigation: FC<NavigationProps> = ({ onClickMenu }) => {
       <Link className='font-bold py-2 px-2 hover' to='/archives' onClick={onClickMenu}>
         Статьи
       </Link>
-      {/* <Link className='font-bold py-2 px-2 hover' to='/contacts' onClick={onClickMenu}>
-        Contacts
-      </Link> */}
     </div>
   )
 }

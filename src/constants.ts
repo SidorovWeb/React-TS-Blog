@@ -22,7 +22,6 @@ export const defaultPost = {
 export const defaultUser = {
   userName: '',
   email: '',
-  // timestamp: new Date(Timestamp.now().seconds * 1000).toLocaleDateString(),
   timestamp: '',
   id: '',
   uid: '',

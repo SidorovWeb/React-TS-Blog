@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import List from '../../List/List'
 import { DashboardContainerContent } from '../DashboardContainerContent'
 import { DashboardPost } from '../DashboardPost'
@@ -22,7 +22,7 @@ export const DashboardAllPosts: FC = () => {
         {!isLoading && (
           <List
             items={allPostsPending.reverse()}
-            renderItem={(post: IPostListProps) => <DashboardPost post={post} key={post.id} />}
+            renderItem={(post: postListProps) => <DashboardPost post={post} key={post.id} />}
           />
         )}
       </div>

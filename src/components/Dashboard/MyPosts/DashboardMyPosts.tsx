@@ -1,11 +1,9 @@
 import { FC, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import { useActions } from '../../../hooks/useActions'
 import { useModal } from '../../../hooks/useModal'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { postDelete } from '../../../store/action-creators/postAction'
-import { storageDelete } from '../../../store/action-creators/storageAction'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import List from '../../List/List'
 import { MyButton } from '../../UI/MyButton/MyButton'
 import { DashboardContainerContent } from '../DashboardContainerContent'
@@ -16,10 +14,10 @@ export const DashboardMyPosts: FC = () => {
   const { user } = useSelector((state) => state.user)
   const [currentPost, setCurrentPost] = useState<any>()
   const userPosts = posts.filter((post) => post.uid === user.id)
-  const dispatch = useDispatch()
   const { hide, show, Modal } = useModal()
+  const { storageDelete, postDelete } = useActions()
 
-  const deleteOnClick = (post: IPostListProps) => {
+  const deleteOnClick = (post: postListProps) => {
     show()
     setCurrentPost(post)
   }
@@ -27,9 +25,9 @@ export const DashboardMyPosts: FC = () => {
   const deleteCurrentPost = async () => {
     if (currentPost) {
       if (currentPost.previewImage.url) {
-        await new Promise((resolve) => resolve(dispatch(storageDelete(currentPost.previewImage.fileLocated))))
+        await new Promise((resolve) => resolve(storageDelete(currentPost.previewImage.fileLocated)))
       }
-      dispatch(postDelete(currentPost))
+      postDelete(currentPost)
       hide()
       toast.success('Пост удален!')
       setCurrentPost({})
@@ -48,7 +46,7 @@ export const DashboardMyPosts: FC = () => {
           {!isLoading && (
             <List
               items={userPosts.reverse()}
-              renderItem={(post: IPostListProps) => (
+              renderItem={(post: postListProps) => (
                 <DashboardPost post={post} key={post.id} uid={user.id} myPosts={true} deleteOnClick={deleteOnClick} />
               )}
             />

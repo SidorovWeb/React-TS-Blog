@@ -1,13 +1,12 @@
 import { PencilAltIcon, TrashIcon, EyeIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useModal } from '../../hooks/useModal'
-import { IPostListProps } from '../../types/postsTypes'
+import { postListProps } from '../../types/postsTypes'
 import { formatTimestamp, statusColor } from '../../utils'
 import { MyButton } from '../UI/MyButton/MyButton'
 
 interface DashboardPostProps {
-  post: IPostListProps
+  post: postListProps
   uid?: string
   myPosts?: boolean
   deleteOnClick?: any
@@ -15,7 +14,6 @@ interface DashboardPostProps {
 
 export const DashboardPost: FC<DashboardPostProps> = ({ post, uid, myPosts, deleteOnClick }) => {
   const navigate = useNavigate()
-  const { hide, show, Modal } = useModal()
 
   const status = {
     color: `${statusColor(post.status.type)}`,

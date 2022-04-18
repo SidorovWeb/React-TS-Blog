@@ -13,7 +13,7 @@ interface status {
   message: string
 }
 
-export interface IPostListProps {
+export interface postListProps {
   author: string
   authorPhoto: string
   title: string
@@ -34,7 +34,7 @@ export interface postStatusProps {
 }
 
 export interface postState {
-  posts: IPostListProps[]
+  posts: postListProps[]
   isLoading: boolean
   error: null | string
   postStatus: postStatusProps
@@ -61,7 +61,7 @@ interface postActionCreateStart {
 }
 interface postActionCreateSuccess {
   type: postType.POST_CREATE_SUCCESS
-  payload: IPostListProps
+  payload: postListProps
 }
 interface postActionCreateError {
   type: postType.POST__CREATE_ERROR
@@ -73,7 +73,7 @@ interface postsActionReadStart {
 }
 interface postsActionReadSuccess {
   type: postType.POSTS_READ_SUCCESS
-  payload: IPostListProps[]
+  payload: postListProps[]
 }
 interface postsActionReadError {
   type: postType.POSTS_READ_ERROR
@@ -85,7 +85,7 @@ interface postActionUpdateStart {
 }
 interface postActionUpdateSuccess {
   type: postType.POST_UPDATE_SUCCESS
-  payload: IPostListProps
+  payload: postListProps
 }
 interface postActionUpdateError {
   type: postType.POST_UPDATE_ERROR
@@ -97,7 +97,7 @@ interface postActionDeleteStart {
 }
 interface postActionDeleteSuccess {
   type: postType.POST_DELETE_SUCCESS
-  payload: IPostListProps
+  payload: postListProps
 }
 interface postActionDeleteError {
   type: postType.POST_DELETE_ERROR

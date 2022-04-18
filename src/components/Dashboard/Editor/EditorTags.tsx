@@ -1,11 +1,11 @@
 import { HashtagIcon } from '@heroicons/react/outline'
 import { FC, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import CyrillicToTranslit from 'cyrillic-to-translit-js'
 
 interface EditorTagsProps {
-  post: IPostListProps
+  post: postListProps
   errors: any
   setError: Function
   setValue: Function

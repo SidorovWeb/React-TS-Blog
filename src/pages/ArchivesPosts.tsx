@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FC } from 'react'
-import { IPostListProps } from '../types/postsTypes'
+import { postListProps } from '../types/postsTypes'
 import { getArrRange } from '../utils'
 import List from '../components/List/List'
 import { PostItem } from '../components/Posts/PostListItem'
@@ -76,7 +76,7 @@ export const ArchivesPosts: FC = () => {
           ) : (
             <List
               items={getArrRange(filteredPostList as [], part, page).reverse()}
-              renderItem={(post: IPostListProps) => <PostItem post={post} key={post.id} />}
+              renderItem={(post: postListProps) => <PostItem post={post} key={post.id} />}
             />
           )}
         </div>

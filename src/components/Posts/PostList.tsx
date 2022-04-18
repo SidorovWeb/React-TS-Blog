@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
-import { IPostListProps } from '../../types/postsTypes'
+import { FC } from 'react'
+import { postListProps } from '../../types/postsTypes'
 import { PostItem } from './PostListItem'
 
 interface PostListProps {
-  posts: IPostListProps[]
+  posts: postListProps[]
 }
 
 export const PostList: FC<PostListProps> = ({ posts }) => {

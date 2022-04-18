@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { useSelector } from '../../hooks/useTypedSelector'
-import { IPostListProps } from '../../types/postsTypes'
+import { postListProps } from '../../types/postsTypes'
 import { uniqueListCategories, wordForm } from '../../utils'
 import { MySelect } from '../UI/MySelect/MySelect'
 
 interface SortingPanelProps {
-  posts: IPostListProps[]
+  posts: postListProps[]
   valueSelect: string
   filter: (val: string) => void
   setValueSelect: (val: string) => void

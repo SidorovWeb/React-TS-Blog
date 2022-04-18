@@ -1,7 +1,6 @@
 import { collection, doc, getDocs, orderBy, query, updateDoc } from 'firebase/firestore'
 import { Dispatch } from 'redux'
 import { db } from '../../firebase'
-import { useSelector } from '../../hooks/useTypedSelector'
 import { User, userAction, userType } from '../../types/userTypes'
 
 export const user = (user: User) => (dispatch: Dispatch<userAction>) => {

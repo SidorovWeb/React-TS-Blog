@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { IPostListProps } from '../../types/postsTypes'
+import { postListProps } from '../../types/postsTypes'
 import { Link } from 'react-router-dom'
 import { formatTimestamp } from '../../utils'
 
 interface SidebarItemProps {
-  post: IPostListProps
+  post: postListProps
 }
 
 export const SidebarRecentPost: FC<SidebarItemProps> = ({ post }) => {

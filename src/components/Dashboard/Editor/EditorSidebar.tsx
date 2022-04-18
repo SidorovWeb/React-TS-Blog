@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
-import { IPostListProps } from '../../../types/postsTypes'
+import { FC } from 'react'
+import { postListProps } from '../../../types/postsTypes'
 import { User } from '../../../types/userTypes'
 import { EditorSidebarAdmin } from './EditorSidebarAdmin'
 import { EditorSidebarUser } from './EditorSidebarUser'
 
 interface EditorSidebarProps {
-  post: IPostListProps
+  post: postListProps
   user: User
   isModeration: boolean
 }

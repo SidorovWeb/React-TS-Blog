@@ -2,15 +2,13 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js'
 import { serverTimestamp, Timestamp } from 'firebase/firestore'
 import { FC, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useActions } from '../../../hooks/useActions'
 import { useSelector } from '../../../hooks/useTypedSelector'
-import { postCreate, postUpdate } from '../../../store/action-creators/postAction'
-import { storage, storageDelete } from '../../../store/action-creators/storageAction'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import { User } from '../../../types/userTypes'
-import { formatTimestamp, statusColor, ucFirst } from '../../../utils'
+import { formatTimestamp, ucFirst } from '../../../utils'
 import { EditorContent } from './EditorContent'
 import { EditorExcerpt } from './EditorExcerpt'
 import { EditorLoader } from './EditorLoader'
@@ -20,11 +18,11 @@ import { EditorTitle } from './EditorTitle'
 
 interface EditorMainProps {
   user: User
-  post: IPostListProps
+  post: postListProps
 }
 
 export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
-  const dispatch = useDispatch()
+  const { storage, storageDelete, postUpdate, postCreate } = useActions()
   const navigate = useNavigate()
   const location = useLocation()
   const isModeration = location.search.includes('moderation')
@@ -85,12 +83,12 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
 
     if (file instanceof File) {
       fileLocated = `${user.uid}/${Timestamp.now() + file.name}`
-      const url = await new Promise((resolve) => resolve(dispatch(storage(file, fileLocated))))
+      const url = await new Promise((resolve) => resolve(storage(file, fileLocated)))
       urlPrevImg = String(url)
     }
 
     if (post.previewImage.url && !data.previewImage.url) {
-      await new Promise((resolve) => resolve(dispatch(storageDelete(post.previewImage.fileLocated))))
+      await new Promise((resolve) => resolve(storageDelete(post.previewImage.fileLocated)))
     }
 
     let slug = cyrillicToTranslit.transform(titleText, '_').toLocaleLowerCase()
@@ -99,7 +97,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
     let categories =
       data.categories.length > 0 ? data.categories : [{ name: 'Web Development', slug: 'web_development' }]
 
-    const newPost: IPostListProps = {
+    const newPost: postListProps = {
       ...post,
       ...data,
       author: user.userName,
@@ -121,9 +119,9 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
     }
 
     if (post.id) {
-      dispatch(postUpdate(newPost))
+      postUpdate(newPost)
     } else {
-      const postID = await new Promise((resolve) => resolve(dispatch(postCreate(newPost))))
+      const postID = await new Promise((resolve) => resolve(postCreate(newPost)))
       navigate(`/my-account/editor/${postID}`)
     }
 
@@ -133,16 +131,6 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
 
   return (
     <>
-      {post.status.type !== 'draft' && post.status.message && (
-        <div
-          className='flex flex-wrap text-white py-2 px-4 font-bold rounded-lg mb-10 shadow-lg'
-          style={{ backgroundColor: statusColor(post.status.type) }}
-        >
-          <div className='mb-4 md:mb-0'>Сообщение от модератора: </div>
-          <div className='md:ml-4'>{post.status.message}</div>
-        </div>
-      )}
-
       <form
         className='flex flex-col'
         onSubmit={handleSubmit(onSaveUpdatingPost)}

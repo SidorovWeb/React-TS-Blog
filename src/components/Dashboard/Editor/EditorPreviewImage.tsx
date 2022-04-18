@@ -1,10 +1,10 @@
 import { PhotographIcon, TrashIcon } from '@heroicons/react/outline'
 import { FC, useEffect, useState } from 'react'
-import { IPostListProps } from '../../../types/postsTypes'
+import { postListProps } from '../../../types/postsTypes'
 import { MyButton } from '../../UI/MyButton/MyButton'
 
 interface EditorPreviewImageProps {
-  post: IPostListProps
+  post: postListProps
   register: any
   isModeration: boolean
   setValue: Function

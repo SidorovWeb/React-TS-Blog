@@ -1,7 +1,5 @@
 import { FC, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { login } from '../store/action-creators/loginAction'
 import { useAuth } from '../hooks/useAuth'
 import { Controller, useForm } from 'react-hook-form'
 import { SignInData } from '../types/loginTypes'
@@ -10,10 +8,11 @@ import { Fieldset } from '../components/UI/Fieldset/Fieldset'
 import { MyButton } from '../components/UI/MyButton/MyButton'
 import { Spin } from '../components/UI/Spin/Spin'
 import { Title } from '../components/Title/Title'
+import { useActions } from '../hooks/useActions'
 
 export const Login: FC = () => {
   const currentUser = useAuth()
-  const dispatch = useDispatch()
+  const { login } = useActions()
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.login)
 
@@ -37,7 +36,7 @@ export const Login: FC = () => {
   })
 
   const onSubmit = async (data: SignInData) => {
-    await new Promise((resolve) => resolve(dispatch(login(data))))
+    await new Promise((resolve) => resolve(login(data)))
     reset()
   }
 

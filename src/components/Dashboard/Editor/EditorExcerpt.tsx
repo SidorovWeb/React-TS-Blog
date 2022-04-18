@@ -1,8 +1,8 @@
-import React, { FC, useEffect } from 'react'
-import { IPostListProps } from '../../../types/postsTypes'
+import { FC, useEffect } from 'react'
+import { postListProps } from '../../../types/postsTypes'
 
 interface EditorExcerptProps {
-  post: IPostListProps
+  post: postListProps
   errors: any
   clearErrors: Function
   watch: Function

@@ -1,11 +1,9 @@
 import { BellIcon, HomeIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
-import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useActions } from '../../hooks/useActions'
 import { useModal } from '../../hooks/useModal'
-import { menu } from '../../store/action-creators/menuAction'
-import { usersUpdate, userUpdate } from '../../store/action-creators/userAction'
 import { User } from '../../types/userTypes'
 import { isMyAccount, statusColor } from '../../utils'
 import { Profile } from '../Profile/Profile'
@@ -16,8 +14,8 @@ interface MenuProps {
 
 export const Menu: FC<MenuProps> = ({ user }) => {
   const pathname = useLocation().pathname
-  const dispatch = useDispatch()
-  const { hide, show, Modal } = useModal()
+  const { usersUpdate, userUpdate, menu } = useActions()
+  const { show, Modal } = useModal()
 
   const onClickReadMessage = async (notification: any) => {
     const notificationFilter = user.notification.filter((n) => n.id !== notification.id)
@@ -27,8 +25,8 @@ export const Menu: FC<MenuProps> = ({ user }) => {
       notification: notificationFilter,
     }
 
-    await new Promise((resolve) => resolve(dispatch(userUpdate(newUser))))
-    dispatch(usersUpdate(newUser))
+    await new Promise((resolve) => resolve(userUpdate(newUser)))
+    usersUpdate(newUser)
     toast.success('Сообщение прочитано')
   }
 
@@ -50,7 +48,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
       </div>
 
       {isMyAccount(pathname) && (
-        <Link className='flex items-center p-2 font-bold hover' to={`/`} onClick={() => dispatch(menu(false))}>
+        <Link className='flex items-center p-2 font-bold hover' to={`/`} onClick={() => menu(false)}>
           <HomeIcon width={24} />
         </Link>
       )}

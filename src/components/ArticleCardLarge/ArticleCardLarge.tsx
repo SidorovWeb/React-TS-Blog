@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IPostListProps } from '../../types/postsTypes'
+import { postListProps } from '../../types/postsTypes'
 import { User } from '../../types/userTypes'
 import { Profile } from '../Profile/Profile'
 
 interface ArticleCardLargeProps {
-  post: IPostListProps
+  post: postListProps
   users: User[]
 }
 

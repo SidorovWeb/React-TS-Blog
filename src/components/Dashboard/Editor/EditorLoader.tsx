@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useMemo } from 'react'
+import { FC, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { Spin } from '../../UI/Spin/Spin'
 
 interface EditorLoaderProps {
   isLoading: boolean
