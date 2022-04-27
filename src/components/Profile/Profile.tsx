@@ -9,17 +9,17 @@ interface ProfileProps {
   height?: string
 }
 
-export const Profile: FC<ProfileProps> = ({ user, width = '32px', height = '34px' }) => {
+export const Profile: FC<ProfileProps> = ({ user = null, width = '32px', height = '34px' }) => {
   const { menu } = useActions()
 
   return (
     <>
       <div
-        className='bg-white rounded-full overflow-hidden shrink-0 flex items-center justify-center'
+        className='bg-gray-100 rounded-full overflow-hidden shrink-0 flex items-center justify-center'
         style={{ width: width, height: height }}
         onClick={() => menu(false)}
       >
-        {user.userPhoto.url ? (
+        {user && user.userPhoto.url ? (
           <img className='w-full object-cover block h-full' src={user.userPhoto.url} alt={user.userName} />
         ) : (
           <UserIcon width={24} color='#2d2d2d' />

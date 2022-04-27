@@ -15,32 +15,35 @@ export const PostItem: FC<PostItemPost> = ({ post, users = [] }) => {
   const user = users.filter((u: User) => u.id === post.uid)[0]
 
   return (
-    <div className='flex flex-col rounded-lg overflow-hidden  shadow-lg mb-4  text-left'>
+    <div className='flex flex-col rounded-lg overflow-hidden  shadow-lg dark:shadow-gray-50/10 mb-4  text-left'>
       <div className='calc75 relative'>
         <Link
-          className='mb-8  overflow-hidden block shrink-0 absolute top-0 left-0 h-full w-full object-cover'
+          className='mb-8 overflow-hidden block shrink-0 absolute top-0 left-0 h-full w-full object-cover'
           to={`/post/${post.slug}`}
         >
           <img className='img ' src={post.previewImage.url} alt='Изображение' loading='lazy' />
         </Link>
         <span className='absolute -bottom-4 z-9 select-none'>
-          <ShapeAvatar width={80} height={36} />
+          <ShapeAvatar width={80} height={36} className='fill-gray-100 dark:fill-slate-700' />
         </span>
         <div className='absolute -bottom-5 left-6 z-10 select-none'>
           {user && <Profile user={user} width={'34px'} height={'34px'} />}
         </div>
       </div>
 
-      <div className='px-3 md:px-8 py-8 bg-white h-full'>
-        <div className='text-gray-700 mb-2'>{formatTimestamp(post.timestamp)}</div>
+      <div className='px-3 md:px-8 py-8 bg-gray-100 dark:bg-slate-700 h-full'>
+        <div className='text-gray-700 dark:text-white/80 mb-2'>{formatTimestamp(post.timestamp)}</div>
         <Link
-          className='block text-gray-900 text-xl lg:text-2xl font-bold mb-6 hover:opacity-60 transition-all max-w-xl 2xl:max-w-2xl'
+          className='block text-xl lg:text-2xl font-bold mb-6 hover:opacity-60 transition-opacity max-w-xl 2xl:max-w-2xl'
           to={`/post/${post.slug}`}
         >
           {post.title}
         </Link>
 
-        <Link className='text-gray-700 font-bold hover:opacity-60 transition-all' to={`/post/${post.slug}`}>
+        <Link
+          className='text-gray-700 dark:text-white/80  font-bold hover:opacity-60 transition-opacity'
+          to={`/post/${post.slug}`}
+        >
           {post.excerpt}
         </Link>
       </div>

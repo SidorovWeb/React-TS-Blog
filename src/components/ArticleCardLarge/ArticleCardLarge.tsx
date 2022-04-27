@@ -13,7 +13,7 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post, users = [] }
   const user = users.filter((u: User) => u.id === post.uid)[0]
 
   return (
-    <div className='rounded-lg overflow-hidden w-full block lg:flex justify-end bg-white shadow-lg relative text-left  mb-8 lg:mb-0 min-h-[422px] break-out'>
+    <div className='lg:rounded-lg overflow-hidden w-full block lg:flex justify-end bg-white shadow-lg dark:shadow-gray-50/10 relative text-left  mb-8 lg:mb-0 min-h-[422px] break-out'>
       {post.previewImage && (
         <Link
           className='overflow-hidden h-full absolute t-0 left-0 thumbnail-lg lg:thumbnail-gradient w-full lg:w-[55%]'
@@ -41,7 +41,7 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post, users = [] }
         </Link>
         <div className='flex items-center font-bold'>
           {user && <Profile user={user} width={'34px'} height={'34px'} />}
-          <div className='font-bold text-white lg:text-gray-700 ml-4'>{post.author}</div>
+          <div className='font-bold text-white lg:text-gray-700 ml-2'>{post.author}</div>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ code {
 
 @layer utilities {
   .btn {
-    @apply transition-all font-bold bg-gray-600 hover:!bg-pink-500 rounded-md px-6 text-white whitespace-nowrap shadow-lg;
+    @apply transition-all font-bold bg-gray-600 hover:!bg-violet-600 rounded-md px-6 text-white whitespace-nowrap !shadow-lg;
   }
 
   .icon {
@@ -179,12 +179,12 @@ code {
 
 @media (max-width: 1280px) {
   .break-out {
-    width: 90vw;
+    width: 100vw;
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -45vw;
-    margin-right: -45vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 }
 
@@ -232,7 +232,7 @@ code {
 }
 
 .calc75 {
-  padding-top: calc(75%);
+  padding-top: calc(47%);
 }
 
 .animate-pulse {
@@ -250,7 +250,7 @@ code {
 }
 
 .fade {
-  animation: fadeInAnimation ease 0.3s;
+  animation: fadeInAnimation ease 0.125s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -262,4 +262,55 @@ code {
   100% {
     opacity: 1;
   }
+}
+
+.react-select__control {
+  @apply font-bold !bg-gray-100 dark:!bg-slate-800 !text-gray-900 dark:!text-white !rounded-lg !border-none
+  md:!min-h-[48px] !shadow-lg !cursor-pointer;
+}
+
+.react-select__placeholder {
+  @apply !text-gray-900 dark:!text-white/80;
+}
+
+.react-select__control--is-focused {
+  @apply !border-white !shadow-none;
+}
+
+.react-select__option {
+  @apply font-bold  !cursor-pointer !text-gray-900 dark:!text-white;
+}
+
+.react-select__input-container {
+  @apply !cursor-text !text-gray-900 dark:!text-white;
+}
+.react-select__single-value {
+  @apply !text-gray-900 dark:!text-white;
+}
+
+.react-select__indicator {
+  @apply !cursor-pointer;
+}
+.react-select__indicator:hover {
+  @apply opacity-60 transition-opacity;
+}
+
+.react-select__indicator svg {
+  @apply !text-gray-900 dark:!text-white;
+}
+
+.react-select__menu {
+  @apply bg-gray-100 dark:bg-slate-800 !shadow-lg !rounded-lg overflow-hidden !z-50;
+}
+
+.react-select__option--is-selected {
+  @apply !bg-violet-600  !text-white;
+}
+
+.react-select__option:hover {
+  @apply !text-gray-900;
+}
+
+.react-select__option--is-selected:hover {
+  @apply !text-white;
 }

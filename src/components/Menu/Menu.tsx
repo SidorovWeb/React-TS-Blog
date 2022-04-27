@@ -40,7 +40,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
           show()
         }}
       >
-        <BellIcon width={24} className='hover cursor-pointer' />
+        <BellIcon width={24} className='hover:opacity-60 transition-opacity  cursor-pointer' />
         {!!user.notification.length && (
           <div className='absolute bottom-1 right-1 h-3 w-3 rounded-full bg-red-500 animate-pulse'></div>
         )}
@@ -48,7 +48,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
       <Modal>
         <div className='flex flex-col'>
           <div className='font-bold mb-2 text-xl'>Сообщения</div>
-          <div className='text-gray-900/50 mb-4 text-sm'>
+          <div className='mb-4 text-sm'>
             Новых сообщений {user.notification.length > 0 ? `${user.notification.length}` : 'нет'}
           </div>
           <div className='mb-6'>
@@ -56,7 +56,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
               <div className='border-t border-gray-100 text-md pt-2'>
                 {user.notification.map((n) => (
                   <div
-                    className='cursor-pointer hover:bg-slate-100 transition-all py-2 rounded-lg'
+                    className='cursor-pointer hover:bg-slate-200 hover:dark:bg-slate-500 transition-all py-2 rounded-lg'
                     key={n.id}
                     onClick={() => onClickReadMessage(n)}
                   >
@@ -64,7 +64,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
                       {n.postStatus === 'published' && 'Опубликована'}
                       {n.postStatus === 'rejected' && 'Отклонена'}
                     </div>
-                    <div className='text-gray-900 font-bold'>{n.postName}</div>
+                    <div className='font-bold'>{n.postName}</div>
                   </div>
                 ))}
               </div>

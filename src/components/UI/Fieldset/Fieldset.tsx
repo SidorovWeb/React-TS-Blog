@@ -24,7 +24,7 @@ export const Fieldset: FC<FieldsetProps> = ({
   return (
     <fieldset className='mb-10'>
       {labelText && (
-        <label className='mb-2 block text-gray-900' htmlFor={id}>
+        <label className='mb-2 block' htmlFor={id}>
           {labelText}
         </label>
       )}

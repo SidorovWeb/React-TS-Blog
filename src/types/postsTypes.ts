@@ -1,6 +1,6 @@
-interface Categories {
-  name: string
-  slug: string
+export interface Categories {
+  value: string
+  label: string
 }
 
 interface previewImage {

@@ -37,10 +37,14 @@ export const NavBar: FC = () => {
         <div className={`${open ? 'block' : 'hidden'} lg:block fade menu cursor-pointer`} onClick={() => menu(!open)}>
           <div className='items-start hidden lg:flex menu__content cursor-default' onClick={(e) => e.stopPropagation()}>
             <div className='flex flex-col lg:flex-row order-1 lg:-order-none mt-6 lg:mt-0 mr-2'>
-              <Link className='font-bold py-2 px-2 hover' to='/' onClick={onClickMenu}>
+              <Link className='font-bold py-2 px-2 hover:opacity-60 transition-opacity' to='/' onClick={onClickMenu}>
                 Главная
               </Link>
-              <Link className='font-bold py-2 px-2 hover' to='/archives' onClick={onClickMenu}>
+              <Link
+                className='font-bold py-2 px-2 hover:opacity-60 transition-opacity'
+                to='/archives'
+                onClick={onClickMenu}
+              >
                 Статьи
               </Link>
             </div>

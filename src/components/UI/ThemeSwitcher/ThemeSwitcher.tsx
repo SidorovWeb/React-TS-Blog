@@ -9,11 +9,19 @@ export const ThemeSwitcher: FC = () => {
     <>
       {colorTheme === 'light' ? (
         <div className='p-1'>
-          <SunIcon className='iconSun cursor-pointer hover' width={24} onClick={() => setTheme(colorTheme)} />
+          <SunIcon
+            className='iconSun cursor-pointer hover:opacity-60 transition-opacity '
+            width={24}
+            onClick={() => setTheme(colorTheme)}
+          />
         </div>
       ) : (
         <div className='p-1'>
-          <MoonIcon className='iconMoon cursor-pointer hover' width={24} onClick={() => setTheme(colorTheme)} />
+          <MoonIcon
+            className='iconMoon cursor-pointer hover:opacity-60 transition-opacity '
+            width={24}
+            onClick={() => setTheme(colorTheme)}
+          />
         </div>
       )}
     </>
