@@ -19,7 +19,7 @@ export const DashboardAllUsers: FC = () => {
           className='grid md:grid-cols-3 gap-5 bg-blue-100 mt-4 px-2 py-4 rounded-lg text-gray-900 shadow-lg'
           key={user.uid}
         >
-          <Profile user={user} width={'34px'} height={'34px'} />
+          <Profile authorPhotoUrl={user.userPhoto.url} author={user.userName} width={'34px'} height={'34px'} />
           <div className='mr-2 flex items-center'>{user.userName}</div>
           <div className='flex items-center'>{user.email}</div>
         </div>

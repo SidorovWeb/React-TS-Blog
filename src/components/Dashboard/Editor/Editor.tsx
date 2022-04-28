@@ -12,7 +12,10 @@ export const Editor: FC = () => {
   const posts = useSelector((state) => state.post.posts)
   const post = posts.find((post) => post.id === id) ?? {
     author: '',
-    authorPhoto: '',
+    authorPhoto: {
+      fileLocated: '',
+      url: '',
+    },
     title: '',
     slug: '',
     categories: [],

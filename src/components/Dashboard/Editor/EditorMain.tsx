@@ -98,6 +98,7 @@ export const EditorMain: FC<EditorMainProps> = ({ user, post }) => {
       ...post,
       ...data,
       author: user.userName,
+      authorPhoto: user.userPhoto,
       uid: user.id,
       title: ucFirst(titleText),
       slug: slug,

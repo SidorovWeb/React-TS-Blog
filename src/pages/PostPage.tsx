@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { formatTimestamp } from '../utils'
 import { useSelector } from '../hooks/useTypedSelector'
-import { User } from '../types/userTypes'
 import { SkeletonCard } from '../components/Skeleton/SkeletonCard'
 import { Profile } from '../components/Profile/Profile'
 
@@ -12,13 +11,6 @@ export const PostPage: FC = () => {
 
   const posts = useSelector((state) => state.post.posts)
   const post = posts.find((post) => post.slug === slug)
-  const users = useSelector((state) => state.user.users)
-  const [user, setUser] = useState<any>()
-
-  useEffect(() => {
-    const user = users.filter((u: User) => u.id === post?.uid)
-    setUser(user[0])
-  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -42,7 +34,7 @@ export const PostPage: FC = () => {
             <div className='flex items-center justify-between mb-6'>
               <div className='flex items-center '>
                 <div className='flex-shrink-0 mr-2'>
-                  <Profile user={user} />
+                  <Profile authorPhotoUrl={post.authorPhoto.url} author={post.author} />
                 </div>
 
                 <div className='text-gray-700/80 dark:text-white/80 dark:text-white font-bold mt-1'>{post.author}</div>

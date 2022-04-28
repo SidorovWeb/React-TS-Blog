@@ -13,9 +13,14 @@ interface status {
   message: string
 }
 
+interface authorPhoto {
+  fileLocated: string
+  url: string
+}
+
 export interface postListProps {
   author: string
-  authorPhoto: string
+  authorPhoto: authorPhoto
   title: string
   previewImage: previewImage
   timestamp: any

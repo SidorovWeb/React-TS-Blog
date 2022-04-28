@@ -17,6 +17,7 @@ export const DashboardDrawer: FC<DashboardDrawerProps> = ({ user }) => {
   const { open } = useSelector((state) => state.menu)
   const navigate = useNavigate()
   const { menu } = useActions()
+  const isAdmin = user.status === 'admin'
 
   const onLogout = () => {
     const auth = getAuth()
@@ -54,16 +55,16 @@ export const DashboardDrawer: FC<DashboardDrawerProps> = ({ user }) => {
             <CogIcon width={22} /> <span className='ml-2'>Настройки</span>
           </DashboardDrawerItem>
         </NavLink>
-        {user.status === 'admin' && <div className='border mb-2'></div>}
+        {isAdmin && <div className='border mb-2'></div>}
 
-        {user.status === 'admin' && (
+        {isAdmin && (
           <NavLink to={'/my-account/all_posts'} onClick={() => menu(!open)}>
             <DashboardDrawerItem activeItem={false}>
               <ClipboardListIcon width={22} /> <span className='ml-2'>Модерация постов</span>
             </DashboardDrawerItem>
           </NavLink>
         )}
-        {user.status === 'admin' && (
+        {isAdmin && (
           <NavLink to={'/my-account/all_users'} onClick={() => menu(!open)}>
             <DashboardDrawerItem activeItem={false}>
               <UserGroupIcon width={22} /> <span className='ml-2'>Пользователи</span>

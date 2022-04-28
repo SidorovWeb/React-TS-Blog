@@ -15,6 +15,7 @@ interface MenuProps {
 export const Menu: FC<MenuProps> = ({ user }) => {
   const { usersUpdate, userUpdate } = useActions()
   const { show, Modal } = useModal()
+  const { menu } = useActions()
 
   const onClickReadMessage = (notification: any) => {
     const notificationFilter = user.notification.filter((n) => n.id !== notification.id)
@@ -31,8 +32,8 @@ export const Menu: FC<MenuProps> = ({ user }) => {
 
   return (
     <div className='flex items-center relative'>
-      <Link className='flex items-center mr-2' to={`/my-account/home`}>
-        <Profile user={user} />
+      <Link className='flex items-center mr-2' to={`/my-account/home`} onClick={() => menu(false)}>
+        <Profile authorPhotoUrl={user.userPhoto.url} author={user.userName} />
       </Link>
       <div
         className='flex items-center p-1 relative'
@@ -45,6 +46,7 @@ export const Menu: FC<MenuProps> = ({ user }) => {
           <div className='absolute bottom-1 right-1 h-3 w-3 rounded-full bg-red-500 animate-pulse'></div>
         )}
       </div>
+
       <Modal>
         <div className='flex flex-col'>
           <div className='font-bold mb-2 text-xl'>Сообщения</div>

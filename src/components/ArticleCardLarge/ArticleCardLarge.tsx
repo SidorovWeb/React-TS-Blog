@@ -1,18 +1,15 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { postListProps } from '../../types/postsTypes'
-import { User } from '../../types/userTypes'
 import { Profile } from '../Profile/Profile'
+import { SkeletonLarge } from '../Skeleton/SkeletonLarge'
 
 interface ArticleCardLargeProps {
   post: postListProps
-  users: User[]
 }
 
-export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post, users = [] }) => {
-  const user = users.filter((u: User) => u.id === post.uid)[0]
-
-  return (
+export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post }) => {
+  return post ? (
     <div className='lg:rounded-lg overflow-hidden w-full block lg:flex justify-end bg-white shadow-lg dark:shadow-gray-50/10 relative text-left  mb-8 lg:mb-0 min-h-[422px] break-out'>
       {post.previewImage && (
         <Link
@@ -40,10 +37,12 @@ export const ArticleCardLarge: FC<ArticleCardLargeProps> = ({ post, users = [] }
           </p>
         </Link>
         <div className='flex items-center font-bold'>
-          {user && <Profile user={user} width={'34px'} height={'34px'} />}
+          <Profile width={'34px'} height={'34px'} authorPhotoUrl={post.authorPhoto.url} author={post.author} />
           <div className='font-bold text-white lg:text-gray-700 ml-2'>{post.author}</div>
         </div>
       </div>
     </div>
+  ) : (
+    <SkeletonLarge cl='h-[422px]' />
   )
 }

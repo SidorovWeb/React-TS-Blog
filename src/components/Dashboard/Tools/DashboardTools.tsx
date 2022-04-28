@@ -70,7 +70,7 @@ export const DashboardTools: FC = () => {
       <div className='flex flex-col'>
         <div className='mr-4 text-xl  mb-6'>Мои настройки</div>
         <div className='flex items-center flex-col md:flex-row mb-8'>
-          <Profile user={user} width='80px' height='80px' />
+          <Profile authorPhotoUrl={user.userPhoto.url} author={user.userName} width='80px' height='80px' />
           <div className='ml-0 md:ml-4 mt-6 md:mt-0'>
             <input
               className='hidden opacity-0 w-0'

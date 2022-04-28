@@ -13,7 +13,6 @@ import Select from 'react-select'
 
 export const Archive: FC = () => {
   const { posts, isLoading } = useSelector((state) => state.post)
-  const { users } = useSelector((state) => state.user)
   const postList = posts.filter((p) => p.status.type === 'published')
   const [filteredPostList, setFilteredPostList] = useState<any>([])
   let UniqueList: Categories[] = uniqueListCategories(postList as [], 'value')
@@ -85,7 +84,7 @@ export const Archive: FC = () => {
           ) : (
             <List
               items={getArrRange(filteredPostList as [], part, page).reverse()}
-              renderItem={(post: postListProps) => <PostItem post={post} users={users} key={post.id} />}
+              renderItem={(post: postListProps) => <PostItem post={post} key={post.id} />}
             />
           )}
         </div>
