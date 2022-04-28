@@ -52,7 +52,7 @@ export const DashboardHomeContent: FC<DashboardHomeContentProps> = ({ user, isLo
         <Writer className='block md:w-[400px]' fill='#FBBF24' />
       </div>
 
-      <div className={`${!user.notification.length ? 'justify-center text-gray-700' : 'justify-start'} flex`}>
+      <div className={`${!user.notification.length ? 'justify-center' : 'justify-start'} flex`}>
         {!user.notification.length ? (
           <div className='flex flex-col items-center'>
             <BellIcon width={40} />
