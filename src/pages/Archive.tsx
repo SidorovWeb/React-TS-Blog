@@ -56,7 +56,7 @@ export const Archive: FC = () => {
     <div className='pt-7 container mx-auto '>
       {currentSelect && <Title title={currentSelect.label} />}
 
-      <div className='p-3 md:p-8 md:bg-gray-300 md:dark:bg-slate-700 rounded-lg text-white mb-14 flex flex-col sm:flex-row justify-between items-center'>
+      <div className='px-3 py-6 md:p-8 bg-gray-300 dark:bg-slate-700 rounded-lg text-white mb-14 flex flex-col sm:flex-row justify-between items-center'>
         <div className='w-full lg:w-[300px]'>
           {currentSelect && (
             <Select
@@ -67,7 +67,7 @@ export const Archive: FC = () => {
             />
           )}
         </div>
-        <div className='font-bold mt-4 sm:mt-0 hidden  md:block '>
+        <div className='font-bold mt-4 sm:mt-0 hidden  md:block ml-8'>
           <span className='sm:ml-4 text-gray-900 dark:text-white'>
             {filteredPostList.length} {wordForm(filteredPostList.length, ['статья', 'статьи', 'статей'])}
           </span>
